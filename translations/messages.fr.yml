@@ -1,0 +1,106 @@
+menu:
+    legal: "Mentions légales"
+
+
+
+app_home:
+    title: "Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    menu: "Accueil"
+    description: "Trouvez des projets, postulez à des offres d'emploi et collaborez avec les meilleurs professionnels de Madagascar et francophones. Rejoignez-nous dès maintenant."
+    keywords: "freelance, projet, offre"
+
+app_home_experts:
+    menu: "Trouver un profil"
+    title: "Découvrez nos Experts - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Explorez notre communauté d'experts qualifiés prêts à collaborer sur votre projet. Trouvez le professionnel idéal dans notre réseau de talents francophones et malgaches."
+    keywords: "experts, professionnels, freelance, talents, Madagascar, francophone"
+
+app_home_posting:
+    menu: "Trouver une offre"
+    title: "Publiez votre Projet - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Publiez votre projet et recevez des propositions de nos professionnels qualifiés. Découvrez la simplicité de l'embauche de freelances et d'employés à travers notre plateforme."
+    keywords: "publier, projet, emploi, freelance, embauche, Madagascar, francophone"
+
+app_home_formation:
+    menu: "Nos formations"
+    title: "Formations Professionnelles - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Élargissez vos compétences avec nos formations professionnelles conçues pour booster votre carrière. Découvrez des cours interactifs dans une multitude de domaines."
+    keywords: "formation, cours, compétences, carrière, professionnelle, apprentissage"
+
+app_home_ia:
+    menu: "Bon plan IA"
+    title: "Innovation en Intelligence Artificielle - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Découvrez comment l'intelligence artificielle transforme le monde du travail. Explorez nos ressources, nos projets et collaborez avec des experts en IA."
+    keywords: "intelligence artificielle, IA, innovation, technologie, projets, collaboration"
+
+app_home_contact:
+    menu: "Nous contacter"
+    title: "Contactez-nous - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Avez-vous des questions ou besoin d'assistance ? Contactez-nous et notre équipe dédiée sera ravie de vous aider. Votre succès est notre priorité."
+    keywords: "contact, assistance, questions, support, équipe, succès"
+
+app_home_legal:
+    menu: "Mentions légales"
+    title: "Mentions Légales - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Consultez nos mentions légales pour obtenir des informations sur l'identification légale, les conditions d'utilisation et autres aspects juridiques de notre plateforme."
+    keywords: "mentions légales, identification légale, conditions d'utilisation"
+
+app_home_privacy:
+    menu: "Politique de confidentialité"
+    title: "Politique de Confidentialité - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Notre politique de confidentialité détaille la manière dont nous collectons, utilisons et protégeons vos données personnelles. Votre sécurité est notre priorité."
+    keywords: "politique de confidentialité, protection des données, sécurité des données"
+
+app_home_terms:
+    menu: "Conditions générales"
+    title: "Conditions Générales - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
+    description: "Découvrez nos conditions générales d'utilisation qui régissent votre utilisation de notre plateforme, incluant les droits et les responsabilités des utilisateurs."
+    keywords: "conditions générales, utilisation, droits, responsabilités"
+
+
+# app_home_posting:
+#     title: ""
+#     description: ""
+#     keywords: ""
+
+app_login:
+    menu: "Connexion"
+    title: "Connexion à Olona-talents.com"
+    description: "Accédez à votre espace professionnel et découvrez des opportunités inégalées."
+    keywords: "freelance, project, talent"
+    email: "Adresse email"
+    password: "Mot de passe"
+    remember: "Se souvenir de moi"
+    not_member: "Pas encore membre ?"
+    register: "Inscrivez-vous dès maintenant"
+    join: "et rejoignez la communauté Olona-talents."
+    button: "Se connecter"
+
+app_logout:
+    menu: "Deconnexion"
+    
+app_register:
+    menu: "S'inscrire"
+    title: "Inscription à Olona-talents.com"
+    description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
+    already_member: Déjà membre ? <a href=\"%terms_url%\">Connectez-vous ici</a>.
+    keywords: "freelance, project, talent"
+
+app_forgot_password_request:
+    title: "Réinitialisez votre mot de passe"
+    link: "Mot de passe oublié?"
+    message: "Entrez votre adresse email, et nous vous enverrons un lien pour réinitialiser votre mot de passe."
+    description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
+    keywords: "freelance, project, talent"
+    button: "Envoyer l'email de réinitialisation du mot de passe"
+
+app_check_email:
+    title: "Email de réinitialisation du mot de passe envoyé"
+    message: "Si un compte correspondant à votre email existe, alors un email vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe."
+    massage2: "Si vous ne recevez pas d'email, veuillez vérifier votre dossier spam ou réessayez"
+    description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
+    keywords: "freelance, project, talent"
+
+app_reset_password:
+    title: "Réinitialisez votre mot de passe"
+    button: "Réinitialiser le mot de passe"
