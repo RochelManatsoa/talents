@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <section id="login" class="vh-100" style="background-color: black;">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="row w-100">
+        <div class="col-md-6 text-center mx-auto">
+          <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="login olona talents" />
+        </div>
+        <div class="col-md-6 text-white">
+          <h1 class="h1 mb-3 font-weight-normal">
+            {{ meta_title() }}
+          </h1>
+          <p class="text-light fs-6">
+            <small>
+              {{ meta_description() }}
+            </small>
+          </p>
+          <hr>
+            <form method="post">
+              {% if error %}
+                <div class="alert alert-dark">
+                  {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+              {% endif %}
+
+              {% if app.user %}
+                <div class="mb-3">
+                  You are logged in as 
+                  {{ app.user.userIdentifier }}
+                  , 
+                  <a href="{{ path('app_logout') }}">
+                    Logout
+                  </a>
+                </div>
+              {% endif %}
+
+              <label for="inputEmail">
+                {{ 'app_login.email'|trans }}
+              </label>
+              <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                <label for="inputPassword">
+                  {{ 'app_login.password'|trans }}
+                </label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                  <div class="mb-3 form-check">
+                    <div class="row">
+                      <div class="col-6">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">
+                            {{ 'app_login.remember'|trans }}
+                          </label>
+                        </div>
+                        <div class="col-6">
+                          <!--Forgot password link-->
+                          <a href="{{ path('app_forgot_password_request') }}" class="">
+                            {{ 'app_forgot_password_request.link'|trans }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                      <button class="btn btn-lg btn-primary" type="submit">
+                        {{ "app_login.button"|trans }}
+                      </button>
+                    </form>
+                    <p class="my-4 text-center text-white">
+                      {{ 'app_login.not_member'|trans }}
+                      <a href="{{ path('app_register') }}" class="text-primary transition ">
+                        {{ 'app_login.register'|trans }}
+                      </a>
+                      {{ 'app_login.join'|trans }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          {% endblock %}
+          
