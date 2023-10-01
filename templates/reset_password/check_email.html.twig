@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="hero" class="vh-100" style="background-color: black;">
+        <div class="container h-100 d-flex flex-column justify-content-center">
+            <div class="row text-white">
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        <h1>{{ "app_check_email.title"|trans}}</h1>
+                        <hr class="my-4">
+                        <p>
+                            {{ "app_check_email.message"|trans }}
+                            {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                        </p>
+                        <p>
+                            If you don't receive an email please check your spam folder or 
+                            <a href="{{ path('app_forgot_password_request') }}">
+                                try again
+                            </a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6"></div>
+        </div>
+    </div>
+</section>{% endblock %}

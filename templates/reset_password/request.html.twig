@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="hero" class="vh-100" style="background-color: black;">
+        <div class="container h-100 d-flex flex-column justify-content-center">
+            <div class="row text-white">
+                <div class="col-md-6 offset-md-3">
+                    <div class="row">
+                        {% for flash_error in app.flashes('reset_password_error') %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ flash_error }}
+                            </div>
+                        {% endfor %}
+                        <h1>
+                            {{ "app_forgot_password_request.title"|trans }}
+                        </h1>
+                        <hr class="my-4">
+
+                            {{ form_start(requestForm) }}
+                            {{ form_row(requestForm.email) }}
+                            <div>
+                                <small>
+                                    {{ "app_forgot_password_request.message"|trans }}
+                                </small>
+                            </div>
+
+                            <button class="btn my-4 btn-primary">
+                                {{ "app_forgot_password_request.button"|trans }}
+                            </button>
+                            {{ form_end(requestForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

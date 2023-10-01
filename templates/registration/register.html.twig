@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="register" class="vh-100" style="background-color: black;">
+        <div class="container h-100 d-flex flex-column justify-content-center">
+            <div class="row">
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-light" role="alert">
+                        {{ flash_error }}
+                    </div>
+                {% endfor %}
+                <div class="col-md-6 text-center mx-auto">
+                    <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="login olona talents" />
+                </div>
+                <div class="col-md-6 text-white">
+                    <h1 class="h4 my-6 text-center text-white">
+                        {{ meta_title() }}
+                    </h1>
+
+                    {{ form_errors(registrationForm) }}
+
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <button type="submit" class="btn btn-outline-primary">
+                        Register
+                                                                                            
+                                                                    
+                                            
+                    </button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
