@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section id="register" class="vh-100" style="background-color: black;">
+    <section id="register" class="mt-lg-5" style="background-color: black;">
         <div class="container h-100 d-flex flex-column justify-content-center">
             <div class="row">
                 {% for flash_error in app.flashes('verify_email_error') %}
@@ -9,28 +9,51 @@
                         {{ flash_error }}
                     </div>
                 {% endfor %}
-                <div class="col-md-6 text-center mx-auto">
+                <div class="col-md-6 mt-lg-5 text-center mx-auto">
                     <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="login olona talents" />
                 </div>
                 <div class="col-md-6 text-white">
-                    <h1 class="h4 my-6 text-center text-white">
+                    <h1 class="h1 my-6 text-white">
                         {{ meta_title() }}
                     </h1>
 
+                    <div class="mx-auto mb-3">
+                        <a href="{{ path('connect_google_start') }}" class="btn btn-outline-secondary">
+                            {{ 'app_register.continue'|trans }}  <i class="bi bi-google h5 mx-3 "></i>           
+                        </a>
+                        <button type="button" class="btn btn-outline-secondary">
+                            {{ 'app_register.continue'|trans }}  <i class="bi bi-linkedin h4 mx-3"></i>           
+                        </button>
+                    </div>
+                    <hr>
                     {{ form_errors(registrationForm) }}
 
-                    {{ form_start(registrationForm) }}
+                    {{ form_start(registrationForm, {'attr': {'class': 'row g-3'}}) }}
+
+
+                    {{ form_row(registrationForm.firstName) }}
+                    {{ form_row(registrationForm.lastName) }}
                     {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword, {
-                        label: 'Password'
-                    }) }}
-                    {{ form_row(registrationForm.agreeTerms) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    <div class="form-check form-check-inline">
+                        <div class="row">
+                            <div class="col-1">
+                                {{ form_widget(registrationForm.agreeTerms) }}
+                            </div>
+                            <div class="col-11">
+                                <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">
+                                    {{ attribute(registrationForm.agreeTerms.vars.attr, 'label')|trans({
+                                        '%terms_url%': path('app_home_terms'),
+                                        '%privacy_url%': path('app_home_privacy')
+                                    })|raw }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <button type="submit" class="btn btn-outline-primary">
-                        Register
-                                                                                            
-                                                                    
-                                            
+                        {{ 'app_register.menu'|trans }}                
                     </button>
                     {{ form_end(registrationForm) }}
                 </div>
