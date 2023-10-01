@@ -30,7 +30,11 @@
       {% if app.user %}
         <div class="dropdown">
           <button class="dropdown-toggle btn btn-lg btn-dark" type="button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle"></i>
+          {% if app.user.gravatar is not null %}
+          <img src="{{ app.user.gravatar}}" alt="Avatar" style="height: 27px; width: auto;" class="rounded-circle">
+          {% else %}  
+          <i class="bi bi-person-circle"></i>
+          {% endif %}  
           </button>
 
           <ul class="dropdown-menu dropdown-menu-end">

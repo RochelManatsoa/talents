@@ -85,6 +85,13 @@ app_register:
     description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
     already_member: Déjà membre ? <a href=\"%terms_url%\">Connectez-vous ici</a>.
     keywords: "freelance, project, talent"
+    email: "Adresse éléctronique"
+    first_name: "Nom *"
+    last_name: "Prénom(s) *"
+    password: "Mot de passe"
+    repeat_password: "Repeter le mot de passe"
+    agree_terms: "<small>En vous inscrivant, vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utilisation</a> et notre <a href=\"%privacy_url%\">Politique de Confidentialité</a>.</small>"
+    continue: "Continuer avec "
 
 app_forgot_password_request:
     title: "Réinitialisez votre mot de passe"
