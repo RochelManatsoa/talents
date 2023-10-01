@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg bg-black border-bottom" data-bs-theme="dark">
+  <div class="container">
+  <a class="navbar-brand" href="{{path('app_home')}}">
+    <img src="{{ asset('images/logo-olona-talents.jpg')}}" alt="Olona Talents" width="122" height="50">
+  </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_home_posting')}}">Deposer votre annonce</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_home_experts')}}">{{ 'app_home_experts.menu'|trans }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_home_posting')}}">{{ 'app_home_posting.menu'|trans }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_home_formation')}}">{{ 'app_home_formation.menu'|trans }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_home_contact')}}">{{ 'app_home_contact.menu'|trans }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true" href="{{ path('app_home_ia')}}">{{ 'app_home_ia.menu'|trans }}</a>
+        </li>
+      </ul>
+      {# {% if app.user %}
+        <a href="{{path('app_logout')}}" class="btn btn-dark">{{ 'app_logout.menu'|trans }}</a>
+      {% else %}
+        <a href="{{path('app_login')}}" class="btn btn-dark">{{ 'app_login.menu'|trans }}</a>
+      {% endif %} #}
+    </div>
+  </div>
+</nav>
