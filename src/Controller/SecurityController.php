@@ -38,7 +38,12 @@ class SecurityController extends AbstractController
     #[Route(path: '/connect', name: 'app_connect')]
     public function connect(): Response
     {
-        return $this->redirectToRoute('app_dashboard_expert');
+        $user = $this->getUser();
+        // if($user->getAccount() instanceof Account) return $this->redirectToRoute('app_identity_create');
+        // if($user->getCompany() instanceof Company) return $this->redirectToRoute('app_dashboard_company');
+        // if($user->getExpert() instanceof Expert) return $this->redirectToRoute('app_dashboard_expert');
+
+        return $this->redirectToRoute('app_identity_create');
     }
     
     #[Route(path: '/connect/google', name: 'connect_google_start')]
