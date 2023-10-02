@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Expert;
+use App\Entity\Account;
+use App\Entity\Company;
+use App\Entity\Identity;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -38,10 +42,14 @@ class SecurityController extends AbstractController
     #[Route(path: '/connect', name: 'app_connect')]
     public function connect(): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
-        // if($user->getAccount() instanceof Account) return $this->redirectToRoute('app_identity_create');
-        // if($user->getCompany() instanceof Company) return $this->redirectToRoute('app_dashboard_company');
-        // if($user->getExpert() instanceof Expert) return $this->redirectToRoute('app_dashboard_expert');
+        /** @var Identity $identity */
+        $identity = $user->getIdentity();
+        if(!$identity instanceof Identity) return $this->redirectToRoute('app_identity_create');
+        if(!$identity->getAccount() instanceof Account) return $this->redirectToRoute('app_identity_create');
+        if($identity->getCompany() instanceof Company) return $this->redirectToRoute('app_dashboard_company');
+        if($identity->getExpert() instanceof Expert) return $this->redirectToRoute('app_dashboard_expert');
 
         return $this->redirectToRoute('app_identity_create');
     }

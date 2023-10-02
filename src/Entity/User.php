@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $gravatar = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Identity $identity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +173,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGravatar(?string $gravatar): static
     {
         $this->gravatar = $gravatar;
+
+        return $this;
+    }
+
+    public function getIdentity(): ?Identity
+    {
+        return $this->identity;
+    }
+
+    public function setIdentity(?Identity $identity): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($identity === null && $this->identity !== null) {
+            $this->identity->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($identity !== null && $identity->getUser() !== $this) {
+            $identity->setUser($this);
+        }
+
+        $this->identity = $identity;
 
         return $this;
     }
