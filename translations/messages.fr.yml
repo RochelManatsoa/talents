@@ -58,10 +58,6 @@ app_home_terms:
     keywords: "conditions générales, utilisation, droits, responsabilités"
 
 
-# app_home_posting:
-#     title: ""
-#     description: ""
-#     keywords: ""
 
 app_login:
     menu: "Connexion"
@@ -119,3 +115,69 @@ app_dashboard_expert:
 app_dashboard_company:
     title: "Tableau de bord"
     button: "Réinitialiser le mot de passe"
+
+app_identity_create:
+    title: "Bienvenue sur Olona-talents.com !"
+    description: "Votre première étape vers des opportunités professionnelles inégalées."
+    keywords: "freelance, project, talent"
+    message: "Nous sommes ravis de vous avoir parmi nous. Pour commencer, prenez quelques instants pour créer votre profil. Cela nous aidera à vous offrir une expérience personnalisée."
+    button: "Créer mon profil"
+    hey: "Bienvenue sur Olona-talents.com !"
+
+
+app_identity_account:
+    title: "Quelle est votre intention sur Olona-talents.com ?"
+    description: "Explorez Olona-talents.com et découvrez une plateforme conçue pour mettre en lumière vos intentions et vos talents. Quelle que soit votre ambition, nous vous offrons l'espace pour vous exprimer, apprendre et grandir au sein d'une communauté dynamique."
+    keywords: "freelance, projet, offre"
+    button: "Continuer"
+
+app_identity_company:
+    title: "Précisez vos besoins en tant qu'entreprise."
+    description: "Plus nous en savons sur vos besoins, mieux nous pouvons vous servir."
+    button: "Enregistrer et continuer"
+    keywords: "freelance, project, talent"
+    name: "Nom de l'entreprise *"
+    size: "Taille de l'entreprise"
+    country: "Localisation"
+    desc: "Compétences recherchées"
+    budget: "Budget pour le poste/projet"
+    email: "Adresse mail"
+    phone: "Téléphone"
+    select: "Séléctionner"
+    website: "Site Web"
+    project: "Description du poste ou du projet"
+    sector: "Secteur d'activité"
+    type_posting: "Type d'emploi proposé "
+
+
+app_identity_expert:
+    title: "Créez votre profil professionnel détaillé."
+    description: "Plus nous en savons sur vous, mieux nous pouvons vous mettre en relation avec les bonnes opportunités."
+    keywords: "freelance, project, talent"
+    button: "Enregistrer et continuer"
+    name: "Votre titre"
+    professionnal: "Titre professionnel *"
+    sector: "Secteur d'expertise"
+    year: "Années d'expérience"
+    localisation: "Localisation"
+    select: "Séléctionner"
+    type_job: "Type d'emploi recherché"
+    main_skills: "Compétences principales"
+    aspiration: "Aspirations professionnelles"
+    preference: "Conditions et préférences"
+    website: "Portfolio ou site web"
+    email: "Adresse mail"
+    phone: "Téléphone"
+
+
+app_identity_confirmation:
+    title: "Félicitations !"
+    description: "Votre profil est maintenant créé et prêt à être exploré"
+    message: "Vous pouvez maintenant naviguer sur Olona-talents.com, découvrir des offres, collaborer avec des professionnels ou simplement enrichir davantage votre profil."
+    keywords: "freelance, project, talent"
+    button: "Accéder à mon tableau de bord"
+
+# app_home_posting:
+#     title: ""
+#     description: ""
+#     keywords: ""
