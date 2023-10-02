@@ -111,3 +111,11 @@ app_check_email:
 app_reset_password:
     title: "Réinitialisez votre mot de passe"
     button: "Réinitialiser le mot de passe"
+
+app_dashboard_expert:
+    title: "Tableau de bord"
+    button: "Réinitialiser le mot de passe"
+
+app_dashboard_company:
+    title: "Tableau de bord"
+    button: "Réinitialiser le mot de passe"

@@ -16,29 +16,34 @@
               {{ meta_description() }}
             </small>
           </p>
-            <form method="post">
-              {% if error %}
-                <div class="alert alert-dark">
-                  {{ error.messageKey|trans(error.messageData, 'security') }}
-                </div>
-              {% endif %}
-              <div class="mx-auto mb-3">
-                <a href="{{ path('connect_google_start') }}" class="btn btn-outline-secondary">
-                    {{ 'app_register.continue'|trans }}  <i class="bi bi-google h5 mx-2 "></i>           
-                </a>
-                <button type="button" class="btn btn-outline-secondary">
-                    {{ 'app_register.continue'|trans }}  <i class="bi bi-linkedin h5 mx-2"></i>           
-                </button>
+          <form method="post">
+            {% if error %}
+              <div class="alert alert-dark">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
               </div>
-              <hr>
+            {% endif %}
+            <div class="mx-auto mb-3">
+              <a href="{{ path('connect_google_start') }}" class="btn btn-outline-secondary">
+                {{ 'app_register.continue'|trans }}
+                <i class="bi bi-google h5 mx-2 "></i>
+              </a>
+              <button type="button" class="btn btn-outline-secondary">
+                {{ 'app_register.continue'|trans }}
+                <i class="bi bi-linkedin h5 mx-2"></i>
+              </button>
+            </div>
+            <hr>
 
               {% if app.user %}
                 <div class="mb-3">
                   You are logged in as 
+                                    
                   {{ app.user.userIdentifier }}
                   , 
+                                    
                   <a href="{{ path('app_logout') }}">
                     Logout
+                                      
                   </a>
                 </div>
               {% endif %}
