@@ -7,13 +7,13 @@
             <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center">  <!-- Add flex styles here -->
                 <!-- Colonne 2 : Vous pouvez ajouter une image ou un formulaire ici. -->
                 <div>  <!-- Wrap content in a div -->
-                    <h2 class="text-black text-center my-5 w-100 h1"><strong>COMMENT ÇA MARCHE</strong></h2>
+                    <h2 class="text-white text-center my-5 w-100 h1"><strong>COMMENT ÇA MARCHE</strong></h2>
                     <p><span class="h5"><strong>Étape 1 :</strong></span> "Publiez ou recherchez des offres" - Mettez en avant vos compétences ou trouvez le talent parfait pour votre projet.</p>
                     <p><span class="h5"><strong>Étape 2 :</strong></span> "Collaborez en toute sécurité" - Utilisez nos outils intégrés pour une collaboration transparente et sécurisée.</p>
                     <p><span class="h5"><strong>Étape 3 :</strong></span> "Finalisez et évaluez" - Recevez des paiements sécurisés et donnez votre avis sur la collaboration.</p>
                     <p class="d-flex flex-column flex-sm-row justify-content-center">  <!-- Update class here -->
-                        <span class="mb-2 mb-sm-0"><button class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">Déposez votre annonce</button></span>
-                        <span class="mb-2 mb-sm-0"><button class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">Trouvez une offre</button></span>
+                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a></span>
+                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
                     </p>
                 </div>
             </div>
