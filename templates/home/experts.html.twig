@@ -12,27 +12,23 @@
             {% for identity in experts %}
                 <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
                 <div class="col">
-                    <div class="card  bg-dark">
-                    <div class="row">
-                        <div class="col-4">
-                            <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top rounded-circle" alt="{{ identity.user.firstName }}">
+                    <div class="card  bg-dark p-2">
+                        <div class="row">
+                            <div class="col-5 ">
+                                <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top rounded-circle border border-primary" alt="{{ identity.user.firstName }}">
+                            </div>
+                            <div class="col-6">
+                                <p class="card-title text-white h5 mt-2">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
+                                {% for lang in identity.languages %}
+                                {{ isoToEmoji(lang.code) }}
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div class="col-8">
-                            <p class="card-title text-white h5 mt-2">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
-                            {% for lang in identity.languages %}
-                            {{ isoToEmoji(lang.code) }}
-                            {% endfor %}
-                        </div>
-                    </div>
                         <div class="card-body">
                             <div class="row">
                                 <p class="card-title text-white"><small>Eum architecto ipsum commodi officia aut qui enim. Ea non quia quia qui amet nulla. Perferendis quo qui labore iure ...</small></p>
-                                <div class="col-6">
-                                    {# <small class="text-light">{{ identity.tarif }} € / heure</small> #}
-                                </div>
-                                <div class="col-6">
-                                    <small class="text-light">{{ identity.experiences|length }} projets réalisés</small>
-                                </div>
+                                <small class="text-warning"><i class="mx-1 bi bi-trophy"></i> {{ identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
+                                <small class="text-warning"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
                             </div>
                         </div>
                     </div>
