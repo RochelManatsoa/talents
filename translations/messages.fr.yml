@@ -130,6 +130,7 @@ app_identity_account:
     description: "Explorez Olona-talents.com et découvrez une plateforme conçue pour mettre en lumière vos intentions et vos talents. Quelle que soit votre ambition, nous vous offrons l'espace pour vous exprimer, apprendre et grandir au sein d'une communauté dynamique."
     keywords: "freelance, projet, offre"
     button: "Continuer"
+    message: "Choisissez ce que vous souhaitez qu'Olona-talents vous accompagne"
 
 app_identity_company:
     title: "Précisez vos besoins en tant qu'entreprise."
@@ -183,7 +184,28 @@ app_identity_confirmation:
 #     keywords: "freelance, project, talent"
 #     button: "Accéder à mon tableau de bord"
 
-# app_home_posting:
-#     title: ""
-#     description: ""
-#     keywords: ""
+app_catalog_expert:
+    title: ""
+    description: ""
+    keywords: "freelance, project, talent"
+    presentation: "Présentation"
+    evaluation: "Evaluation"
+    preference: "Préférence"
+    contact: "Contact"
+    stats_title: "Statistique"
+    stats: "depuis la création de compte"
+    projects: "Projets réalisés"
+    connected: "Derière connexion"
+    member: "Membre depuis"
+    view: "Profil vue"
+
+app_catalog_posting:
+    title: "Annonces | Olona-talents.com"
+    description: "Votre profil est maintenant créé et prêt à être exploré"
+    message: "Découvrez une sélection rigoureuse d'experts professionnels francophones et malgaches. Collaborez et enrichissez vos projets grâce à l'excellence locale sur Olona-Talents."
+    keywords: "freelance, project, talent"
+    continue: "Continuer pour postuler"
+    signal: "Signaler l'offre"
+    offer: "Postuler à cette offre"
+    button: "Postuler"
+    motivation: "Votre message"

@@ -10,6 +10,7 @@
             </h1>
             <div class="row row-cols-1 row-cols-md-4 g-4">
             {% for identity in experts %}
+                <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
                 <div class="col">
                     <div class="card  bg-dark">
                     <div class="row">
@@ -36,6 +37,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             {% endfor %}
             </div>
             <div class="col-md-6">

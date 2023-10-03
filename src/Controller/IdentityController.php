@@ -30,14 +30,14 @@ class IdentityController extends AbstractController
     {
         $identity = $this->userService->getCurrentIdentity();
         if($identity instanceof Identity){
-            // $compagny = $identity->getCompagny();
-            // if($compagny instanceof Compagny){
-            //     return $this->redirectToRoute('app_dashboard_company');
-            // }
-            // $expert = $identity->getExpert();
-            // if($expert instanceof Expert){
-            //     return $this->redirectToRoute('app_dashboard_expert');
-            // }
+            $compagny = $identity->getCompany();
+            if($compagny instanceof Company){
+                return $this->redirectToRoute('app_dashboard_company');
+            }
+            $expert = $identity->getExpert();
+            if($expert instanceof Expert){
+                return $this->redirectToRoute('app_dashboard_expert');
+            }
 
             return $this->redirectToRoute('app_identity_account');
         }
