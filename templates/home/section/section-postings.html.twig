@@ -9,7 +9,7 @@
                         <h3 class="card-title h4">{{ item.title }}</h3>
                         <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-danger">Urgent</span> | {{ item.views|length }} vues | {{ item.applications|length }} offres</h6>
                         <p class="card-text flex-grow-1">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-dark card-link mt-auto">Postuler</a>
+                        <a href="{{ path('app_catalog_posting', {'jobId': item.jobId } ) }}" class="btn btn-dark card-link mt-auto">Postuler</a>
                     </div>
                 </div>
             </div>

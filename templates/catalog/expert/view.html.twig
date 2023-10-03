@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="row">
+            
+            <!-- Sidebar -->
+            <div class="col-md-3 bg-light text-dark text-center">
+                <div class="p-3 d-flex justify-content-center align-items-center">
+                    <img src="{{vich_uploader_asset(identity, 'file')}}" alt="Avatar" class="img-fluid rounded-circle" style="max-width: 75%;">
+                </div>
+                <p class="h5 mt-2">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
+                <div class="d-flex text-center">
+                    <div class="col px-2 py-4">
+                        <p class="h4">{{ identity.views|length }}</p>
+                        <p class="text-muted small">Vues</p>
+                    </div>
+                    <div class="col px-2 py-4">
+                        <p class="h4" id="likes">5</p>
+                        <p class="text-muted small">J'aime</p>
+                    </div>
+                    <div class="col px-2 py-4">
+                        <p class="h4">
+                            <span>1</span>
+                            <span class="small align-top">ème</span>
+                        </p>
+                        <p class="text-muted small">sur 108</p>
+                    </div>
+                </div>
+                <p class="h5 mt-2">{{ 'app_catalog_expert.stats_title'|trans }}</p>
+                <p class="mt-2">{{ 'app_catalog_expert.stats'|trans }}.</p>
+                <div class="table-responsive">
+                    <table class="table fs-6">
+                        <tbody>
+                            <tr>
+                            <th scope="row">{{ 'app_catalog_expert.projects'|trans }}</th>
+                            <td>{{ identity.experiences|length }} </td>
+                            </tr>
+                            <tr>
+                            <th scope="row">{{ 'app_catalog_expert.connected'|trans }}</th>
+                            <td>il y a 1 jour</td>
+                            </tr>
+                            <tr>
+                            <th scope="row">{{ 'app_catalog_expert.member'|trans }}</th>
+                            <td>{{ identity.createdAt|date('M Y')}}</td>
+                            </tr>
+                            <tr>
+                            <th scope="row">{{ 'app_catalog_expert.view'|trans }}</th>
+                            <td>{{ identity.views|length }} fois</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                            {{ 'app_catalog_expert.presentation'|trans }}
+                        </button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+                            {{ 'app_catalog_expert.evaluation'|trans }}
+                        </button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
+                            {{ 'app_catalog_expert.preference'|trans }}
+                        </button>
+                        <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>
+                            {{ 'app_catalog_expert.contact'|trans }}
+                        </button>
+                    </div>
+                </nav>
+                <div class="tab-content bg-dark custom-min-height" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        
+                        <div class="p-4">
+                            {% if not app.user %}
+                            <!-- Alert -->
+                                {% include 'components/alert/_locked.html.twig' with {
+                                    identity: identity,
+                                    } 
+                                %}
+                            <!-- Alert -->
+                            {% endif %}
+                            <h2 class="p-4">
+                            {{ 'app_catalog_expert.presentation'|trans }}
+                            </h2>
+
+                            {{ identity.bio|raw }}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                        
+                        <div class="p-4">
+                            <h2 class="p-4">
+                            {{ 'app_catalog_expert.evaluation'|trans }}
+                            </h2>
+
+                            {{ identity.bio|raw }}
+                            {{ identity.bio|raw }}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        
+                        <div class="p-4">
+                            <h2 class="p-4">
+                            {{ 'app_catalog_expert.preference'|trans }}
+                            </h2>
+
+                            {{ identity.bio|raw }}
+                            {{ identity.bio|raw }}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+                        ...
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

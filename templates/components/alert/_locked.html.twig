@@ -1,0 +1,18 @@
+<div class="mb-4 rounded bg-success text-success-dark px-5 py-5" role="alert">
+    <h4 class="mb-2 h3 font-weight-medium">
+        Accédez au profil complet de {{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.
+    </h4>
+    <p class="mb-4">
+        Créez un compte en 2 minutes et accédez au profil complet de nos 292 890 prestataires.          
+    </p>
+    <hr class="border-success" />
+    <p class="mb-0 mt-4">
+        <button
+            type="button"    
+            data-toggle="modal"
+            data-target="#singupModal"
+            class="btn btn-info text-white rounded-pill shadow-sm transition">
+            Créer un compte
+        </button>
+    </p>
+</div>

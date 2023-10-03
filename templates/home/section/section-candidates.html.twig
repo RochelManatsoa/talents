@@ -4,6 +4,7 @@
             <h2 class="text-black text-center my-5 w-100 h1"><strong>NOS DERNIERS CANDIDATS</strong></h2>
             <div class="row row-cols-1 row-cols-md-5 g-4">
             {% for identity in experts %}
+                <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
                 <div class="col">
                     <div class="card">
                         <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top" alt="{{ identity.user.firstName }}">
@@ -13,6 +14,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             {% endfor %}
             </div>
         </div>
