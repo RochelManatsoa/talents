@@ -25,6 +25,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('meta_description', [$this, 'metaDescription']),
             new TwigFunction('meta_keywords', [$this, 'metaKeywords']),
             new TwigFunction('show_account_desc', [$this, 'showAccountDesc']),
+            new TwigFunction('isoToEmoji', [$this, 'isoToEmoji']),
         ];
     }
 
@@ -50,5 +51,16 @@ class AppExtension extends AbstractExtension
     public function showAccountDesc(int $accountId)
     {
         return $this->accountRepository->findOneById($accountId)->getDescription();
+    }
+
+    public function isoToEmoji(string $code)
+    {
+        return implode(
+            '',
+            array_map(
+                fn ($letter) => mb_chr(ord($letter) % 32 + 0x1F1E5),
+                str_split($code)
+            )
+        );
     }
 }

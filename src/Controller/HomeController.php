@@ -2,17 +2,30 @@
 
 namespace App\Controller;
 
+use App\Repository\IdentityRepository;
+use App\Repository\PostingRepository;
+use App\Repository\SectorRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
+    public function __construct(
+        private PostingRepository $postingRepository,
+        private IdentityRepository $identityRepository,
+        private SectorRepository $sectorRepository,
+    ){
+    }
+
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'sectors' => $this->sectorRepository->findAll(),
+            'experts' => $this->identityRepository->findSearch(),
+            'postings' => $this->postingRepository->findAll(),
         ]);
     }
 
@@ -20,7 +33,7 @@ class HomeController extends AbstractController
     public function experts(): Response
     {
         return $this->render('home/experts.html.twig', [
-            'controller_name' => 'HomeController',
+            'experts' => $this->identityRepository->findSearch(),
         ]);
     }
 
@@ -28,7 +41,7 @@ class HomeController extends AbstractController
     public function posting(): Response
     {
         return $this->render('home/posting.html.twig', [
-            'controller_name' => 'HomeController',
+            'postings' => $this->postingRepository->findAll(),
         ]);
     }
 

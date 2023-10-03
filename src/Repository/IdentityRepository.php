@@ -21,6 +21,28 @@ class IdentityRepository extends ServiceEntityRepository
         parent::__construct($registry, Identity::class);
     }
 
+    /**
+    * @return Identity[] Returns an array of Identity objects
+    */
+   public function findSearch(int $max = 12, int $offset = null): array
+   {
+        $query = $this->createQueryBuilder('i')
+            ->select('i, COUNT(v.id) as HIDDEN num_views')
+            // ->join('i.sectors', 's')
+            // ->join('i.aicores', 'a')
+            // ->join('i.languages', 'la')
+            // ->join('la.lang', 'l')
+            ->leftJoin('i.views', 'v')
+            ->andWhere('i.fileName IS NOT NULL')
+            ->andWhere('i.username IS NOT NULL')
+            ->groupBy('i.id')
+            ->orderBy('num_views', 'DESC')
+            ->setMaxResults($max)
+            ->setFirstResult($offset)
+        ;
+        return $query->getQuery()->getResult();
+   }
+
 //    /**
 //     * @return Identity[] Returns an array of Identity objects
 //     */

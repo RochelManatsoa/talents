@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SectorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class Sector
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\OneToMany(mappedBy: 'sector', targetEntity: Posting::class)]
+    private Collection $postings;
+
+    public function __construct()
+    {
+        $this->postings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Sector
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Posting>
+     */
+    public function getPostings(): Collection
+    {
+        return $this->postings;
+    }
+
+    public function addPosting(Posting $posting): static
+    {
+        if (!$this->postings->contains($posting)) {
+            $this->postings->add($posting);
+            $posting->setSector($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosting(Posting $posting): static
+    {
+        if ($this->postings->removeElement($posting)) {
+            // set the owning side to null (unless already changed)
+            if ($posting->getSector() === $this) {
+                $posting->setSector(null);
+            }
+        }
 
         return $this;
     }

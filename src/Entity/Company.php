@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Type\PostingType;
 use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -47,6 +50,18 @@ class Company
 
     #[ORM\OneToOne(inversedBy: 'company', cascade: ['persist', 'remove'])]
     private ?Identity $identity = null;
+
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Posting::class)]
+    private Collection $postings;
+
+    #[ORM\ManyToMany(targetEntity: PostingType::class, mappedBy: 'companies')]
+    private Collection $typeSearch;
+
+    public function __construct()
+    {
+        $this->postings = new ArrayCollection();
+        $this->typeSearch = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -148,4 +163,62 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Posting>
+     */
+    public function getPostings(): Collection
+    {
+        return $this->postings;
+    }
+
+    public function addPosting(Posting $posting): static
+    {
+        if (!$this->postings->contains($posting)) {
+            $this->postings->add($posting);
+            $posting->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosting(Posting $posting): static
+    {
+        if ($this->postings->removeElement($posting)) {
+            // set the owning side to null (unless already changed)
+            if ($posting->getCompany() === $this) {
+                $posting->setCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostingType>
+     */
+    public function getTypeSearch(): Collection
+    {
+        return $this->typeSearch;
+    }
+
+    public function addTypeSearch(PostingType $typeSearch): static
+    {
+        if (!$this->typeSearch->contains($typeSearch)) {
+            $this->typeSearch->add($typeSearch);
+            $typeSearch->addCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTypeSearch(PostingType $typeSearch): static
+    {
+        if ($this->typeSearch->removeElement($typeSearch)) {
+            $typeSearch->removeCompany($this);
+        }
+
+        return $this;
+    }
+
 }
