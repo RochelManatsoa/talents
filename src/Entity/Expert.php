@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Type\PostingType;
 use App\Repository\ExpertRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +52,18 @@ class Expert
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $website = null;
+
+    #[ORM\ManyToMany(targetEntity: PostingType::class, mappedBy: 'experts')]
+    private Collection $jobTypes;
+
+    #[ORM\ManyToMany(targetEntity: PostingType::class, mappedBy: 'experts')]
+    private Collection $typeJob;
+
+    public function __construct()
+    {
+        $this->jobTypes = new ArrayCollection();
+        $this->typeJob = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -147,6 +162,60 @@ class Expert
     public function setWebsite(?string $website): static
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostingType>
+     */
+    public function getJobTypes(): Collection
+    {
+        return $this->jobTypes;
+    }
+
+    public function addJobType(PostingType $jobType): static
+    {
+        if (!$this->jobTypes->contains($jobType)) {
+            $this->jobTypes->add($jobType);
+            $jobType->addExpert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobType(PostingType $jobType): static
+    {
+        if ($this->jobTypes->removeElement($jobType)) {
+            $jobType->removeExpert($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PostingType>
+     */
+    public function getTypeJob(): Collection
+    {
+        return $this->typeJob;
+    }
+
+    public function addTypeJob(PostingType $typeJob): static
+    {
+        if (!$this->typeJob->contains($typeJob)) {
+            $this->typeJob->add($typeJob);
+            $typeJob->addExpert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTypeJob(PostingType $typeJob): static
+    {
+        if ($this->typeJob->removeElement($typeJob)) {
+            $typeJob->removeExpert($this);
+        }
 
         return $this;
     }
