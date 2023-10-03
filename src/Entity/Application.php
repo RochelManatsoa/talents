@@ -26,6 +26,9 @@ class Application
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $other = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $motivation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Application
     public function setOther(?string $other): static
     {
         $this->other = $other;
+
+        return $this;
+    }
+
+    public function getMotivation(): ?string
+    {
+        return $this->motivation;
+    }
+
+    public function setMotivation(string $motivation): static
+    {
+        $this->motivation = $motivation;
 
         return $this;
     }

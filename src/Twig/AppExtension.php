@@ -48,9 +48,12 @@ class AppExtension extends AbstractExtension
         return $this->translator->trans($routeName . '.keywords');
     }
 
-    public function showAccountDesc(int $accountId)
+    public function showAccountDesc($accountId)
     {
-        return $this->accountRepository->findOneById($accountId)->getDescription();
+        $accountId = (int) $accountId;
+        $account = $this->accountRepository->findOneById($accountId);
+        // dd($account, $account->getDescription());
+        return $account;
     }
 
     public function isoToEmoji(string $code)

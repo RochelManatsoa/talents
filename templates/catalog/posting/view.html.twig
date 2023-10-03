@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% set status = "Fermé" %}
+{% set classStatus = "border border-success" %}
+{% if posting.isValid %}
+{% set status = "Ouvert" %}
+{% set classStatus = "bg-success" %}
+{% endif %}
+
+{% block body %}
+    <div class="container mt-5">
+
+        <div class="row">
+            <div class="col-md-9">
+                <h1 class="h1 ">
+                    {{ posting.title }}
+                </h1>
+                <div class="d-flex align-items-center">
+                    <div class="{{ classStatus }} w-4 h-4 rounded-circle"></div>
+                    <span class="ms-2 text-secondary">{{ status }} | {{ posting.views|length }} vues | {{ posting.applications|length }} offres</span>
+                </div>
+                <p>
+                    <a href="#apply" class="btn btn-primary text-uppercase text-white">
+                        {{ 'app_catalog_posting.continue'|trans}}
+                    </a>
+                    <button type="button" class="btn btn-outline-primary text-uppercase">
+                    {{ 'app_catalog_posting.signal'|trans}}e
+                    </button>
+                </p>
+                <hr class="my-4">
+
+                <p class="mt-2 text-white">
+                    {{ posting.description|raw }}
+                </p>
+                <p class="mt-2 text-white">
+                    {{ posting.description|raw }}
+                </p>
+
+                <p class="h2 text-white" id="apply">
+                    {{ 'app_catalog_posting.offer'|trans}}
+                </p>
+                {{ form_start(form)}}
+                {{ form_widget(form)}}
+                {% if app.user %}
+                    {# Utilisateur connecté, le bouton fait quelque chose d'autre (par exemple, le rediriger vers une autre page) #}
+                    <button
+                        type="submit"
+                        class="btn btn-primary text-uppercase text-white">
+                        {{ 'app_catalog_posting.button'|trans}}
+                    </button>
+                {% else %}
+                    {# Utilisateur non connecté, le bouton ouvre un modal #}
+                    <button
+                        type="button"
+                        data-te-toggle="modal" data-te-target="#loginModal"
+                        class="btn btn-primary text-uppercase text-white">
+                        {{ 'app_catalog_posting.button'|trans}}
+                    </button>
+                {% endif %}
+                {{ form_end(form)}}
+
+
+
+            </div>
+            <div class="col-md-3 bg-light text-dark text-center custom-min-height">
+                <h2 class="h3 m-3 text-uppercase font-weight-bold text-info">
+                    Profil entreprise     
+                </h2>
+                <!-- Card -->
+                {% include 'components/card/_company_profile.html.twig' with {} %}
+                <!-- Card -->
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

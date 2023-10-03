@@ -53,3 +53,30 @@ h2, h3, h1{
     background-image: linear-gradient(to right, #2204a3, #92c6c8);
     -webkit-background-image: linear-gradient(to right, #2204a3, #92c6c8);
 }
+
+
+.custom-control-label .img-fluid {
+    object-fit: cover;  /* Pour maintenir l'aspect de l'image */
+}
+/* Dans votre fichier CSS */
+.image-checkbox {
+    position: relative;  /* Position relative pour le conteneur */
+}
+
+.custom-control-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;  /* Pour s'assurer qu'il reste en haut */
+}
+
+label.form-check-label.required{
+    display: none !important;;
+}
+#experts a, #candidates a{
+    text-decoration: none;
+    color: $gray!important;
+}
+.custom-min-height {
+    min-height: 100vh;  /* 75% de la hauteur de l'écran */
+}
