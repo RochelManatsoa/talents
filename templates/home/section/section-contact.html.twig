@@ -4,18 +4,18 @@
             <div class="col-md-5">
                 <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBlb3BsZSUyMGF0JTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60" class="img-fluid" alt="Image 4" style="width:100%">
             </div>
-            <div class="col-md-7 text-center">
-                <h2 class="text-white h1">
+            <div class="col-md-7 ">
+                <h2 class="text-white h1 text-center">
                     PRÊT À TRANSFORMER VOTRE CARRIÈRE OU VOTRE ENTREPRISE ?
                 </h2>
                 <p class="d-flex flex-column flex-sm-row justify-content-center text-white">  <!-- Update class here -->
-                    <span class="mb-2 mb-sm-0">
+                    <span class="mb-2 mb-sm-0 text-right">
                         123 Anywhere St.<br>
                         Any City<br>
                         ST 12345<br>
                         Country<br>
-                        Telephone: (123) 456-7890<br>
-                        Mobile: (123) 456-7890<br>
+                        (123) 456-7890<br>
+                        (123) 456-7890<br>
                         hello@reallygreatsite.com
                     </span>
                     <span class="mb-2 mb-sm-0">
@@ -28,9 +28,8 @@
                     </span>
                 </p>
                 <p class="d-flex flex-column flex-sm-row justify-content-center">  <!-- Update class here -->
-                    <span class="mb-2 mb-sm-0"><button class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">Déposez votre annonce</button></span>
-                    <span class="mb-2 mb-sm-0"><button class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">Trouvez une offre</button></span>
-                    <span class="mb-2 mb-sm-0"><button class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">Trouvez une offre</button></span>
+                    <span class="mb-2 mb-sm-0"><a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a></span>
+                    <span class="mb-2 mb-sm-0"><ahref="{{ path('app_home_posting')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</ahref=></span>
                 </p>
             </div>
         </div>

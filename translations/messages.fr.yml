@@ -112,10 +112,6 @@ app_dashboard_expert:
     title: "Tableau de bord"
     button: "Réinitialiser le mot de passe"
 
-app_dashboard_company:
-    title: "Tableau de bord"
-    button: "Réinitialiser le mot de passe"
-
 app_identity_create:
     title: "Bienvenue sur Olona-talents.com !"
     description: "Votre première étape vers des opportunités professionnelles inégalées."
@@ -197,6 +193,8 @@ app_catalog_expert:
     projects: "Projets réalisés"
     connected: "Derière connexion"
     member: "Membre depuis"
+    certificated: "Certifié par Olona Talents"
+    realised: "projets réalisés"
     view: "Profil vue"
 
 app_catalog_posting:
@@ -209,3 +207,20 @@ app_catalog_posting:
     offer: "Postuler à cette offre"
     button: "Postuler"
     motivation: "Votre message"
+
+app_dashboard_company:
+    title: "Tableau de bord"
+    description: "Votre profil est maintenant créé et prêt à être exploré"
+    message: "Bienvenu dans votre espace Entreprise : "
+    publish: "Publier une annonce"
+    my_posting: "Mes annonces"
+    find: "Trouver un profil"
+    messaging: "Messagerie"
+    notification: "Notification"
+    my_account: "Mon compte"
+    logout: "Sortir"
+
+app_dashboard_company_posting_new:
+    title: "Deposer une annonce"
+    menu: "Deposer une annonce"
+    description: "Votre profil est maintenant créé et prêt à être exploré"
