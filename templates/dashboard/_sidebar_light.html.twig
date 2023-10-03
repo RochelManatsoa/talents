@@ -1,0 +1,56 @@
+{% set current_route = app.request.attributes.get('_route') %}
+<div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-light position-sticky top-0" style="width: 280px;">
+    <a href="{{ path('app_dashboard_expert')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <span class="fs-4">{{ 'app_dashboard_expert.title'|trans }}   </span>
+    </a>
+    <hr>
+
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="{{ path('app_dashboard_expert_posting')}}" 
+            class="nav-link {{ current_route == 'app_dashboard_expert_posting' ? 'active' : 'text-dark' }}">
+            <i class="mx-2 h5 bi bi-search"></i>
+            {{ 'app_dashboard_expert.find'|trans }}  
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('app_dashboard_expert_application')}}" 
+            class="nav-link {{ current_route == 'app_dashboard_expert_application' ? 'active' : 'text-dark' }}" 
+            {{ current_route == 'app_dashboard_expert_application' ? 'aria-current=page' : '' }}>
+            <i class="mx-2 h5 bi bi-stickies"></i>
+            {{ 'app_dashboard_expert.my_applies'|trans }}   
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('app_dashboard_expert_message')}}" 
+            class="nav-link {{ current_route == 'app_dashboard_expert_message' ? 'active' : 'text-dark' }}">
+            <i class="mx-2 h5 bi bi-chat-right-text"></i>
+            {{ 'app_dashboard_company.messaging'|trans }} 
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('app_dashboard_expert_notification')}}" 
+            class="nav-link {{ current_route == 'app_dashboard_expert_notification' ? 'active' : 'text-dark' }}">
+            <i class="mx-2 h5 bi bi-bell"></i>
+            {{ 'app_dashboard_company.notification'|trans }}  
+        </a>
+      </li>
+    </ul>
+
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="{{ path('app_dashboard_expert_account')}}" 
+            class="nav-link {{ current_route == 'app_dashboard_expert_account' ? 'active' : 'text-dark' }}">
+            <i class="mx-2 h5 bi bi-person-circle"></i>
+            {{ 'app_dashboard_company.my_account'|trans }}    
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('app_logout')}}" class="nav-link text-dark">
+            <i class="mx-2 h5 bi bi-box-arrow-right"></i>
+            {{ 'app_dashboard_company.logout'|trans }}    
+        </a>
+      </li>
+    </ul>
+  </div>
