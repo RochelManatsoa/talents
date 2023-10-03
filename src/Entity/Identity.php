@@ -2,11 +2,22 @@
 
 namespace App\Entity;
 
+use App\Entity\Identity\Experience;
+use App\Entity\Identity\SpokenLanguage;
+use App\Entity\Identity\TechnicalSkill;
+use App\Entity\Note\SkillNote;
+use App\Entity\Views\IdentityViews;
 use App\Repository\IdentityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: IdentityRepository::class)]
+#[Vich\Uploadable]
 class Identity
 {
     #[ORM\Id]
@@ -35,11 +46,47 @@ class Identity
     #[ORM\ManyToOne(inversedBy: 'identity')]
     private ?Account $account = null;
 
+    #[Vich\UploadableField(mapping: 'cv_expert', fileNameProperty: 'fileName')]
+    #[Groups(['identity'])]
+    private ?File $file = null;
+    
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['identity', 'message'])]
+    private ?string $fileName = null;
+
     #[ORM\OneToOne(mappedBy: 'identity', cascade: ['persist', 'remove'])]
     private ?Company $company = null;
 
     #[ORM\OneToOne(mappedBy: 'identity', cascade: ['persist', 'remove'])]
     private ?Expert $expert = null;
+
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: IdentityViews::class)]
+    private Collection $views;
+
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: SpokenLanguage::class)]
+    private Collection $languages;
+
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: Experience::class)]
+    private Collection $experiences;
+
+    #[ORM\ManyToMany(targetEntity: TechnicalSkill::class, mappedBy: 'identity')]
+    private Collection $technicalSkills;
+
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: SkillNote::class)]
+    private Collection $skillNotes;
+
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: Application::class)]
+    private Collection $applications;
+
+    public function __construct()
+    {
+        $this->views = new ArrayCollection();
+        $this->languages = new ArrayCollection();
+        $this->experiences = new ArrayCollection();
+        $this->technicalSkills = new ArrayCollection();
+        $this->skillNotes = new ArrayCollection();
+        $this->applications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -170,6 +217,212 @@ class Identity
         }
 
         $this->expert = $expert;
+
+        return $this;
+    }
+
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if (null !== $file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime();
+        }
+
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(?string $fileName): static
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, IdentityViews>
+     */
+    public function getViews(): Collection
+    {
+        return $this->views;
+    }
+
+    public function addView(IdentityViews $view): static
+    {
+        if (!$this->views->contains($view)) {
+            $this->views->add($view);
+            $view->setIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeView(IdentityViews $view): static
+    {
+        if ($this->views->removeElement($view)) {
+            // set the owning side to null (unless already changed)
+            if ($view->getIdentity() === $this) {
+                $view->setIdentity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpokenLanguage>
+     */
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function addLanguage(SpokenLanguage $language): static
+    {
+        if (!$this->languages->contains($language)) {
+            $this->languages->add($language);
+            $language->setIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(SpokenLanguage $language): static
+    {
+        if ($this->languages->removeElement($language)) {
+            // set the owning side to null (unless already changed)
+            if ($language->getIdentity() === $this) {
+                $language->setIdentity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experience $experience): static
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences->add($experience);
+            $experience->setIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): static
+    {
+        if ($this->experiences->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getIdentity() === $this) {
+                $experience->setIdentity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TechnicalSkill>
+     */
+    public function getTechnicalSkills(): Collection
+    {
+        return $this->technicalSkills;
+    }
+
+    public function addTechnicalSkill(TechnicalSkill $technicalSkill): static
+    {
+        if (!$this->technicalSkills->contains($technicalSkill)) {
+            $this->technicalSkills->add($technicalSkill);
+            $technicalSkill->addIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTechnicalSkill(TechnicalSkill $technicalSkill): static
+    {
+        if ($this->technicalSkills->removeElement($technicalSkill)) {
+            $technicalSkill->removeIdentity($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SkillNote>
+     */
+    public function getSkillNotes(): Collection
+    {
+        return $this->skillNotes;
+    }
+
+    public function addSkillNote(SkillNote $skillNote): static
+    {
+        if (!$this->skillNotes->contains($skillNote)) {
+            $this->skillNotes->add($skillNote);
+            $skillNote->setIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkillNote(SkillNote $skillNote): static
+    {
+        if ($this->skillNotes->removeElement($skillNote)) {
+            // set the owning side to null (unless already changed)
+            if ($skillNote->getIdentity() === $this) {
+                $skillNote->setIdentity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): static
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): static
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getIdentity() === $this) {
+                $application->setIdentity(null);
+            }
+        }
 
         return $this;
     }

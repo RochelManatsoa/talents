@@ -169,13 +169,19 @@ app_identity_expert:
     email: "Adresse mail"
     phone: "Téléphone"
 
-
 app_identity_confirmation:
     title: "Félicitations !"
     description: "Votre profil est maintenant créé et prêt à être exploré"
     message: "Vous pouvez maintenant naviguer sur Olona-talents.com, découvrir des offres, collaborer avec des professionnels ou simplement enrichir davantage votre profil."
     keywords: "freelance, project, talent"
     button: "Accéder à mon tableau de bord"
+
+# app_home_experts:
+#     title: "Experts Francophones et Malgaches | Olona-talents.com"
+#     description: "Votre profil est maintenant créé et prêt à être exploré"
+#     message: "Découvrez une sélection rigoureuse d'experts professionnels francophones et malgaches. Collaborez et enrichissez vos projets grâce à l'excellence locale sur Olona-Talents."
+#     keywords: "freelance, project, talent"
+#     button: "Accéder à mon tableau de bord"
 
 # app_home_posting:
 #     title: ""
