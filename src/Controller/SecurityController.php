@@ -42,15 +42,24 @@ class SecurityController extends AbstractController
     #[Route(path: '/connect', name: 'app_connect')]
     public function connect(): Response
     {
-        /** @var User $user */
+        /** @var User|null $user */
         $user = $this->getUser();
+    
+        if (null === $user || !$user->getIdentity() instanceof Identity) {
+            return $this->redirectToRoute('app_identity_create');
+        }
+    
         /** @var Identity $identity */
         $identity = $user->getIdentity();
-        if(!$identity instanceof Identity) return $this->redirectToRoute('app_identity_create');
-        if(!$identity->getAccount() instanceof Account) return $this->redirectToRoute('app_identity_create');
-        if($identity->getCompany() instanceof Company) return $this->redirectToRoute('app_dashboard_company');
-        if($identity->getExpert() instanceof Expert) return $this->redirectToRoute('app_dashboard_expert');
-
+    
+        if ($identity->getCompany() instanceof Company) {
+            return $this->redirectToRoute('app_dashboard_company');
+        }
+    
+        if ($identity->getExpert() instanceof Expert) {
+            return $this->redirectToRoute('app_dashboard_expert');
+        }
+    
         return $this->redirectToRoute('app_identity_create');
     }
     

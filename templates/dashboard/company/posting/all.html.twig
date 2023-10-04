@@ -1,4 +1,20 @@
 {% extends 'dashboard/layout.html.twig' %}
 
 {% block body %}
+    <h1 class="mb-3">{{ 'app_dashboard_company.my_posting'|trans }}</h1>   
+    {% for item in postings %}
+    <div class="row mb-3 text-center d-flex align-items-center bg-white py-2 rounded my-1">
+        <div class="col-md-3 bordered themed-grid-col h6">
+            {{ item.title }}<br/>
+            {% if item.isValid %}<span class="badge text-bg-danger">Refusée</span>{% else %}<span class="badge text-bg-info">Publiée</span>{% endif %}
+        </div>
+        <div class="col-md-6 bordered themed-grid-col"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></div>
+        <div class="col-md-3 bordered themed-grid-col">
+            <a href="{{ path('app_dashboard_company_posting', {'jobId': item.jobId}) }}"><i class="bi mx-3 h3 bi-pencil-square"></i></a>
+            <a href="{{ path('app_home') }}"><i class="bi mx-3 h3 bi-eye"></i></a>
+            <a href="{{ path('app_home') }}"><i class="bi mx-3 h3 bi-check2"></i></a>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
 {% endblock %}
