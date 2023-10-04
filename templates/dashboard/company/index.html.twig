@@ -1,5 +1,126 @@
 {% extends 'dashboard/layout.html.twig' %}
 
 {% block body %}
+
+<div class="container mt-3">
+    <div class="row text-dark">
+        <p>
+            <i class="h5 bi mx-2 bi-plus-lg"></i> 
+            {{ 'app_dashboard_company.get_started'|trans }} 
+            <a href="{{ path('app_dashboard_company_posting_new') }}" class="mx-2 btn btn-dark">{{ 'app_dashboard_company.publish'|trans }}</a>
+        </p>
+        <hr>
+        <p class="h6">
+            <i class="h5 bi mx-2 bi-newspaper"></i> 
+            {{ 'app_dashboard_company.optimize'|trans }} 
+        </p>
+    </div>
+    <div class="row mt-3">
+        <div class="col-lg-6">
+            <h3 class="h4 mx-2 text-center">{{ 'app_dashboard_company.posting.publish'|trans }}</h3> 
+            <div class="d-flex flex-column flex-md-row mt-3 gap-4 py-md-5 align-items-center justify-content-center">
+                <div class="list-group">
+                    {% for item in postingsOk %}
+                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                        <i class="bi h3 bi-code-slash"></i>
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                            <div>
+                            <h5 class="mb-0">{{ item.title}}</h5>
+                            <p class="mb-0 opacity-75">{{ item.description|length > 120 ? item.description|slice(0, 117) ~ '...' : item.description }}</p>
+                            </div>
+                            <small class="opacity-50 text-nowrap">now</small>
+                        </div>
+                    </a>                        
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h3 class="h4 mx-2 text-center">{{ 'app_dashboard_company.posting.refused'|trans }}</h3> 
+            <div class="d-flex flex-column flex-md-row mt-3 gap-4 py-md-5 align-items-center justify-content-center">
+                <div class="list-group">
+                {% for item in postingsFail %}
+                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <i class="bi h3 bi-code-slash"></i>
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                        <h5 class="mb-0">{{ item.title}}</h5>
+                        <p class="mb-0 opacity-75">{{ item.description|length > 120 ? item.description|slice(0, 117) ~ '...' : item.description }}</p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">now</small>
+                    </div>
+                </a>                        
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1 text-center">
+        <div class="col text-center">
+            <a href="{{ path('app_dashboard_company_posting_all') }}" class="px-3 btn btn-dark">{{ 'app_dashboard_company.posting.all'|trans }}</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-1 text-dark">
+        <p>
+            <i class="h5 bi mx-2 bi-people-fill"></i> 
+            {{ 'app_dashboard_company.talent'|trans }} 
+        </p>
+    </div>
+    <div class="row mt-1 text-dark">
+        <div id="myCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+
+            {# Calculate the number of slides needed #}
+            {% set numSlides = experts|length // 4 %}
+            {% if experts|length % 4 > 0 %}
+                {% set numSlides = numSlides + 1 %}
+            {% endif %}
+
+            <div class="carousel-indicators mb-3">
+                {% for i in 0..numSlides - 1 %}
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ i }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ i + 1 }}"></button>
+                {% endfor %}
+            </div>
+
+            <div class="carousel-inner">
+                {% for i in 0..numSlides - 1 %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-md-4 g-2">
+                            {% for j in 0..3 %}
+                            {% set index = i * 4 + j %}
+                            {% if index < experts|length %}
+                            {% set identity = experts[index] %}
+                            <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
+                                <div class="col">
+                                    <div class="card">
+                                        <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top" alt="{{ identity.user.firstName }}">
+                                        <div class="card-body">
+                                            <p class="card-title h6">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
+                                            <small>
+                                                <small class="card-text">{{ identity.phone }}</small><br>
+                                                <small class="card-text"><i class="mx-1 bi bi-trophy"></i> {{ identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
+                                                <small class="card-text"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-2 text-center">
+        <div class="col text-center">
+            <a href="{{ path('app_home_experts') }}" class="px-3 btn btn-dark">{{ 'app_dashboard_company.all_expert'|trans }}</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
-                
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}

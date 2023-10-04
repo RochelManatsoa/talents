@@ -1,4 +1,12 @@
 {% extends 'dashboard/layout.html.twig' %}
 
 {% block body %}
+<h1 class="mb-3">{{ 'app_dashboard_company_account.edit'|trans }}</h1>  
+{{ form_start(form)}}
+{{ form_widget(form)}}
+<div class="col text-center my-4">
+<button type="submit" class="px-3 btn btn-dark">{{ 'app_dashboard_company_account.button'|trans }}</button>
+</div>
+{{ form_end(form)}}
 {% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}

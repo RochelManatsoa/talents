@@ -215,11 +215,51 @@ app_dashboard_company:
     notification: "Notification"
     my_account: "Mon compte"
     logout: "Sortir"
+    all_expert: "Parcourir le catalogue de profil"
+    get_started: "Lancez votre recherche de talent en quelques clics!"
+    talent: "Découvrez les talents qui correspondent à vos besoins !"
+    follow_us: "Suivez nos actualités sur les réseaux :"
+    contact_us: "Contactez-nous à contact@olona-talents.com ou +261 XX XX XX XX"
+    more_info: "Besoin d'informations ou de partenariat ?"
+    optimize: "Suivez l'état de vos annonces et optimisez-les pour de meilleurs résultats !"
+    posting: 
+        publish: "Annonces publiées"
+        refused: "Annonces refusées"
+        all: "Voir toutes les annonces"
 
 app_dashboard_company_posting_new:
     title: "Deposer une annonce"
     menu: "Deposer une annonce"
-    description: "Votre profil est maintenant créé et prêt à être exploré"
+    button:
+        view: "Prévisualiser"
+        publish: "Publier"
+        cancel: "Annuler"
+
+    description: "Votre profil est maintenant créé et prêt à être exploré"  
+    title_form: "Donnez un titre accrocheur à votre annonce."
+    desc_form: "Décrivez les responsabilités et les tâches du poste."
+    tarif: "Budget prévu pour la mission "
+    number: "Nombre de profil à chercher"
+    type: "Sélectionnez le type de contrat"
+    planned_date: "Date de début "
+    sector: "Quel secteur d’activité de votre entreprise sera sollicité pour cette mission ? "
+
+app_dashboard_company_posting_all:
+    title: "Mes annonces"
+
+app_dashboard_company_profile:
+    title: "Trouver un profil"
+
+app_dashboard_company_message:
+    title: "Messagerie"
+
+app_dashboard_company_notification:
+    title: "Notifications"
+
+app_dashboard_company_account:
+    title: "Mon compte"
+    edit: "Mes informations"
+    button: "Mettre à jour"
 
 app_dashboard_expert:
     title: "Tableau de bord"
