@@ -189,7 +189,7 @@ app_catalog_expert:
     projects: "Projets réalisés"
     connected: "Derière connexion"
     member: "Membre depuis"
-    certificated: "Certifié par Olona Talents"
+    certificated: "Certifié Olona Talents"
     realised: "projets réalisés"
     view: "Profil vue"
 
@@ -206,6 +206,7 @@ app_catalog_posting:
 
 app_dashboard_company:
     title: "Tableau de bord"
+    dashboard_title: "Bienvenu dans votre espace Entreprise : %company_name%"
     description: "Votre profil est maintenant créé et prêt à être exploré"
     message: "Bienvenu dans votre espace Entreprise : "
     publish: "Publier une annonce"
@@ -229,6 +230,8 @@ app_dashboard_company:
 
 app_dashboard_company_posting_new:
     title: "Deposer une annonce"
+    form_title: "Deposer une annonce"
+    dashboard_title: "Titre de l'annonce"
     menu: "Deposer une annonce"
     button:
         view: "Prévisualiser"
@@ -242,29 +245,56 @@ app_dashboard_company_posting_new:
     number: "Nombre de profil à chercher"
     type: "Sélectionnez le type de contrat"
     planned_date: "Date de début "
-    sector: "Quel secteur d’activité de votre entreprise sera sollicité pour cette mission ? "
+    sector: "Quel secteur d'activité de votre entreprise sera sollicité pour cette mission ? "
 
 app_dashboard_company_posting_all:
     title: "Mes annonces"
+    dashboard_title: "Mes annonces - %company_name%"
+    get_started: "Déposez votre annonce en 1 clic"
+    list: "Votre liste d'annonces"
+    response: "Ils ont repondu à vos annonces"
+    status:
+        published: "Publiée"
+        finished: "Terminée"
+        moderate: "En cours de moderation"
+        unpublished: "Non publiée"
+
+app_dashboard_company_posting_edit:
+    title: "Modifier une annonce"
+    dashboard_title: "Modifier une annonce - %company_name%"
+    get_started: "Déposez votre annonce en 1 clic"
+    list: "Votre liste d'annonces"
+    response: "Ils ont repondu à vos annonces"
+    status:
+        published: "Publiée"
+        finished: "Terminée"
+        moderate: "En cours de moderation"
+        unpublished: "Non publiée"
 
 app_dashboard_company_profile:
     title: "Trouver un profil"
+    get_started: "Entrez des compétances, un nom ou un domaine pour trouver le profil ideal"
+    dashboard_title: "Decouvrez des talents"
+    recommanded: "Profils recommandés"
+    catalog: "Catalogue de profils"
 
 app_dashboard_company_message:
     title: "Messagerie"
+    dashboard_title: "Messagerie"
 
 app_dashboard_company_notification:
     title: "Notifications"
+    dashboard_title: "Notifications"
 
 app_dashboard_company_account:
     title: "Mon compte"
+    dashboard_title: "Mon compte"
     edit: "Mes informations"
     button: "Mettre à jour"
 
 app_dashboard_expert:
     title: "Tableau de bord"
     description: "Votre profil est maintenant créé et prêt à être exploré"
-    message: "Bienvenu dans votre espace Entreprise : "
     publish: "Publier une annonce"
     my_applies: "Mes candidatures"
     find: "Trouver une offre"

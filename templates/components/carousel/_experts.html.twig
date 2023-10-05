@@ -1,0 +1,53 @@
+
+<p>
+    <span class="h5">
+        <i class="h5 bi mx-2 bi-people-fill"></i> 
+        {{ title }}   
+    </span> 
+</p>
+<div id="myCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+
+    {# Calculate the number of slides needed #}
+    {% set numSlides = experts|length // 4 %}
+    {% if experts|length % 4 > 0 %}
+        {% set numSlides = numSlides + 1 %}
+    {% endif %}
+
+    <div class="carousel-indicators mb-3">
+        {% for i in 0..numSlides - 1 %}
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ i }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ i + 1 }}"></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for i in 0..numSlides - 1 %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-4 g-2">
+                    {% for j in 0..3 %}
+                    {% set index = i * 4 + j %}
+                    {% if index < experts|length %}
+                    {% set identity = experts[index] %}
+                    <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
+                        <div class="col">
+                            <div class="card">
+                                <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top" alt="{{ identity.user.firstName }}">
+                                <div class="card-body">
+                                    <p class="card-title h6">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
+                                    <small>
+                                        <small class="card-text">{{ identity.expert.title }}</small><br>
+                                        <small class="card-text"><i class="mx-1 bi bi-trophy"></i> {{ identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
+                                        <small class="card-text"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

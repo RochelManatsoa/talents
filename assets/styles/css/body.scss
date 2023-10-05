@@ -99,4 +99,34 @@ label.form-check-label.required{
     min-height: 100vh;
     box-sizing: border-box; 
 }
+.text-green{
+    color: $green;
+}
+.small{
+    font-size: small;
+}
+.five-cols .col-2-25 {
+    flex: 0 0 8%; /* 2/25 de la largeur totale */
+    max-width: 8%;
+}
+
+.five-cols .col-5-25 {
+    flex: 0 0 20%; /* 5/25 de la largeur totale */
+    max-width: 20%;
+}
+
+.five-cols .col-3-25 {
+    flex: 0 0 12%; /* 3/25 de la largeur totale */
+    max-width: 12%;
+}
+.img-border {
+    border: 2px solid black;
+}
+.image-container {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center;     /* Centrer verticalement */
+    height: 100%; /* ou toute autre valeur selon vos besoins */
+}
+
 

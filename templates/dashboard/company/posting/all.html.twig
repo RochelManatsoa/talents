@@ -1,20 +1,56 @@
 {% extends 'dashboard/layout.html.twig' %}
 
 {% block body %}
-    <h1 class="mb-3">{{ 'app_dashboard_company.my_posting'|trans }}</h1>   
+<div class="row text-dark">
+<p>
+    <i class="h5 bi mx-2 bi-plus-lg"></i> 
+    {{ 'app_dashboard_company_posting_all.get_started'|trans }} 
+    <a href="{{ path('app_dashboard_company_posting_new') }}" class="mx-2 btn btn-dark">{{ 'app_dashboard_company.publish'|trans }}</a>
+</p>
+<hr>
+<p class="">
+    <span class="h4">
+        <i class="h5 bi mx-2 bi-stars"></i> 
+        {{ 'app_dashboard_company_posting_all.list'|trans }}    
+    </span> 
+    <span class="small">
+        <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_company_posting_all.status.published'|trans }} 
+        <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_company_posting_all.status.finished'|trans }} 
+        <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_company_posting_all.status.moderate'|trans }} 
+        <i class="h6 bi mx-2 bi-circle-fill small text-danger"></i> {{ 'app_dashboard_company_posting_all.status.unpublished'|trans }} 
+    </span> 
+</p>
+<hr>
+</div>
     {% for item in postings %}
-    <div class="row mb-3 text-center d-flex align-items-center bg-white py-2 rounded my-1">
-        <div class="col-md-3 bordered themed-grid-col h6">
-            {{ item.title }}<br/>
-            {% if item.isValid %}<span class="badge text-bg-danger">Refusée</span>{% else %}<span class="badge text-bg-info">Publiée</span>{% endif %}
-        </div>
-        <div class="col-md-6 bordered themed-grid-col"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></div>
+    <div class="row mb-3 d-flex align-items-center bg-white py-2 rounded my-1">
         <div class="col-md-3 bordered themed-grid-col">
-            <a href="{{ path('app_dashboard_company_posting', {'jobId': item.jobId}) }}"><i class="bi mx-3 h3 bi-pencil-square"></i></a>
-            <a href="{{ path('app_home') }}"><i class="bi mx-3 h3 bi-eye"></i></a>
-            <a href="{{ path('app_home') }}"><i class="bi mx-3 h3 bi-check2"></i></a>
+            <i class="bi mx-1 h5 bi-code-slash"></i><span class="h6">{{ item.title|length > 22 ? item.title|slice(0, 19) ~ '...' : item.title }}</span><br/>
+            {% if item.isValid %}<i class="h6 bi mx-1 bi-circle-fill small text-green"></i>{% else %}<i class="h6 bi mx-1 bi-circle-fill small text-warning"></i>{% endif %}
+            <span class="small">{{ item.views|length}} vues | {{ item.applications|length}} candidatures</span>
+        </div>
+        <div class="col-md-6 bordered themed-grid-col text-center"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></div>
+        <div class="col-md-3 bordered themed-grid-col text-center">
+            <a href="{{ path('app_dashboard_company_posting_edit', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-pencil-square"></i></a>
+            <a href="{{ path('app_catalog_posting', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-eye"></i></a>
+            <a href="{{ path('app_home') }}"><i class="bi mx-1 h4 bi-geo-fill"></i></a>
+            <a href="{{ path('app_ajax_posting_delete', {'jobId': item.jobId}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"><i class="bi mx-1 h4 bi-trash"></i></a>
         </div>
     </div>
     <hr>
     {% endfor %}
+    <div class="row mt-1 text-dark">
+        {% if experts|length > 0 %}
+            {% include "components/carousel/_experts.html.twig" with {
+                'experts': experts,
+                'title': 'app_dashboard_company_posting_all.response'|trans,
+            } %}
+        {% else %}
+            {% include "components/carousel/_experts.html.twig" with {
+                'experts': expertsDefault,
+                'title': 'app_dashboard_company.talent'|trans,
+            } %}
+        {% endif %}
+    </div>
 {% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
