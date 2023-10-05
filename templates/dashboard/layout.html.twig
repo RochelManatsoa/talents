@@ -17,7 +17,7 @@
         {% endblock %}
     </head>
     <body>
-        {% block header %} {% include "parts/_navbar-none.html.twig" %} {% endblock %}
+        {% block header %} {% include "parts/_navbar-none.html.twig" with { 'title': dashboard_title()} %} {% endblock %}
         <div class=" {% if app.user.identity.expert %}bg-light text-dark{% else %}bg-dark text-white{% endif %}">
             <div class="container">
                 <div class="row">

@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Repository\AccountRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -14,6 +15,7 @@ class AppExtension extends AbstractExtension
         private RequestStack $requestStack,
         private TranslatorInterface $translator,
         private AccountRepository $accountRepository,
+        private Security $security,
         )
     {
     }
@@ -22,10 +24,13 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('meta_title', [$this, 'metaTitle']),
+            new TwigFunction('dashboard_title', [$this, 'dashboardTitle']),
             new TwigFunction('meta_description', [$this, 'metaDescription']),
             new TwigFunction('meta_keywords', [$this, 'metaKeywords']),
             new TwigFunction('show_account_desc', [$this, 'showAccountDesc']),
             new TwigFunction('isoToEmoji', [$this, 'isoToEmoji']),
+            new TwigFunction('show_country', [$this, 'showCountry']),
+            new TwigFunction('experience_text', [$this, 'getExperienceText'])
         ];
     }
 
@@ -34,6 +39,15 @@ class AppExtension extends AbstractExtension
         $routeName = $this->requestStack->getCurrentRequest()->attributes->get('_route'); 
 
         return $this->translator->trans($routeName . '.title');
+    }
+
+    public function dashboardTitle(): string
+    {
+        $routeName = $this->requestStack->getCurrentRequest()->attributes->get('_route'); 
+        $user = $this->security->getUser();
+        $companyName = $user->getIdentity()->getCompany()->getName();
+
+        return $this->translator->trans($routeName . '.dashboard_title', ['%company_name%' => $companyName]);
     }
 
     public function metaDescription(): string
@@ -65,5 +79,25 @@ class AppExtension extends AbstractExtension
                 str_split($code)
             )
         );
+    }
+
+    public function showCountry($countryCode)
+    {
+        if(null !== $countryCode){
+            return \Symfony\Component\Intl\Countries::getName($countryCode);
+        }
+        return null;
+    }
+
+    public function getExperienceText(string $value): string
+    {
+        $choices = [
+            'SM' => '1 an',
+            'MD' => '1-3 ans',
+            'LG' => '3-5 ans',
+            'XL' => '+ de 5 ans', // J'ai modifié la clé ici de 'LG' à 'XL' car 'LG' était dupliqué
+        ];
+
+        return $choices[$value] ?? 'N/A';
     }
 }

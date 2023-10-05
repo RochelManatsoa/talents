@@ -4,17 +4,20 @@ namespace App\Controller\Dashboard;
 
 use App\Entity\Company;
 use App\Entity\Posting;
+use App\Form\CompanyType;
+use App\Form\ExpertSearchType;
 use App\Manager\ExpertManager;
 use App\Manager\PostingManager;
 use App\Entity\Type\PostingType;
-use App\Form\CompanyType;
 use App\Service\User\UserService;
 use App\Form\PostingType as Annonce;
+use App\Repository\IdentityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class CompanyController extends AbstractController
 {
@@ -22,7 +25,9 @@ class CompanyController extends AbstractController
         private UserService $userService,
         private EntityManagerInterface $em,
         private PostingManager $postingManager,
+        private IdentityRepository $identityRepository,
         private ExpertManager $expertManager,
+        private RequestStack $requestStack,
     ){
     }
 
@@ -62,6 +67,29 @@ class CompanyController extends AbstractController
         ]);
     }
     
+    #[Route('/dashboard/company/posting/edit/{jobId}', name: 'app_dashboard_company_posting_edit')]
+    public function edit(Posting $posting, Request $request): Response
+    {
+        $referer = $this->requestStack->getCurrentRequest()->headers->get('referer');
+        $company = $this->getCompanyOrRedirect();
+        if (!$company) return $this->redirectToRoute('app_identity_create');
+        $form = $this->createForm(Annonce::class, $posting, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $posting = $form->getData();
+            $this->em->persist($posting);
+            $this->em->flush();
+
+            return $this->redirectToRoute('app_dashboard_company_posting_all', []);
+        }
+
+        return $this->render('dashboard/company/posting/edit.html.twig', [
+            'referer' => $referer,
+            'company' => $company,
+            'form' => $form->createView(),
+        ]);
+    }
+    
     #[Route('/dashboard/company/posting/new', name: 'app_dashboard_company_posting_new')]
     public function postingNew(Request $request): Response
     {
@@ -76,7 +104,7 @@ class CompanyController extends AbstractController
             $this->em->persist($posting);
             $this->em->flush();
 
-            return $this->redirectToRoute('app_dashboard_company_posting', []);
+            return $this->redirectToRoute('app_dashboard_company_posting_all', []);
         }
 
         return $this->render('dashboard/company/posting/new.html.twig', [
@@ -94,18 +122,31 @@ class CompanyController extends AbstractController
         return $this->render('dashboard/company/posting/all.html.twig', [
             'company' => $company,
             'postings' => $company->getPostings(),
+            'experts' => $this->expertManager->candidate($company),
+            'expertsDefault' => $this->identityRepository->findSearch(),
+            'expertsAll' => $this->identityRepository->findAll(),
         ]);
     }
     
     #[Route('/dashboard/company/profile', name: 'app_dashboard_company_profile')]
-    public function profile(): Response
+    public function profile(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
+        $form = $this->createForm(ExpertSearchType::class);
+        $form->handleRequest($request);
         $company = $this->getCompanyOrRedirect();
         if (!$company) return $this->redirectToRoute('app_identity_create');
+        $experts = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchTerm = $form->get('query')->getData();
+            $experts = $this->searchExperts($searchTerm, $entityManagerInterface);
+        }
 
         return $this->render('dashboard/company/profile/index.html.twig', [
             'company' => $company,
-            'experts' => $this->expertManager->allExpert(),
+            'expertsDefault' => $this->expertManager->allExpert(),
+            'form' => $form->createView(),
+            'experts' => $experts,
+            'expertsAll' => $this->identityRepository->findSearch(),
         ]);
     }
     
@@ -151,5 +192,33 @@ class CompanyController extends AbstractController
             'company' => $company,
             'form' => $form->createView(),
         ]);
+    }
+
+    private function searchExperts(string $query, EntityManagerInterface $entityManager): array
+    {
+        $qb = $entityManager->createQueryBuilder();
+        
+        $keywords = array_filter(explode(' ', $query));
+        $parameters = [];
+    
+        $conditions = [];
+        foreach ($keywords as $key => $keyword) {
+            $conditions[] = '(e.title LIKE :query' . $key . 
+                            ' OR e.mainSkills LIKE :query' . $key . 
+                            ' OR e.aspiration LIKE :query' . $key . 
+                            ' OR e.preference LIKE :query' . $key . 
+                            ' OR jt.name LIKE :query' . $key . 
+                            ' OR tj.name LIKE :query' . $key . ')';
+            $parameters['query' . $key] = '%' . $keyword . '%';
+        }
+    
+        $qb->select('e')
+            ->from('App\Entity\Expert', 'e')
+            ->leftJoin('e.jobTypes', 'jt')
+            ->leftJoin('e.typeJob', 'tj')
+            ->where(implode(' OR ', $conditions))
+            ->setParameters($parameters);
+    
+        return $qb->getQuery()->getResult();
     }
 }
