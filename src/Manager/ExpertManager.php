@@ -28,21 +28,19 @@ class ExpertManager
         return $this->identityRepository->findSearch();
     }
     
-    public function likedByCompany(Company $company): array
+    public function candidate(Company $company): array
     {
         $postings = $company->getPostings();
 
-        $postingsOk = [];
-        $postingsFail = [];
+        $experts = [];
 
         foreach ($postings as $posting) {
-            if ($posting->isIsValid()) {
-                $postingsOk[] = $posting;
-            } else {
-                $postingsFail[] = $posting;
+            $applications = $posting->getApplications();
+            foreach ($applications as $application) {
+                $experts[] = $application->getIdentity();
             }
         }
 
-        return [$postingsOk, $postingsFail];
+        return $experts;
     }
 }

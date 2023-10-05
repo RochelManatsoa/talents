@@ -1,0 +1,13 @@
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block body %}
+<label class="form-label" for="posting_title">{{ 'app_dashboard_company_posting_new.dashboard_title'|trans }}</label>
+{{ form_start(form)}}
+{{ form_widget(form)}}
+<div class="col text-center my-4">
+<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="px-3 btn btn-outline-dark">{{ 'app_dashboard_company_posting_new.button.view'|trans }}</button>
+<button type="submit" class="px-3 btn btn-dark">{{ 'app_dashboard_company_posting_new.button.publish'|trans }}</button>
+<a href="{{ referer }}" class="px-3 btn btn-outline-dark">{{ 'app_dashboard_company_posting_new.button.cancel'|trans }}</a>
+</div>
+{{ form_end(form)}}
+{% endblock %}
