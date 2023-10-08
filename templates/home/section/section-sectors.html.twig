@@ -1,29 +1,29 @@
 <section id="sector" class="py-5" style="background-color: white;">
     <div class="d-flex align-items-center" style="height: 100%;">
-        <div class="container h-100">
+        <div class="container-fluid h-100">
             <div class="row">
-                <div class="col-md-7 text-left text-dark">  <!-- Change here -->
-                    <h2 class="text-black text-center my-5 w-100 h1"><strong>SECTEURS QUI RECRUTENT !!</strong></h2>
-                    <hr style="width:50%!important;">  <!-- Change here -->
-                    <p>Are you a creative professional seeking to showcase your talents in an inspiring environment? Look no further than Studio Agatho, an agency that designs the future.</p>
-                    <p>Be part of our team and unleash your artistry in a collaborative and dynamic workplace.</p>
+                <div class="col-lg-7 text-left text-dark">
+                    <h2 class="text-black my-5 w-100 display-1 text-strong">{{ 'app_home.section.sector.h2'|trans }}</h2>
+                    <hr style="width:50%!important;">
+                    <p>{{ 'app_home.section.sector.p1'|trans }}</p>
+                    <p>{{ 'app_home.section.sector.p2'|trans }}</p>
                 </div>
-                <div class="col-md-5">  <!-- Change here -->
+                <div class="col-lg-5">
                     <!-- Colonne 2 : Vous pouvez ajouter une image ou un formulaire ici. -->
                     <div class="p-4  text-white bg-gradient-sector m-1">
-                        <h4 class="h4">DÉVELOPPEMENT WEB</h4>
-                        <p>Transformez votre vision en réalité avec des développeurs experts</p>
-                        <a href="{{ path('app_home_posting')}}" class="btn btn-light">{{ 'app_home_posting.menu'|trans }}</a>
+                        <h4 class="h4">{{ 'app_home.section.sector.dev_title'|trans }}</h4>
+                        <p>{{ 'app_home.section.sector.dev_desc'|trans }}</p>
+                        <a href="{{ path('app_home_posting')}}" class="btn btn-light rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
                     </div>
                     <div class="p-4  text-white bg-dark m-1">
-                        <h4 class="h4">DESIGN</h4> 
-                        <p>Donnez vie à vos idées avec des designs époustouflants</p>
-                        <a href="{{ path('app_home_posting')}}" class="btn btn-light">{{ 'app_home_posting.menu'|trans }}</a>
+                        <h4 class="h4">{{ 'app_home.section.sector.design_title'|trans }}</h4> 
+                        <p>{{ 'app_home.section.sector.design_desc'|trans }}</p>
+                        <a href="{{ path('app_home_posting')}}" class="btn btn-light rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
                     </div>
                     <div class="p-4  text-white bg-gradient-sector m-1">
-                        <h4 class="h4">MARKETING</h4> 
-                        <p>Atteignez votre public cible avec des stratégies innovante</p>
-                        <a href="{{ path('app_home_posting')}}" class="btn btn-light">{{ 'app_home_posting.menu'|trans }}</a>
+                        <h4 class="h4">{{ 'app_home.section.sector.marketing_title'|trans }}</h4> 
+                        <p>{{ 'app_home.section.sector.marketing_desc'|trans }}</p>
+                        <a href="{{ path('app_home_posting')}}" class="btn btn-light rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
                     </div>
                 </div>
             </div>

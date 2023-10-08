@@ -40,7 +40,7 @@
     <hr>
     {% endfor %}
     <div class="row mt-1 text-dark">
-        {% if experts|length > 0 %}
+        {# {% if experts|length > 0 %}
             {% include "components/carousel/_experts.html.twig" with {
                 'experts': experts,
                 'title': 'app_dashboard_company_posting_all.response'|trans,
@@ -50,7 +50,7 @@
                 'experts': expertsDefault,
                 'title': 'app_dashboard_company.talent'|trans,
             } %}
-        {% endif %}
+        {% endif %} #}
     </div>
 {% endblock %}
 {% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}

@@ -5,6 +5,7 @@
         {{ title }}   
     </span> 
 </p>
+{% if experts is not empty %}
 <div id="myCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
 
     {# Calculate the number of slides needed #}
@@ -27,16 +28,16 @@
                     {% for j in 0..3 %}
                     {% set index = i * 4 + j %}
                     {% if index < experts|length %}
-                    {% set identity = experts[index] %}
-                    <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
+                    {% set expert = experts[index] %}
+                    <a href="{{ path('app_catalog_expert', {'username': expert.identity.username}) }}">
                         <div class="col">
                             <div class="card">
-                                <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top" alt="{{ identity.user.firstName }}">
+                                <img src="{{vich_uploader_asset(expert.identity, 'file')}}" class="card-img-top" alt="{{ expert.identity.user.firstName }}">
                                 <div class="card-body">
-                                    <p class="card-title h6">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
+                                    <p class="card-title h6">{{ expert.identity.user.firstName }} {{ expert.identity.user.lastName|slice(0, 1)|upper }}.</p>
                                     <small>
-                                        <small class="card-text">{{ identity.expert.title }}</small><br>
-                                        <small class="card-text"><i class="mx-1 bi bi-trophy"></i> {{ identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
+                                        <small class="card-text">{{ expert.title }}</small><br>
+                                        <small class="card-text"><i class="mx-1 bi bi-trophy"></i> {{ expert.identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
                                         <small class="card-text"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
                                     </small>
                                 </div>
@@ -51,3 +52,4 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}
