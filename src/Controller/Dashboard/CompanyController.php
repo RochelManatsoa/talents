@@ -135,7 +135,7 @@ class CompanyController extends AbstractController
         $form->handleRequest($request);
         $company = $this->getCompanyOrRedirect();
         if (!$company) return $this->redirectToRoute('app_identity_create');
-        $experts = [];
+        $experts = $this->expertManager->allExpert();
         if ($form->isSubmitted() && $form->isValid()) {
             $searchTerm = $form->get('query')->getData();
             $experts = $this->searchExperts($searchTerm, $entityManagerInterface);

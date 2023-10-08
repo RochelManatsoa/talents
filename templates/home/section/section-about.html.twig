@@ -1,19 +1,17 @@
-<section id="about" class="vh-100" style="">
-    <div class="container h-100 d-flex flex-column justify-content-center">
+<section id="about" class="desktop-vh-100" style="background-color: white;position:relative">
+    <div class="container-fluid h-100 d-flex flex-column justify-content-center">
         <div class="row">
-            <div class="col-md-6 col-sm-12 text-center">
-                <img src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlJTIwYXQlMjB3b3JrfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60" class="img-fluid" alt="Image 4" style="width:100%">
+            <div class="col-lg-6 col-sm-12 text-center background-div" style="background-image: url('{{ asset('images/home/sections/how-it-works.png') }}');">
             </div>
-            <div class="col-md-6 col-sm-12 d-flex flex-column justify-content-center">  <!-- Add flex styles here -->
-                <!-- Colonne 2 : Vous pouvez ajouter une image ou un formulaire ici. -->
-                <div>  <!-- Wrap content in a div -->
-                    <h2 class="text-white text-center my-5 w-100 h1"><strong>COMMENT ÇA MARCHE</strong></h2>
-                    <p><span class="h5"><strong>Étape 1 :</strong></span> "Publiez ou recherchez des offres" - Mettez en avant vos compétences ou trouvez le talent parfait pour votre projet.</p>
-                    <p><span class="h5"><strong>Étape 2 :</strong></span> "Collaborez en toute sécurité" - Utilisez nos outils intégrés pour une collaboration transparente et sécurisée.</p>
-                    <p><span class="h5"><strong>Étape 3 :</strong></span> "Finalisez et évaluez" - Recevez des paiements sécurisés et donnez votre avis sur la collaboration.</p>
-                    <p class="d-flex flex-column flex-sm-row justify-content-center">  <!-- Update class here -->
-                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a></span>
-                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-secondary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
+            <div class="col-lg-6 col-sm-12 d-flex flex-column justify-content-center px-4">  <!-- Add flex styles here -->
+                <div class="text-black">  <!-- Wrap content in a div -->
+                    <h2 class="text-black mb-5 w-100 display-5 text-strong">{{ 'app_home.section.about.h2'|trans }}</h2>
+                    <p class="fs-5 mt-4"><span class="text-strong fs-4">{{ 'app_home.section.about.step'|trans }} 1 :</span> "{{ 'app_home.section.about.p1_title'|trans }}" - {{ 'app_home.section.about.p1_desc'|trans }}</p>
+                    <p class="fs-5 mt-4"><span class="text-strong fs-4">{{ 'app_home.section.about.step'|trans }} 2 :</span> "{{ 'app_home.section.about.p2_title'|trans }}" - {{ 'app_home.section.about.p2_desc'|trans }}</p>
+                    <p class="fs-5 mt-4"><span class="text-strong fs-4">{{ 'app_home.section.about.step'|trans }} 3 :</span> "{{ 'app_home.section.about.p3_title'|trans }}" - {{ 'app_home.section.about.p3_desc'|trans }}</p>
+                    <p class="d-flex flex-column flex-sm-row justify-content-center cta-group">  <!-- Update class here -->
+                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-secondary py-3 text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a></span>
+                        <span class="mb-2 mb-sm-0"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-secondary py-3 text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
                     </p>
                 </div>
             </div>

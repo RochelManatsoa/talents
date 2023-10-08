@@ -1,41 +1,43 @@
 
-<section id="hero" class="vh-100" style="background-color: black;">
+<section id="hero" class="desktop-vh-100" style="background-color: black;">
     <div class="container h-100 d-flex flex-column justify-content-center">
         <div class="row">
-            <div class="col-md-6 text-center">
-                <img src="{{ asset('images/logo-olona-talents.jpg')}}" class="img-fluid mx-auto rounded mb-2" style="width:300px;align:center;" alt="Logo">
-                <h1 class="text-white">DÉCOUVREZ</h1>
-                <h2 class="text-white">LE FUTUR DU TRAVAIL</h2>
-                <h3 class="text-white">PROFESSIONNEL FRANCOPHONE ET MALGACHE.</h3>
-                <p class="text-white">Collaborez avec des experts, explorez des opportunités inégalées et propulsez votre carrière vers de nouveaux sommets.</p>
+            <div class="col-lg-6 text-center">
+                <img src="{{ asset('images/logo-olona-talents.jpg')}}" class="img-fluid mx-auto rounded mb-2" style="width:350px;align:center;" alt="Logo">
+                <h1 class="text-white display-1 mt-5">{{ 'app_home.section.hero.h1'|trans }}</h1>
+                <h2 class="text-white display-5 custom-margin-h2">{{ 'app_home.section.hero.h2'|trans }}</h2>
+                <h3 class="text-white my-3 text-strong">{{ 'app_home.section.hero.h3'|trans }}</h3>
+                <div class="d-flex justify-content-center align-items-center">
+                    <p class="text-white col-md-8 fs-5">{{ 'app_home.section.hero.p'|trans }}</p>
+                </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <!-- Colonne 2 : Vous pouvez ajouter une image ou un formulaire ici. -->
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="image-wrapper">
-                            <img src="https://plus.unsplash.com/premium_photo-1661499658658-be683c173be4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cGVvcGxlJTIwYXQlMjB3b3JrfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60" class="img-fluid rounded mb-2" alt="Image 1">
-                            <a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-secondary text-uppercase w-100 mx-auto rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a>
+                            <img src="{{ asset('images/home/sections/hero1.png')}}" class="img-fluid rounded mb-2" alt="Image 1">
+                            <a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1574100004472-e536d3b6bacc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBlb3BsZSUyMGF0JTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60" class="img-fluid rounded mb-2" alt="Image 2">
-                            <a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-secondary text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
+                            <img src="{{ asset('images/home/sections/hero2.png')}}" class="img-fluid rounded mb-2" alt="Image 2">
+                            <a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlJTIwYXQlMjB3b3JrfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60" class="img-fluid rounded mb-2" alt="Image 3">
-                            <a href="{{ path('app_home_experts')}}" class="btn btn-sm btn-secondary text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_experts.menu'|trans }}</a>
+                            <img src="{{ asset('images/home/sections/hero3.png')}}" class="img-fluid rounded mb-2" alt="Image 3">
+                            <a href="{{ path('app_home_experts')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_experts.menu'|trans }}</a>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <div class="image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBlb3BsZSUyMGF0JTIwd29ya3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60" class="img-fluid rounded mb-2" alt="Image 4">
-                            <a href="{{ path('app_home_contact')}}" class="btn btn-sm btn-secondary text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_contact.menu'|trans }}</a>
+                            <img src="{{ asset('images/home/sections/hero4.png')}}" class="img-fluid rounded mb-2" alt="Image 4">
+                            <a href="{{ path('app_home_contact')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_contact.menu'|trans }}</a>
                         </div>
                     </div>
                 </div>

@@ -9,3 +9,26 @@
 import './styles/app.scss';
 import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import $ from 'jquery';
+
+$(function() {
+    // Vérifiez si vous êtes sur la page d'accueil
+    if ($('#homepage-indicator').length > 0) {
+        var prevScrollpos = $(window).scrollTop();
+
+        $(window).on('scroll', function() {
+            var currentScrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if (currentScrollPos === 0) {
+                $('#navbar').removeClass('show');
+            } else {
+                $('#navbar').addClass('show');
+            }
+
+            prevScrollpos = currentScrollPos;
+        });
+    }else{
+        $('#navbar').addClass('show');
+    }
+});
+

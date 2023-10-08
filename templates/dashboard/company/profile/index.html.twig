@@ -38,6 +38,21 @@
     </div>
 {{ form_end(form) }}
 
+<div class="row mt-1 text-dark">
+    {% include "components/carousel/_experts.html.twig" with {
+        'experts': experts,
+        'title': 'app_dashboard_company_profile.recommanded'|trans,
+    } %}
+</div>
+
+<p class="">
+    <div class="d-flex gap-2 ">
+    <span class="h5">
+        <i class="h5 bi mx-2 bi-stars"></i> 
+        {{ 'app_dashboard_company_profile.catalog'|trans }}    
+    </span> 
+  </div>
+</p>
 
 {% for item in experts %}
     <div class="row five-cols">
@@ -72,51 +87,5 @@
     <hr>
 {% endfor %}
 
-<div class="row mt-1 text-dark">
-    {% include "components/carousel/_experts.html.twig" with {
-        'experts': expertsDefault,
-        'title': 'app_dashboard_company_profile.recommanded'|trans,
-    } %}
-</div>
-<p class="">
-    <div class="d-flex gap-2 ">
-    <span class="h5">
-        <i class="h5 bi mx-2 bi-stars"></i> 
-        {{ 'app_dashboard_company_profile.catalog'|trans }}    
-    </span> 
-  </div>
-</p>
-{% for item in expertsAll %}
-    <div class="row five-cols">
-        <div class="col custom-col col-2-25 image-container">
-            <img src="{{vich_uploader_asset(item, 'file')}}" class="img-fluid img-border" alt="{{ item.user.firstName }}">
-        </div>
-        <div class="col custom-col col-5-25">
-            <small class="h6">{{ item.user.firstName }} {{ item.user.lastName|slice(0, 1)|upper }}. <i class="h6 bi mx-2 bi-circle-fill small text-green"></i></small><br>
-            <small class="card-text"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
-        </div>
-        <div class="col custom-col col-5-25">{{ item.expert.title }}</div>
-        <div class="col custom-col col-5-25">
-            <small class="text-dark small">{{ experience_text(item.expert.years) }} d'expérience </small><br>
-            <small class="text-dark "><i class="mx-1 bi bi-trophy"></i> {{ item.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small>
-        </div>
-        <div class="col custom-col col-5-25 small">
-            {{ show_country(item.expert.country) }}<br>
-            <small class="text-dark small">Télétravail</small>
-        </div>
-        <div class="col custom-col col-3-25">
-            <div class="flex items-center">
-                {% for i in 1..5 %}
-                    {% if i <= 5 %}
-                    <i class="small bi bi-star-fill text-warning"></i>
-                    {% else %}
-                    <i class="small bi bi-star text-dark"></i>
-                    {% endif %}
-                {% endfor %}    
-            </div>
-        </div>
-    </div>
-    <hr>
-{% endfor %}
 </div>
 {% endblock %}
