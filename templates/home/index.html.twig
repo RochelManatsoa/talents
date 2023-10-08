@@ -2,6 +2,9 @@
 
 {% block fluid %}<div class="container-fluid m-0">{% endblock %} 
 {% block body %}
+<!-- Indicateur pour le JavaScript pour savoir que nous sommes sur la page d'accueil -->
+<div id="homepage-indicator" style="display: none;"></div>
+
 {% include "home/section/section-hero.html.twig" with {} %}
 {% include "home/section/section-postings.html.twig" with {'postings': postings} %}
 {% include "home/section/section-about.html.twig" with {} %}

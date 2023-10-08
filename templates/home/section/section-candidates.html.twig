@@ -1,9 +1,9 @@
-<section id="candidates" class="" style="background-color: white;">
+<section id="candidates" class="desktop-vh-100" style="background-color: white;">
     <div class="container">
         <div class="row">
-            <h2 class="text-black text-center my-5 w-100 h1"><strong>NOS DERNIERS CANDIDATS</strong></h2>
+            <h2 class="text-black text-center my-5 w-100 display-2 text-strong">{{ 'app_home.section.candidates.h2'|trans }}</h2>
             <div class="row row-cols-1 row-cols-md-5 g-4">
-            {% for identity in experts %}
+            {# {% for identity in experts %}
                 <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
                 <div class="col">
                     <div class="card">
@@ -17,11 +17,11 @@
                     </div>
                 </div>
                 </a>
-            {% endfor %}
+            {% endfor %} #}
             </div>
         </div>
         <p class="d-flex flex-column flex-sm-row justify-content-center">  
-            <span class="mb-6"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-primary text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
+            <span class="mb-6"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-light text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
         </p>
     </div>
 </section>

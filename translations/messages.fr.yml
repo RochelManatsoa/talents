@@ -8,6 +8,45 @@ app_home:
     menu: "Accueil"
     description: "Trouvez des projets, postulez à des offres d'emploi et collaborez avec les meilleurs professionnels de Madagascar et francophones. Rejoignez-nous dès maintenant."
     keywords: "freelance, projet, offre"
+    section: 
+        hero:
+            h1: DÉCOUVREZ
+            h2: LE FUTUR DU TRAVAIL
+            h3: PROFESSIONNEL FRANCOPHONE ET MALGACHE.
+            p: Collaborez avec des experts, explorez des opportunités inégalées et propulsez votre carrière vers de nouveaux sommets.
+        postings:
+            h2: LES DERNIÈRES OFFRES D'EMPLOIS
+            h3: PROFESSIONNEL FRANCOPHONE ET MALGACHE.
+            p: Collaborez avec des experts, explorez des opportunités inégalées et propulsez votre carrière vers de nouveaux sommets.
+        about:
+            h2: "COMMENT ÇA MARCHE (HOW IT WORKS) :"
+            step: Étape
+            p1_title: "Publiez ou recherchez des offres"
+            p1_desc: Mettez en avant vos compétences ou trouvez le talent parfait pour votre projet.
+            p2_title: "Collaborez en toute sécurité"
+            p2_desc: Utilisez nos outils intégrés pour une collaboration transparente et sécurisée.
+            p3_title: "Finalisez et évaluez"
+            p3_desc: Recevez des paiements sécurisés et donnez votre avis sur la collaboration.
+        sector:
+            h2: SECTEURS QUI RECRUTENT !!
+            p1: Êtes-vous un professionnel créatif cherchant à mettre en avant vos talents dans un environnement inspirant ? Ne cherchez pas plus loin que Studio Agatho, une agence qui conçoit le futur.
+            p2: Rejoignez notre équipe et libérez votre art dans un lieu de travail collaboratif et dynamique.
+            dev_title: DÉVELOPPEMENT WEB
+            dev_desc: Transformez votre vision en réalité avec des développeurs experts
+            design_title: DESIGN
+            design_desc: Donnez vie à vos idées avec des designs époustouflants
+            marketing_title: MARKETING
+            marketing_desc: Atteignez votre public cible avec des stratégies innovante
+        candidates:
+            h2: NOS DERNIERS CANDIDATS
+            p1: Êtes-vous un professionnel créatif cherchant à mettre en avant vos talents dans un environnement inspirant ? Ne cherchez pas plus loin que Studio Agatho, une agence qui conçoit le futur.
+            p2: Rejoignez notre équipe et libérez votre art dans un lieu de travail collaboratif et dynamique.
+        contact:
+            h2: PRÊT À TRANSFORMER VOTRE CARRIÈRE OU VOTRE ENTREPRISE ?
+            p1: Êtes-vous un professionnel créatif cherchant à mettre en avant vos talents dans un environnement inspirant ? Ne cherchez pas plus loin que Studio Agatho, une agence qui conçoit le futur.
+            p2: Rejoignez notre équipe et libérez votre art dans un lieu de travail collaboratif et dynamique.
+
+
 
 app_home_experts:
     menu: "Trouver un profil"

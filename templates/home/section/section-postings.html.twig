@@ -1,8 +1,8 @@
-<section id="postings" class="container-fluid" style="background-color: white;position:relative">
+<section id="postings" class="desktop-vh-100" style="background-color: white;position:relative">
     <div class="container d-flex flex-column justify-content-center">
         <div class="row">
-            <h2 class="text-black text-center my-5 w-100 h1"><strong>LE FUTUR DU TRAVAIL</strong></h2>
-            {% for item in postings %}
+            <h2 class="text-black text-center my-5 w-100 display-2 text-strong">{{ 'app_home.section.postings.h2'|trans }}</h2>
+            {# {% for item in postings %}
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card h-100" style="text-align:left!important;">
                     <div class="card-body d-flex flex-column">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            {% endfor %} #}
         </div>
     </div>
 </section>

@@ -25,7 +25,11 @@ class ExpertManager
 
     public function allExpert(): array
     {
-        return $this->identityRepository->findSearch();
+        $experts = [];
+        foreach ($this->identityRepository->findSearch() as $identity) {
+            $experts[] = $identity->getExpert();
+        }
+        return $experts;
     }
     
     public function candidate(Company $company): array
