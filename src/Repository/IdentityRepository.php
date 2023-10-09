@@ -43,6 +43,19 @@ class IdentityRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
    }
 
+   public function findTopRanked() : array
+   {
+        return $this->createQueryBuilder('i')
+            ->select('i, COUNT(v.id) as HIDDEN num_views')
+            ->leftJoin('i.views', 'v')  
+            ->groupBy('i')
+            ->orderBy('num_views', 'DESC') 
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Identity[] Returns an array of Identity objects
 //     */

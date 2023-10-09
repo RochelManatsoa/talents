@@ -1,27 +1,20 @@
-<section id="candidates" class="desktop-vh-100" style="background-color: white;">
-    <div class="container">
+<section id="candidates" class="" style="background-color: white;">
+    <div class="container-fluid">
         <div class="row">
             <h2 class="text-black text-center my-5 w-100 display-2 text-strong">{{ 'app_home.section.candidates.h2'|trans }}</h2>
-            <div class="row row-cols-1 row-cols-md-5 g-4">
-            {# {% for identity in experts %}
-                <a href="{{ path('app_catalog_expert', {'username': identity.username}) }}">
-                <div class="col">
-                    <div class="card">
-                        <img src="{{vich_uploader_asset(identity, 'file')}}" class="card-img-top" alt="{{ identity.user.firstName }}">
-                        <div class="card-body">
-                        <p class="card-title h6">{{ identity.user.firstName }} {{ identity.user.lastName|slice(0, 1)|upper }}.</p>
-                        <small class="card-text">{{ identity.expert.title }}</small><br>
-                        <small class="card-text"><i class="mx-1 bi bi-trophy"></i> {{ identity.experiences|length }} {{ 'app_catalog_expert.realised'|trans }}</small><br>
-                        <small class="card-text"><i class="mx-1 bi bi-patch-check"></i> {{ 'app_catalog_expert.certificated'|trans }}</small>
-                        </div>
-                    </div>
+            
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-md-4 g-2">
+                    {% for identity in topRanked %}
+                        {{ component('expert_component', { id: identity.expert.id})}}
+                    {% endfor %}
                 </div>
-                </a>
-            {% endfor %} #}
             </div>
+            <hr class="my-5">
+            {{ component('carousel_expert_component') }}
         </div>
-        <p class="d-flex flex-column flex-sm-row justify-content-center">  
-            <span class="mb-6"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-light text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.menu'|trans }}</a></span>
+        <p class="d-flex flex-column flex-sm-row justify-content-center cta-group">  
+            <span class="my-5"><a href="{{ path('app_home_experts')}}" class="btn btn-sm btn-outline-dark text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_experts.see_all'|trans }}</a></span>
         </p>
     </div>
 </section>
