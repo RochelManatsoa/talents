@@ -1,0 +1,31 @@
+{% set numSlides = this.allPostings|length // 6 %}
+{% if this.allPostings|length % 6 > 0 %}
+{% set numSlides = numSlides + 1 %}
+{% endif %}
+
+
+<div id="carousel_posting_component" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-indicators mb-3">
+        {% for i in 0..numSlides - 1 %}
+        <button type="button" data-bs-target="#carousel_posting_component" data-bs-slide-to="{{ i }}" {% if loop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ i + 1 }}"></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for i in 0..numSlides - 1 %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-md-5 g-2">
+                    {% for j in 0..5 %}
+                        {% set index = i * 6 + j %}
+                        {% if index < this.allPostings|length %}
+                            {% set posting = this.allPostings[index] %}
+                            {{ component('posting_component', {id: posting.id})}}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -25,6 +25,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'sectors' => $this->sectorRepository->findAll(),
             'experts' => $this->identityRepository->findSearch(),
+            'topRanked' => $this->identityRepository->findTopRanked(),
             'postings' => $this->postingRepository->findValid(),
         ]);
     }
