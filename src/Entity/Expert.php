@@ -32,7 +32,7 @@ class Expert
     #[ORM\OneToOne(inversedBy: 'expert', cascade: ['persist', 'remove'])]
     private ?Identity $identity = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -58,6 +58,12 @@ class Expert
 
     #[ORM\ManyToMany(targetEntity: PostingType::class, mappedBy: 'experts')]
     private Collection $typeJob;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $birthday = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $cv = null;
 
     public function __construct()
     {
@@ -87,7 +93,7 @@ class Expert
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -216,6 +222,30 @@ class Expert
         if ($this->typeJob->removeElement($typeJob)) {
             $typeJob->removeExpert($this);
         }
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): static
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?string $cv): static
+    {
+        $this->cv = $cv;
 
         return $this;
     }

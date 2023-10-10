@@ -1,0 +1,450 @@
+{% extends 'base_identity.html.twig' %}
+
+{% block body %}
+    <section id="hero" class="" style="background-color: black;">
+        <div class="container h-100">
+            <h1 class="h3 text-center py-4 text-white font-bold">
+                {{ 'app_identity_expert_step_two.title'|trans }}
+            </h1>
+            {{ form_start(form, {'attr': {'class': 'form-inline' }}
+            ) }}
+                    
+            <div class="row text-white">
+                <div class="col-md-6 offset-md-3">
+                    <hr class="my-4">
+
+                        <div class="row mb-4">
+                            {{ form_label(form.expert.title) }}
+                            <div class="col-sm-8">
+                                {{ form_widget(form.expert.title, {'attr': {'class': 'rounded-pill' }}
+                                ) }}
+                                                    
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            {{ form_label(form.expert.aspiration) }}
+                            <div class="col-sm-8">
+                                {{ form_widget(form.expert.aspiration, {'attr': {'class': 'rounded' }}
+                                ) }}
+                                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="col-md-4 offset-md-6 text-center">
+                        {{ 'app_identity_expert_step_two.experience.name'|trans }}
+                        </div>
+                        <div class="col-md-8 offset-md-2 my-4">
+                            {% if experiences is not empty %}
+                                {% for experience in experiences %}
+                                    <p class="text-light small d-flex justify-content-end align-items-center">
+                                        {{ experience.title }}
+                                        | 
+                                        {{ experience.company }}
+                                        | 
+                                        {{ date_difference(experience.endDate, experience.startDate) }}
+                                    </p>
+                                {% endfor %}
+                            {% else %}
+                                <p class="ttext-light small d-flex justify-content-end align-items-center">
+                                {{ 'app_identity_expert_step_two.experience.none'|trans }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.experiences|length > 0 ? form.experiences|last.vars.name + 1 : 0 }}" data-form-collection-prototype-value="{{ form_widget(form.experiences.vars.prototype)|e('html_attr') }}">
+                            <!-- Modal -->
+                            <div class="modal fade" id="experience" tabindex="-1" aria-labelledby="experienceLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content text-black">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-2" id="experienceLabel">
+                                                {{ 'app_identity_expert_step_two.experience.add'|trans }}
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#experience" type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>
+                                <i class="h5 bi mx-1 bi-plus"></i>
+                                {{ 'app_identity_expert_step_two.experience.add'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#experiencesPreview" type="button">
+                            {{ 'app_identity_expert_step_two.experience.view'|trans }}
+                            <i class="h5 bi mx-1 bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="col-md-4 offset-md-6 text-center">
+                        {{ 'app_identity_expert_step_two.formation.name'|trans }}
+                        </div>
+                        <div class="col-md-8 offset-md-2 my-4">
+                            {% if formations is not empty %}
+                                {% for formation in formations %}
+                                    <p class="text-light small d-flex justify-content-end align-items-center">
+                                        {{ formation.title }}
+                                        | 
+                                        {{ formation.level }}
+                                        | 
+                                        {{ date_difference(formation.endDate, formation.startDate) }}
+                                    </p>
+                                {% endfor %}
+                            {% else %}
+                                <p class="ttext-light small d-flex justify-content-end align-items-center">
+                                {{ 'app_identity_expert_step_two.formation.none'|trans }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.formations|length > 0 ? form.formations|last.vars.name + 1 : 0 }}" data-form-collection-prototype-value="{{ form_widget(form.formations.vars.prototype)|e('html_attr') }}">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="formations" tabindex="-1" aria-labelledby="formationsLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content text-black">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-2" id="formationsLabel">
+                                                {{ 'app_identity_expert_step_two.formation.add'|trans }}
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#formations" type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>
+                                <i class="h5 bi mx-1 bi-plus"></i>
+                                {{ 'app_identity_expert_step_two.formation.add'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#formationsPreview" type="button">
+                            {{ 'app_identity_expert_step_two.formation.view'|trans }}
+                            <i class="h5 bi mx-1 bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="col-md-4 offset-md-6 text-center">
+                        {{ 'app_identity_expert_step_two.skill.name'|trans }}
+                        </div>
+                        <div class="col-md-8 offset-md-2 my-4">
+                            {% if technicalSkills is not empty %}
+                                {% for technicalSkill in technicalSkills %}
+                                    <p class="text-light small d-flex justify-content-end align-items-center">
+                                        {{ technicalSkill.name }}
+                                        <span class="mx-4">
+                                            {% for i in 1..5 %}
+                                                {% if i <= technicalSkill.type %}
+                                                    <i class="small bi bi-star-fill text-warning"></i>
+                                                {% else %}
+                                                    <i class="small bi bi-star text-dark"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                    </p>
+                                {% endfor %}
+                            {% else %}
+                                <p class="ttext-light small d-flex justify-content-end align-items-center">
+                                {{ 'app_identity_expert_step_two.skill.none'|trans }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.technicalSkills|length > 0 ? form.technicalSkills|last.vars.name + 1 : 0 }}" data-form-collection-prototype-value="{{ form_widget(form.technicalSkills.vars.prototype)|e('html_attr') }}">
+                            <!-- Modal -->
+                            <div class="modal fade" id="technicalSkill" tabindex="-1" aria-labelledby="technicalSkillLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content text-black">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-2" id="technicalSkillLabel">
+                                                {{ 'app_identity_expert_step_two.skill.add'|trans }}
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#technicalSkill" type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>
+                                <i class="h5 bi mx-1 bi-plus"></i>
+                                {{ 'app_identity_expert_step_two.skill.add'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#skillsPreview" type="button">
+                            {{ 'app_identity_expert_step_two.skill.view'|trans }}
+                            <i class="h5 bi mx-1 bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col-md-6">
+                        <div class="col-md-4 offset-md-6 text-center">
+                        {{ 'app_identity_expert_step_two.language.name'|trans }}
+                        </div>
+                        <div class="col-md-8 offset-md-2 my-4">
+                            {% if languages is not empty %}
+                                {% for language in languages %}
+                                    <p class="text-light small d-flex justify-content-end align-items-center">
+                                        {{ language.language }}
+                                        <span class="mx-4">
+                                            {% for i in 1..5 %}
+                                                {% if i <= language.level %}
+                                                    <i class="small bi bi-star-fill text-warning"></i>
+                                                {% else %}
+                                                    <i class="small bi bi-star text-dark"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </span>
+                                    </p>
+                                {% endfor %}
+                            {% else %}
+                                <p class="ttext-light small d-flex justify-content-end align-items-center">
+                                {{ 'app_identity_expert_step_two.language.none'|trans }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div {{ stimulus_controller('form-collection') }} data-form-collection-index-value="{{ form.languages|length > 0 ? form.languages|last.vars.name + 1 : 0 }}" data-form-collection-prototype-value="{{ form_widget(form.languages.vars.prototype)|e('html_attr') }}">
+                            <!-- Modal -->
+                            <div class="modal fade" id="language" tabindex="-1" aria-labelledby="languageLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content text-black">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-2" id="languageLabel">
+                                                {{ 'app_identity_expert_step_two.language.add'|trans }}
+                                            </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul {{ stimulus_target('form-collection', 'collectionContainer') }}></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#language" type="button" {{ stimulus_action('form-collection', 'addCollectionElement') }}>
+                                <i class="h5 bi mx-1 bi-plus"></i>
+                                {{ 'app_identity_expert_step_two.language.add'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-light rounded-pill small" data-bs-toggle="modal" data-bs-target="#languagesPreview" type="button">
+                            {{ 'app_identity_expert_step_two.language.view'|trans }}
+                            <i class="h5 bi mx-1 bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-6 offset-md-3">
+                        <div class="row mb-4">
+                            {{ form_label(form.expert.cv) }}
+                            <div class="col-sm-8">
+                                {{ form_widget(form.expert.cv, {'attr': {'class': 'rounded-pill' }}
+                                ) }}
+                                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:none;">
+                    {{ form_widget(form) }}
+                </div>
+                <hr class="my-4">
+                <div class="d-flex justify-content-center">
+                    <a href="{{ path('app_identity_expert_step_one')}}" id="cancel" class="btn btn-outline-dark rounded-pill mx-2">
+                        {{ 'app_identity_expert_step_two.cancel'|trans }}
+                    </a>
+                    <button type="submit" id="submitForm" class="btn btn-primary rounded-pill mx-2" onclick="submitFormAndRedirect()">
+                        {{ 'app_identity_expert_step_two.button'|trans }}
+                    </button>
+                </div>
+                <hr class="my-4">
+                {{ form_end(form) }}
+                <div class="col-md-6 offset-md-4 text-white">
+                    {% include "dashboard/_inner_footer_light.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="experiencesPreview" tabindex="-1" aria-labelledby="experiencesPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-black">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-2" id="experiencesPreviewLabel">
+                        {{ 'app_identity_expert_step_two.experience.all'|trans }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                {% if experiences is not empty %}
+                    {% for experience in experiences %}
+                        <p class="text-dark small d-flex justify-content-between align-items-center">
+                            {{ experience.title }}
+                            | 
+                            {{ experience.company }}
+                            | 
+                            {{ date_difference(experience.endDate, experience.startDate) }}
+                            <button class="btn btn-sm btn-dark rounded-circle p-1 lh-1" type="button" data-id="js-remove" data-href="/ajax-remove-experience/{{ experience.id }}/{{ user.identity.id }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </p>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-dark small">
+                        Aucune 
+                    </p>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="formationsPreview" tabindex="-1" aria-labelledby="formationsPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-black">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-2" id="formationsPreviewLabel">
+                        {{ 'app_identity_expert_step_two.formation.all'|trans }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                {% if formations is not empty %}
+                    {% for formation in formations %}
+                        <p class="text-dark small d-flex justify-content-between align-items-center">
+                            {{ formation.title }}
+                            | 
+                            {{ formation.level }}
+                            | 
+                            {{ date_difference(formation.endDate, formation.startDate) }}
+                            <button class="btn btn-sm btn-dark rounded-circle p-1 lh-1" type="button" data-id="js-remove" data-href="/ajax-remove-formation/{{ formation.id }}/{{ user.identity.id }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </p>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-dark small">
+                        Aucune 
+                    </p>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="skillsPreview" tabindex="-1" aria-labelledby="skillsPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-black">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-2" id="skillsPreviewLabel">
+                        {{ 'app_identity_expert_step_two.skill.all'|trans }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if technicalSkills is not empty %}
+                        {% for technicalSkill in technicalSkills %}
+                            <p class="text-dark small d-flex justify-content-between align-items-center">
+                                {{ technicalSkill.name }}
+                                <span class="mx-4">
+                                    {% for i in 1..5 %}
+                                        {% if i <= technicalSkill.type %}
+                                            <i class="small bi bi-star-fill text-warning"></i>
+                                        {% else %}
+                                            <i class="small bi bi-star text-dark"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                                
+                                <button class="btn btn-sm btn-dark rounded-circle p-1 lh-1" type="button">
+                                    <i class="bi bi-trash"></i>
+                                </button> 
+                            
+                            </p>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-light small">
+                            Aucune 
+                        </p>
+                    {% endif %}                
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="languagesPreview" tabindex="-1" aria-labelledby="languagesPreviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-black">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-2" id="languagesPreviewLabel">
+                        {{ 'app_identity_expert_step_two.language.all'|trans }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if languages is not empty %}
+                        {% for language in languages %}
+                            <p class="text-dark small d-flex justify-content-between align-items-center">
+                                {{ language.language }}
+                                <span class="mx-4">
+                                    {% for i in 1..5 %}
+                                        {% if i <= language.level %}
+                                            <i class="small bi bi-star-fill text-warning"></i>
+                                        {% else %}
+                                            <i class="small bi bi-star text-dark"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                                
+                                <button class="btn btn-sm btn-dark rounded-circle p-1 lh-1" type="button">
+                                    <i class="bi bi-trash"></i>
+                                </button> 
+                            
+                            </p>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-light small">
+                            Aucune 
+                        </p>
+                    {% endif %}                
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+            

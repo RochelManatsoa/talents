@@ -2,10 +2,11 @@
 
 namespace App\Twig;
 
-use App\Repository\AccountRepository;
-use Symfony\Bundle\SecurityBundle\Security;
+use DateTime;
 use Twig\TwigFunction;
+use App\Repository\AccountRepository;
 use Twig\Extension\AbstractExtension;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -25,12 +26,14 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('meta_title', [$this, 'metaTitle']),
             new TwigFunction('dashboard_title', [$this, 'dashboardTitle']),
+            new TwigFunction('identity_title', [$this, 'identityTitle']),
             new TwigFunction('meta_description', [$this, 'metaDescription']),
             new TwigFunction('meta_keywords', [$this, 'metaKeywords']),
             new TwigFunction('show_account_desc', [$this, 'showAccountDesc']),
             new TwigFunction('isoToEmoji', [$this, 'isoToEmoji']),
             new TwigFunction('show_country', [$this, 'showCountry']),
-            new TwigFunction('experience_text', [$this, 'getExperienceText'])
+            new TwigFunction('experience_text', [$this, 'getExperienceText']),
+            new TwigFunction('date_difference', [$this, 'dateDifference']),
         ];
     }
 
@@ -48,6 +51,14 @@ class AppExtension extends AbstractExtension
         $companyName = $user->getIdentity()->getCompany()->getName();
 
         return $this->translator->trans($routeName . '.dashboard_title', ['%company_name%' => $companyName]);
+    }
+
+    public function identityTitle(): string
+    {
+        $routeName = $this->requestStack->getCurrentRequest()->attributes->get('_route'); 
+        $user = $this->security->getUser();
+
+        return $this->translator->trans($routeName . '.identity_title');
     }
 
     public function metaDescription(): string
@@ -99,5 +110,24 @@ class AppExtension extends AbstractExtension
         ];
 
         return $choices[$value] ?? 'N/A';
+    }
+    
+    public function dateDifference(DateTime $date1, DateTime $date2): string
+    {
+        $interval = $date1->diff($date2);
+
+        $result = '';
+
+        if ($interval->y > 0) {
+            $result .= $interval->y . ' années ';
+        }
+        if ($interval->m > 0) {
+            $result .= $interval->m . ' mois ';
+        }
+        if ($interval->d > 0) {
+            $result .= $interval->d . ' jours';
+        }
+
+        return trim($result);
     }
 }
