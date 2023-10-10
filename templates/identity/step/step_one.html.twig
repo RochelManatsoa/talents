@@ -1,0 +1,76 @@
+{% extends 'base_identity.html.twig' %}
+
+{% block body %}
+<section id="hero" class="" style="background-color: black;">
+    <div class="container h-100">
+        <h1 class="h3 text-center py-4 text-white font-bold">
+            {{ 'app_identity_expert_step_one.title'|trans }}
+        </h1>
+        <div class="row text-white">
+            <div class="col-md-6 offset-md-3">
+                <hr class="my-4">
+                {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+                
+                <div class="row mb-4">
+                    {{ form_label(form.user.lastName) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(form.user.lastName, {'attr': {'class': 'rounded-pill'}}) }}
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    {{ form_label(form.user.firstName) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(form.user.firstName, {'attr': {'class': 'rounded-pill'}}) }}
+                    </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                    <div class="col-sm-4 text-center ">
+                        {{ form_label(form.file) }}
+                        {{ 'app_identity_expert_step_one.avatar_desc'|trans }}
+                    </div>
+                    <div class="col-sm-8">
+                        {{ form_widget(form.file) }}
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row mb-4">
+                    {{ form_label(form.expert.country) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(form.expert.country, {'attr': {'class': 'rounded-pill'}}) }}
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    {{ form_label(form.expert.birthday) }}
+                    <div class="col-sm-8">
+                        {{ form_widget(form.expert.birthday, {'attr': {'class': 'rounded-pill'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:none">
+                {{ form_widget(form) }}
+            </div>
+            <hr class="my-4">
+            <div class="d-flex justify-content-center">
+                <button type="reset" id="cancel" class="btn btn-outline-dark rounded-pill mx-2">
+                    {{ 'app_identity_expert_step_one.cancel'|trans }}
+                </button>
+                <button type="submit" id="submit" class="btn btn-primary rounded-pill mx-2">
+                    {{ 'app_identity_expert_step_one.button'|trans }}
+                </button>
+            </div>
+            <hr class="my-4">
+            {{ form_end(form) }}
+            <div class="col-md-8 offset-md-4 text-white">
+                {% include "dashboard/_inner_footer_light.html.twig" %}
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

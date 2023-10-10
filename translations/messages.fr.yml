@@ -200,8 +200,10 @@ app_identity_expert:
     aspiration: "Aspirations professionnelles"
     preference: "Conditions et préférences"
     website: "Portfolio ou site web"
+    cv: "Ajouter un CV"
     email: "Adresse mail"
     phone: "Téléphone"
+    birthday: "Votre anniversaire"
 
 app_identity_confirmation:
     title: "Félicitations !"
@@ -343,3 +345,85 @@ app_dashboard_expert:
     notification: "Notification"
     my_account: "Mon compte"
     logout: "Sortir"
+
+
+app_identity_expert_step_one:
+    identity_title: Créez votre meilleur profil et rejoignez les Talents d'OLONA
+    user: 
+        firstName: Nom(s)
+        lastName: Prénom(s)
+    title: Qui êtes-vous?
+    avatar: Photo / Avatar
+    avatar_desc: Ajouter une photo professionnel de vous
+    message: "Découvrez une sélection rigoureuse d'experts professionnels francophones et malgaches. Collaborez et enrichissez vos projets grâce à l'excellence locale sur Olona-Talents."
+    keywords: "freelance, project, talent"
+    button: Enregistrer et continuer
+    cancel: Annuler
+
+app_identity_expert_step_two:
+    identity_title: Plus nous en savons sur vous, mieux nous pouveons vous mettre en relation avec les bonnes opportunités
+    skill: 
+        add: Ajouter une competence
+        name: Competences
+        all: Vos compétences
+        view: Aperçu
+        level: Niveau
+        one: Débutant
+        two: Intermédiaire
+        three: Confirmé
+        four: Avancé
+        five: Expert
+        submit: Ajouter
+        none: Veuillez ajouter vos compétences
+    formation: 
+        add: Ajouter une formation
+        name: Formations
+        all: Vos formations
+        view: Aperçu
+        title: Nom de l'Etablissement
+        level: Diplôme
+        description: Description
+        startDate: Début
+        endDate: Fin
+        submit: Ajouter
+        none: Veuillez ajouter vos formations
+    experience: 
+        add: Ajouter une experience
+        name: Experiences
+        all: Vos experiences
+        view: Aperçu
+        title: Poste occupé
+        company: Entreprise
+        description: Description
+        startDate: Début
+        endDate: Fin
+        submit: Ajouter
+        none: Veuillez ajouter vos experiences
+    language: 
+        add: Ajouter une langues
+        name: Langue maîtrisées
+        all: Vos langues maîtrisées
+        view: Aperçu
+        title: Poste occupé
+        company: Entreprise
+        description: Description
+        startDate: Début
+        endDate: Fin
+        submit: Ajouter
+        none: Veuillez ajouter les langues que vous maîtrisez
+    title: Détails professionnels
+    message: "Découvrez une sélection rigoureuse d'experts professionnels francophones et malgaches. Collaborez et enrichissez vos projets grâce à l'excellence locale sur Olona-Talents."
+    keywords: "freelance, project, talent"
+    button: Enregistrer et continuer
+    cancel: Retour
+
+app_identity_expert_step_three:
+    identity_title: Dernière étape, comment souhaitez vous être contacté(e) par vos prochains clients?
+    user: 
+        firstName: Nom(s)
+    title: Informations de contact professionnels (*)
+    message: (*) Chez OLONA TALENTS, nous accordons une grande importance à la protection de vos données personnelles. Soyez assuré(e) que les informations fournies dans cette section ne seront utilisées que dans le cadre strict de nos services et ne seront ni rendues public, ni partagées avec des tiers sans votre consentement explicite au début de la mise en relation avec vos futurs clients. <br>Pour plus de details sur la manière dont nous partageons et utilisons vos données, veuillez consulter notre <a href=\"%privacy_url%\">Politique de confidentialité.</a>
+    keywords: "freelance, project, talent"
+    button: Valider mon profil
+    cancel: Retour
+    other: Autres

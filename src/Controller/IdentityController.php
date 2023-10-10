@@ -7,8 +7,12 @@ use App\Entity\Company;
 use App\Entity\Identity;
 use App\Form\ExpertType;
 use App\Form\CompanyType;
+use App\Form\IdentityType;
 use App\Manager\IdentityManager;
 use App\Form\AccountIdentityType;
+use App\Form\Step\StepOneType;
+use App\Form\Step\StepTreeType;
+use App\Form\Step\StepTwoType;
 use App\Service\User\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +67,7 @@ class IdentityController extends AbstractController
             $identity = $this->identityManager->saveForm($form);
             if($identity->getAccount()->getSlug() !== "expert" ) return $this->redirectToRoute('app_identity_company', []);
             
-            return $this->redirectToRoute('app_identity_expert', []);
+            return $this->redirectToRoute('app_identity_expert_step_one', []);
         }
 
         return $this->render('identity/account.html.twig', [
@@ -119,6 +123,127 @@ class IdentityController extends AbstractController
         }
 
         return $this->render('identity/expert.html.twig', [
+            'user' => $this->getUser(),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/identity/expert/create', name: 'app_identity_expert_create')]
+    public function createExpert(Request $request): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+
+        if (!$expert instanceof Expert) {
+            $expert = $this->identityManager->createExpert($identity);
+        }
+
+        $form = $this->createForm(IdentityType::class, $expert->getIdentity(), []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $identity = $form->getData();
+            dd($identity);
+            $this->em->persist($expert);
+            $this->em->flush();
+
+            return $this->redirectToRoute('app_identity_confirmation', []);
+        }
+
+        return $this->render('identity/create.html.twig', [
+            'user' => $this->getUser(),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/identity/expert/step-one', name: 'app_identity_expert_step_one')]
+    public function stepOne(Request $request): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+
+        if (!$expert instanceof Expert) {
+            $expert = $this->identityManager->createExpert($identity);
+        }
+
+        $form = $this->createForm(StepOneType::class, $identity, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $identity = $this->identityManager->saveForm($form);
+
+            return $this->redirectToRoute('app_identity_expert_step_two', []);
+        }
+
+        return $this->render('identity/step/step_one.html.twig', [
+            'user' => $this->getUser(),
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/identity/expert/step-two', name: 'app_identity_expert_step_two')]
+    public function stepTwo(Request $request): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+
+        if (!$expert instanceof Expert) {
+            $expert = $this->identityManager->createExpert($identity);
+        }
+        $initialCounts = [
+            'technicalSkills' => count($identity->getTechnicalSkills()),
+            'formations' => count($identity->getFormations()),
+            'experiences' => count($identity->getExperiences()),
+            'languages' => count($identity->getLanguages())
+        ];
+        $form = $this->createForm(StepTwoType::class, $identity, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $identity = $this->identityManager->saveForm($form);
+            $reloadSamePage = false;
+            foreach ($initialCounts as $field => $initialCount) {
+                if (count($form->get($field)->getData()) !== $initialCount) {
+                    $reloadSamePage = true;
+                    break;
+                }
+            }
+
+            if ($reloadSamePage) {
+                // Si le nombre d'éléments dans un des CollectionType a changé, rechargez la même page
+                return $this->redirectToRoute('app_identity_expert_step_two', []);
+            } else {
+                // Sinon, redirigez vers app_identity_expert_step_three
+                return $this->redirectToRoute('app_identity_expert_step_three', []);
+            }
+        }
+
+        return $this->render('identity/step/step_two.html.twig', [
+            'user' => $this->getUser(),
+            'form' => $form->createView(),
+            'formations' => $identity->getFormations(),
+            'technicalSkills' => $identity->getTechnicalSkills(),
+            'experiences' => $identity->getExperiences(),
+            'languages' => $identity->getLanguages(),
+        ]);
+    }
+
+    #[Route('/identity/expert/step-three', name: 'app_identity_expert_step_three')]
+    public function stepThree(Request $request): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+
+        if (!$expert instanceof Expert) {
+            $expert = $this->identityManager->createExpert($identity);
+        }
+
+        $form = $this->createForm(StepTreeType::class, $identity, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $identity = $this->identityManager->saveForm($form);
+
+            return $this->redirectToRoute('app_identity_confirmation', []);
+        }
+
+        return $this->render('identity/step/step_three.html.twig', [
             'user' => $this->getUser(),
             'form' => $form->createView(),
         ]);
