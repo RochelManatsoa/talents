@@ -124,5 +124,8 @@ label.form-check-label.required{
     align-items: center;     /* Centrer verticalement */
     height: 100%; /* ou toute autre valeur selon vos besoins */
 }
+.modal-body ul li{
+    list-style: none!important;
+}
 
 

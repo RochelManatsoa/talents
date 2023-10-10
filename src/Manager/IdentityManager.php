@@ -36,7 +36,7 @@ class IdentityManager
         $identity->setCreatedAt(new DateTime());
         $identity->setAccount($this->getTypologie());
         $identity->setUsername(new Uuid(Uuid::v1()));
-        // $identity->setAvatar("https://www.jea.com/cdn/images/avatar-gray.png");
+        $identity->setFileName("avatar-default.jpg");
         
         return $identity;
     }

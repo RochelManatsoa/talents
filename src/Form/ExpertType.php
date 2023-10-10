@@ -6,50 +6,75 @@ use App\Entity\Expert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\File;
 
 class ExpertType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, ['label' => 'app_identity_expert.name',])
+            ->add('country', CountryType::class, [
+                'label' => 'app_identity_expert.localisation',
+                'required' => false,
+                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
+                'placeholder' => 'app_identity_expert.select',
+            ])
+            ->add('title', TextType::class, [
+                'required' => false,
+                'label' => 'app_identity_expert.name',
+                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
+                ])
             ->add('years', ChoiceType::class, [
                 'choices' => Expert::CHOICE_YEAR,
                 'label' => 'app_identity_expert.year',
                 'required' => true,
                 ])
-            ->add('country', CountryType::class, [
-                'label' => 'app_identity_expert.localisation',
-                'required' => false,
-                'placeholder' => 'app_identity_expert.select',
-            ])
-            ->add('mainSkills', TextareaType::class, [
-                'label' => 'app_identity_expert.main_skills',
-                'required' => true,
-                'attr' => [
-                    'rows' => 8
-                ]
-            ])
+            // ->add('mainSkills', TextareaType::class, [
+            //     'label' => 'app_identity_expert.main_skills',
+            //     'required' => true,
+            //     'attr' => [
+            //         'rows' => 8
+            //     ]
+            // ])
             ->add('aspiration', TextareaType::class, [
                 'label' => 'app_identity_expert.aspiration',
-                'required' => true,
+                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
+                'required' => false,
                 'attr' => [
                     'rows' => 8
                 ]
             ])
-            ->add('preference', TextareaType::class, [
-                'label' => 'app_identity_expert.preference',
-                'required' => true,
-                'attr' => [
-                    'rows' => 8
-                ]
+            ->add('cv', FileType::class, [
+                'label' => 'app_identity_expert.cv',
+                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ],
             ])
             ->add('website', TextType::class, [
                 'label' => 'app_identity_expert.website',
+                'required' => false,
+            ])
+            ->add('birthday', DateType::class, [
+                'label' => 'app_identity_expert.birthday',
+                'widget' => 'single_text', 
+                'format' => 'yyyy-MM-dd', 
+                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
                 'required' => false,
             ])
         ;

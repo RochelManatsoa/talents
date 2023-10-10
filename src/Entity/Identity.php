@@ -2,23 +2,26 @@
 
 namespace App\Entity;
 
-use App\Entity\Identity\Experience;
-use App\Entity\Identity\SpokenLanguage;
-use App\Entity\Identity\TechnicalSkill;
+use Serializable;
 use App\Entity\Note\SkillNote;
+use Doctrine\DBAL\Types\Types;
+use App\Entity\Identity\Social;
+use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Identity\Formation;
+use App\Entity\Identity\Experience;
 use App\Entity\Views\IdentityViews;
 use App\Repository\IdentityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Identity\SpokenLanguage;
+use App\Entity\Identity\TechnicalSkill;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: IdentityRepository::class)]
 #[Vich\Uploadable]
-class Identity
+class Identity implements Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -47,11 +50,9 @@ class Identity
     private ?Account $account = null;
 
     #[Vich\UploadableField(mapping: 'cv_expert', fileNameProperty: 'fileName')]
-    #[Groups(['identity'])]
     private ?File $file = null;
     
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['identity', 'message'])]
     private ?string $fileName = null;
 
     #[ORM\OneToOne(mappedBy: 'identity', cascade: ['persist', 'remove'])]
@@ -63,13 +64,13 @@ class Identity
     #[ORM\OneToMany(mappedBy: 'identity', targetEntity: IdentityViews::class)]
     private Collection $views;
 
-    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: SpokenLanguage::class)]
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: SpokenLanguage::class, cascade: ['persist', 'remove'])]
     private Collection $languages;
 
-    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: Experience::class)]
+    #[ORM\OneToMany(mappedBy: 'identity', targetEntity: Experience::class, cascade: ['persist', 'remove'])]
     private Collection $experiences;
 
-    #[ORM\ManyToMany(targetEntity: TechnicalSkill::class, mappedBy: 'identity')]
+    #[ORM\ManyToMany(targetEntity: TechnicalSkill::class, mappedBy: 'identity', cascade: ['persist', 'remove'])]
     private Collection $technicalSkills;
 
     #[ORM\OneToMany(mappedBy: 'identity', targetEntity: SkillNote::class)]
@@ -77,6 +78,12 @@ class Identity
 
     #[ORM\OneToMany(mappedBy: 'identity', targetEntity: Application::class)]
     private Collection $applications;
+
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'identity', cascade: ['persist', 'remove'])]
+    private Collection $formations;
+
+    #[ORM\OneToOne(mappedBy: 'identity', cascade: ['persist', 'remove'])]
+    private ?Social $social = null;
 
     public function __construct()
     {
@@ -86,6 +93,7 @@ class Identity
         $this->technicalSkills = new ArrayCollection();
         $this->skillNotes = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,6 +256,17 @@ class Identity
         $this->fileName = $fileName;
 
         return $this;
+    }
+    
+    public function serialize()
+    {
+        $this->fileName = base64_encode($this->fileName);
+    }
+
+    public function unserialize($serialized)
+    {
+        $this->fileName = base64_decode($this->fileName);
+
     }
 
     /**
@@ -423,6 +442,55 @@ class Identity
                 $application->setIdentity(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): static
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->addIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): static
+    {
+        if ($this->formations->removeElement($formation)) {
+            $formation->removeIdentity($this);
+        }
+
+        return $this;
+    }
+
+    public function getSocial(): ?Social
+    {
+        return $this->social;
+    }
+
+    public function setSocial(?Social $social): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($social === null && $this->social !== null) {
+            $this->social->setIdentity(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($social !== null && $social->getIdentity() !== $this) {
+            $social->setIdentity($this);
+        }
+
+        $this->social = $social;
 
         return $this;
     }
