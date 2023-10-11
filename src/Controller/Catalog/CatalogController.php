@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Posting;
 use App\Entity\Identity;
 use App\Entity\Application;
+use App\Entity\Views\IdentityViews;
 use App\Form\ApplicationType;
 use App\Service\User\UserService;
 use App\Entity\Views\PostingViews;
@@ -30,8 +31,27 @@ class CatalogController extends AbstractController
     }
     
     #[Route('/catalog/expert/{username}', name: 'app_catalog_expert')]
-    public function expert(Identity $identity): Response
+    public function expert(Identity $identity, Request $request): Response
     {
+
+        if ($identity) {
+            $ipAddress = $request->getClientIp();
+            $viewRepository = $this->em->getRepository(IdentityViews::class);
+            $existingView = $viewRepository->findOneBy([
+                'identity' => $identity,
+                'ipAdress' => $ipAddress,
+            ]);
+    
+            if (!$existingView) {
+                $view = new IdentityViews();
+                $view->setIdentity($identity);
+                $view->setIpAdress($ipAddress);
+    
+                $this->em->persist($view);
+                $identity->addView($view);
+                $this->em->flush();
+            }
+        }
         return $this->render('catalog/expert/view.html.twig', [
             'identity' => $identity,
         ]);
