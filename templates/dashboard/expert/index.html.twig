@@ -1,6 +1,32 @@
 {% extends 'dashboard/layout.html.twig' %}
-{% block header %} {% include "parts/_navbar.html.twig" %} {% endblock %}
-{% block sidebar %} {% include "dashboard/_sidebar_light.html.twig" %} {% endblock %}
+{% block sidebar %} {% include "dashboard/_sidebar_expert.html.twig" %} {% endblock %}
 
 {% block body %}
+
+<div class="container mt-3">
+    <div class="row text-dark">
+        <p>
+            <i class="h5 bi mx-2 bi-plus-lg"></i> 
+            {{ 'app_dashboard_expert.get_started'|trans }} 
+        </p>
+        <hr>
+        <p class="h6">
+            <i class="h5 bi mx-2 bi-people-fill"></i> 
+            {{ 'app_dashboard_expert.notification'|trans }} 
+        </p>
+        <p class="mx-4">
+            <i class="h5 bi mx-2 bi-view-list"></i> 
+            {{ 'app_dashboard_expert.profile_view'|trans }} 
+        </p>
+        <p class="mx-4">
+            <i class="h5 bi mx-2 bi-clock-history"></i> 
+            {{ 'app_dashboard_expert.history'|trans }} 
+        </p>
+        <p class="mx-4">
+            <i class="h5 bi mx-2 bi-calendar3"></i> 
+            {{ 'app_dashboard_expert.calandar'|trans }} 
+        </p>
+    </div>
+</div>
+
 {% endblock %}

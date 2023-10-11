@@ -41,6 +41,42 @@ class ExpertController extends AbstractController
         ]);
     }
 
+    #[Route('/dashboard/expert/posting/all', name: 'app_dashboard_expert_posting_all')]
+    public function all(): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+        if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+        
+        return $this->render('dashboard/expert/posting/all.html.twig', [
+            'identity' => $identity,
+        ]);
+    }
+
+    #[Route('/dashboard/expert/formation', name: 'app_dashboard_expert_formation')]
+    public function formation(): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+        if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+        
+        return $this->render('dashboard/expert/formation/index.html.twig', [
+            'identity' => $identity,
+        ]);
+    }
+
+    #[Route('/dashboard/expert/tools', name: 'app_dashboard_expert_tools')]
+    public function tools(): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+        if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+        
+        return $this->render('dashboard/expert/tools/index.html.twig', [
+            'identity' => $identity,
+        ]);
+    }
+
     #[Route('/dashboard/expert/application', name: 'app_dashboard_expert_application')]
     public function application(): Response
     {
@@ -85,6 +121,18 @@ class ExpertController extends AbstractController
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
         
         return $this->render('dashboard/expert/account/index.html.twig', [
+            'identity' => $identity,
+        ]);
+    }
+
+    #[Route('/dashboard/expert/profile', name: 'app_dashboard_expert_profile')]
+    public function profile(): Response
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        $expert = $identity->getExpert();
+        if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+        
+        return $this->render('dashboard/expert/profile/index.html.twig', [
             'identity' => $identity,
         ]);
     }

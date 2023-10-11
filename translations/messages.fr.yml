@@ -249,7 +249,7 @@ app_catalog_posting:
 
 app_dashboard_company:
     title: "Tableau de bord"
-    dashboard_title: "Bienvenu dans votre espace Entreprise : %company_name%"
+    dashboard_title: "Bienvenue dans votre espace Entreprise : %company_name%"
     description: "Votre profil est maintenant créé et prêt à être exploré"
     message: "Bienvenu dans votre espace Entreprise : "
     publish: "Publier une annonce"
@@ -337,14 +337,50 @@ app_dashboard_company_account:
 
 app_dashboard_expert:
     title: "Tableau de bord"
+    dashboard_title: "Bienvenue %company_name%! Decouvrez les offres qui correspondent à votre profil"
     description: "Votre profil est maintenant créé et prêt à être exploré"
     publish: "Publier une annonce"
     my_applies: "Mes candidatures"
-    find: "Trouver une offre"
+    find: "Trouver une mission"
+    messaging: "Messagerie"
+    notification: "Notification"
+    get_started: Trouvez des offres par mot-clé, titre de mission, entreprise etc.
+    logout: "Sortir"
+    profile_view: Votre profil a été consulté %views% fois cette semaine. Continuez à améliorer pour attirer plus d'employeurs
+    history: Vous avez %demandes% en attente de réponse. Restez à l'écoute et preparez-vous pour vos futurs entretiens!
+    calandar: "Entretien planifié : semaine du 09 au 15 Octobre 2023"
+
+app_dashboard_expert_posting:
+    title: "Tableau de bord"
+    dashboard_title: "Trouver une mission"
+    description: "Votre profil est maintenant créé et prêt à être exploré"
+    publish: "Publier une annonce"
+    my_applies: "Mes candidatures"
+    find: "Trouver une mission"
     messaging: "Messagerie"
     notification: "Notification"
     my_account: "Mon compte"
     logout: "Sortir"
+
+app_dashboard_expert_posting_all:
+    title: "Tableau de bord"
+    dashboard_title: "Mes missions"
+    my_posting: "Mes missions"
+
+app_dashboard_expert_formation:
+    title: "Tableau de bord"
+    dashboard_title: "Mes formations"
+    menu: "Mes formations"
+
+app_dashboard_expert_tools:
+    title: "Tableau de bord"
+    dashboard_title: "Mes outils de travail"
+    menu: "Mes outils de travail"
+
+app_dashboard_expert_account:
+    title: "Tableau de bord"
+    dashboard_title: "Mon compte"
+    menu: "Mon compte"
 
 
 app_identity_expert_step_one:

@@ -48,9 +48,16 @@ class AppExtension extends AbstractExtension
     {
         $routeName = $this->requestStack->getCurrentRequest()->attributes->get('_route'); 
         $user = $this->security->getUser();
-        $companyName = $user->getIdentity()->getCompany()->getName();
+        
+        /** @var Identity $identity */
+        $identity = $user->getIdentity();
 
-        return $this->translator->trans($routeName . '.dashboard_title', ['%company_name%' => $companyName]);
+        $name = $user->getLastName();
+        if($identity->getCompany()){
+            $name = $identity->getCompany()->getName();
+        }
+
+        return $this->translator->trans($routeName . '.dashboard_title', ['%company_name%' => $name]);
     }
 
     public function identityTitle(): string
