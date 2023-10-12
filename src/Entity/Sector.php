@@ -28,9 +28,17 @@ class Sector
     #[ORM\OneToMany(mappedBy: 'sector', targetEntity: Posting::class)]
     private Collection $postings;
 
+    #[ORM\ManyToMany(targetEntity: Expert::class, mappedBy: 'sectors')]
+    private Collection $experts;
+
+    #[ORM\ManyToMany(targetEntity: Company::class, mappedBy: 'sectors')]
+    private Collection $companies;
+
     public function __construct()
     {
         $this->postings = new ArrayCollection();
+        $this->experts = new ArrayCollection();
+        $this->companies = new ArrayCollection();
     }
 
     public function __toString()
@@ -104,6 +112,60 @@ class Sector
             if ($posting->getSector() === $this) {
                 $posting->setSector(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Expert>
+     */
+    public function getExperts(): Collection
+    {
+        return $this->experts;
+    }
+
+    public function addExpert(Expert $expert): static
+    {
+        if (!$this->experts->contains($expert)) {
+            $this->experts->add($expert);
+            $expert->addSector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpert(Expert $expert): static
+    {
+        if ($this->experts->removeElement($expert)) {
+            $expert->removeSector($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Company>
+     */
+    public function getCompanies(): Collection
+    {
+        return $this->companies;
+    }
+
+    public function addCompany(Company $company): static
+    {
+        if (!$this->companies->contains($company)) {
+            $this->companies->add($company);
+            $company->addSector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompany(Company $company): static
+    {
+        if ($this->companies->removeElement($company)) {
+            $company->removeSector($this);
         }
 
         return $this;

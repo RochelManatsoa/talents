@@ -4,6 +4,7 @@ namespace App\Entity\Identity;
 
 use App\Entity\Identity;
 use App\Entity\Note\SkillNote;
+use App\Entity\Posting;
 use App\Repository\Identity\TechnicalSkillRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -48,12 +49,16 @@ class TechnicalSkill
     #[ORM\OneToMany(mappedBy: 'technicalSkill', targetEntity: SkillNote::class)]
     private Collection $skillNotes;
 
+    #[ORM\ManyToMany(targetEntity: Posting::class, mappedBy: 'technicalSkills')]
+    private Collection $postings;
+
     public function __construct()
     {
         $this->identity = new ArrayCollection();
         $this->experience = new ArrayCollection();
         $this->technicalSkills = new ArrayCollection();
         $this->skillNotes = new ArrayCollection();
+        $this->postings = new ArrayCollection();
     }
 
     public function __toString()
@@ -238,6 +243,33 @@ class TechnicalSkill
             if ($skillNote->getTechnicalSkill() === $this) {
                 $skillNote->setTechnicalSkill(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Posting>
+     */
+    public function getPostings(): Collection
+    {
+        return $this->postings;
+    }
+
+    public function addPosting(Posting $posting): static
+    {
+        if (!$this->postings->contains($posting)) {
+            $this->postings->add($posting);
+            $posting->addTechnicalSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosting(Posting $posting): static
+    {
+        if ($this->postings->removeElement($posting)) {
+            $posting->removeTechnicalSkill($this);
         }
 
         return $this;

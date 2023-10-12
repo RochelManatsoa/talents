@@ -57,10 +57,14 @@ class Company
     #[ORM\ManyToMany(targetEntity: PostingType::class, mappedBy: 'companies')]
     private Collection $typeSearch;
 
+    #[ORM\ManyToMany(targetEntity: Sector::class, inversedBy: 'companies')]
+    private Collection $sectors;
+
     public function __construct()
     {
         $this->postings = new ArrayCollection();
         $this->typeSearch = new ArrayCollection();
+        $this->sectors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +221,30 @@ class Company
         if ($this->typeSearch->removeElement($typeSearch)) {
             $typeSearch->removeCompany($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sector>
+     */
+    public function getSectors(): Collection
+    {
+        return $this->sectors;
+    }
+
+    public function addSector(Sector $sector): static
+    {
+        if (!$this->sectors->contains($sector)) {
+            $this->sectors->add($sector);
+        }
+
+        return $this;
+    }
+
+    public function removeSector(Sector $sector): static
+    {
+        $this->sectors->removeElement($sector);
 
         return $this;
     }

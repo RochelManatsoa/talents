@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Identity\TechnicalSkill;
 use App\Entity\Type\PostingType;
 use App\Entity\Views\PostingViews;
 use App\Repository\PostingRepository;
@@ -14,6 +15,17 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: PostingRepository::class)]
 class Posting
 {
+    const STATUS_DRAFT = 'DRAFT';
+    const STATUS_PUBLISHED = 'PUBLISHED';
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_REJECTED = 'REJECTED';
+    const STATUS_EXPIRED = 'EXPIRED';
+    const STATUS_ARCHIVED = 'ARCHIVED';
+    const STATUS_UNPUBLISHED = 'UNPUBLISHED';
+    const STATUS_DELETED = 'DELETED';
+    const STATUS_FEATURED = 'FEATURED';
+    const STATUS_RESERVED = 'RESERVED';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -61,10 +73,21 @@ class Posting
     #[ORM\OneToMany(mappedBy: 'posting', targetEntity: Application::class)]
     private Collection $applications;
 
+    #[ORM\ManyToMany(targetEntity: TechnicalSkill::class, inversedBy: 'postings')]
+    private Collection $technicalSkills;
+
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'postings')]
+    private Collection $languages;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->views = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->technicalSkills = new ArrayCollection();
+        $this->languages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,5 +297,75 @@ class Posting
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, TechnicalSkill>
+     */
+    public function getTechnicalSkills(): Collection
+    {
+        return $this->technicalSkills;
+    }
+
+    public function addTechnicalSkill(TechnicalSkill $technicalSkill): static
+    {
+        if (!$this->technicalSkills->contains($technicalSkill)) {
+            $this->technicalSkills->add($technicalSkill);
+        }
+
+        return $this;
+    }
+
+    public function removeTechnicalSkill(TechnicalSkill $technicalSkill): static
+    {
+        $this->technicalSkills->removeElement($technicalSkill);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Language>
+     */
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function addLanguage(Language $language): static
+    {
+        if (!$this->languages->contains($language)) {
+            $this->languages->add($language);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguage(Language $language): static
+    {
+        $this->languages->removeElement($language);
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function isApplyByIdentity(Identity $identity): bool
+    {
+        foreach ($this->applications as $application) {
+            if ($application->getIdentity() === $identity) {
+                return true;  // L'identité a postulé pour ce poste.
+            }
+        }
+        return false;  // L'identité n'a pas postulé pour ce poste.
     }
 }

@@ -1,6 +1,16 @@
 menu:
     legal: "Mentions légales"
-
+status:
+    DRAFT: L'annonce a été créée mais n'est pas encore visible par le public.
+    PUBLISHED: L'annonce est actuellement active et visible par le public.
+    PENDING: L'annonce est soumise pour examen ou approbation par un modérateur/administrateur.
+    REJECTED: L'annonce a été examinée et n'a pas été approuvée pour la publication.
+    EXPIRED: La durée de vie de l'annonce est terminée. Elle n'est plus active ni visible par le public.
+    ARCHIVED: L'annonce n'est plus active, mais est conservée à des fins d'enregistrement ou d'historique.
+    UNPUBLISHED: L'annonce a été manuellement désactivée et n'est pas visible par le public, mais peut être réactivée plus tard.
+    DELETED: L'annonce a été supprimée
+    FEATURED: L'annonce est mise en évidence ou priorisée par rapport à d'autres annonces.
+    RESERVED: L'annonce a été "réservée" ou "retenue" par un utilisateur ou un acheteur potentiel.
 
 
 app_home:
@@ -197,7 +207,7 @@ app_identity_expert:
     select: "Séléctionner"
     type_job: "Type d'emploi recherché"
     main_skills: "Compétences principales"
-    aspiration: "Aspirations professionnelles"
+    aspiration: Biographie
     preference: "Conditions et préférences"
     website: "Portfolio ou site web"
     cv: "Ajouter un CV"
@@ -344,11 +354,23 @@ app_dashboard_expert:
     find: "Trouver une mission"
     messaging: "Messagerie"
     notification: "Notification"
+    apply: Voir les détails et postuler
+    offer: Envoyer ma candidature
+    offered: Vous avez postulé pour ce poste.
+    astuce: Astuce du jour
+    read_more: En savoir plus
+    groups: Ne sous-estimez pas le pouvoir du réseautage. Rejoignez des groupes professionnels ou des forums en ligne pour elargir votre réseau et découvrir de nouvelles opportunités
+    personnalize: Personnalisez votre lettre de motivation pour chaque mission à laquelle vous postulez. Cela montre à l'employeur que vous avez pris le temps de comprendre leur besoin.
+    curriculum: Assurez-vous que votre CV est clair, concis et à jour. Les employeurs passent en moyenne 6 secondes sur un CV. Faites en sorte que chaque seconde compte.
+    olona_formation: Voir nos formations et obtenir votre certification OLONA TALENTS!!
+    investigate: Investissez toujours dans votre apprentissage et votre developpement. Les compétences et connaissances supplémentaire peuvent ouvrir des nouvelles portes
     get_started: Trouvez des offres par mot-clé, titre de mission, entreprise etc.
     logout: "Sortir"
-    profile_view: Votre profil a été consulté %views% fois cette semaine. Continuez à améliorer pour attirer plus d'employeurs
-    history: Vous avez %demandes% en attente de réponse. Restez à l'écoute et preparez-vous pour vos futurs entretiens!
-    calandar: "Entretien planifié : semaine du 09 au 15 Octobre 2023"
+    profile_view: Votre profil a été consulté <strong>%views%</strong> fois cette semaine. Continuez à améliorer pour attirer plus d'employeurs
+    history: Vous avez <strong>%demandes%</strong> demande en attente de réponse. Restez à l'écoute et preparez-vous pour vos futurs entretiens!
+    calandar: "Entretien planifié : semaine du <strong>%formatMonday%</strong> au <strong>%formatSunday%</strong>"
+    recommanded: Annonces recommandées
+    recommanded_posting: Selon votre profil et vos recherches précédentes, voici quelques annonces de missions que nous pensons être parfaitement adaptées pour vous!
 
 app_dashboard_expert_posting:
     title: "Tableau de bord"
@@ -463,3 +485,18 @@ app_identity_expert_step_three:
     button: Valider mon profil
     cancel: Retour
     other: Autres
+
+app_guides_motivation:
+    title: Lettre de motivation
+    description: Personnalisez votre lettre de motivation pour chaque mission à laquelle vous postulez. Cela montre à l'employeur que vous avez pris le temps de comprendre leur besoin.
+    keywords: lettre, motivation, guide
+
+app_guides_cv:
+    title: Personnalisez votre CV
+    description: Assurez-vous que votre CV est clair, concis et à jour. Les employeurs passent en moyenne 6 secondes sur un CV. Faites en sorte que chaque seconde compte.
+    keywords: cv, curriculum, guide, vitae
+
+app_guides_reseautage:
+    title: Le réseautage
+    description: Ne sous-estimez pas le pouvoir du réseautage. Rejoignez des groupes professionnels ou des forums en ligne pour elargir votre réseau et découvrir de nouvelles opportunités
+    keywords: lettre, motivation, guide, reseautage
