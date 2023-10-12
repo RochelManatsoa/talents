@@ -5,7 +5,7 @@ namespace App\Controller\Dashboard;
 use App\Entity\Company;
 use App\Entity\Posting;
 use App\Form\CompanyType;
-use App\Form\ExpertSearchType;
+use App\Form\Search\ExpertSearchType;
 use App\Manager\ExpertManager;
 use App\Manager\PostingManager;
 use App\Entity\Type\PostingType;

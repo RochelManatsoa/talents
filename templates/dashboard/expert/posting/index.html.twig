@@ -2,4 +2,22 @@
 {% block sidebar %} {% include "dashboard/_sidebar_expert.html.twig" %} {% endblock %}
 
 {% block body %}
+
+<div class="container mt-3">
+    <div class="row text-dark">
+        <p>
+            <i class="h5 bi mx-2 bi-plus-lg"></i> 
+            {{ 'app_dashboard_expert.get_started'|trans }} 
+        </p>
+        {{ form_start(form, {'attr': {'class': 'form-group mb-5 px-5'}}) }}
+        <div class="input-group">
+            {{ form_widget(form.query, {'attr': {'class': 'form-control'}}) }}
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        {{ dump(postings) }}
+    </div>
+</div>
 {% endblock %}

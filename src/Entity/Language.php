@@ -28,9 +28,13 @@ class Language
     #[ORM\OneToMany(mappedBy: 'language', targetEntity: SpokenLanguage::class)]
     private Collection $languages;
 
+    #[ORM\ManyToMany(targetEntity: Posting::class, mappedBy: 'languages')]
+    private Collection $postings;
+
     public function __construct()
     {
         $this->languages = new ArrayCollection();
+        $this->postings = new ArrayCollection();
     }
 
     public function __toString()
@@ -104,6 +108,33 @@ class Language
             if ($language->getLanguage() === $this) {
                 $language->setLanguage(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Posting>
+     */
+    public function getPostings(): Collection
+    {
+        return $this->postings;
+    }
+
+    public function addPosting(Posting $posting): static
+    {
+        if (!$this->postings->contains($posting)) {
+            $this->postings->add($posting);
+            $posting->addLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosting(Posting $posting): static
+    {
+        if ($this->postings->removeElement($posting)) {
+            $posting->removeLanguage($this);
         }
 
         return $this;

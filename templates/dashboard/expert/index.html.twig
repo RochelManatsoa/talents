@@ -9,24 +9,85 @@
             <i class="h5 bi mx-2 bi-plus-lg"></i> 
             {{ 'app_dashboard_expert.get_started'|trans }} 
         </p>
-        <hr>
-        <p class="h6">
-            <i class="h5 bi mx-2 bi-people-fill"></i> 
+        {{ form_start(form, {'attr': {'class': 'form-group mb-5 px-5', 'action': path('app_dashboard_expert_posting')}}) }}
+            <div class="input-group">
+                {{ form_widget(form.query, {'attr': {'class': 'form-control'}}) }}
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-people-fill"></i> 
             {{ 'app_dashboard_expert.notification'|trans }} 
         </p>
         <p class="mx-4">
             <i class="h5 bi mx-2 bi-view-list"></i> 
-            {{ 'app_dashboard_expert.profile_view'|trans }} 
+            {{ 'app_dashboard_expert.profile_view'|trans({
+                '%views%': identity.views|length
+            })|raw }} 
         </p>
         <p class="mx-4">
             <i class="h5 bi mx-2 bi-clock-history"></i> 
-            {{ 'app_dashboard_expert.history'|trans }} 
+            {{ 'app_dashboard_expert.history'|trans({
+                '%demandes%': identity.views|length
+            })|raw }} 
         </p>
         <p class="mx-4">
             <i class="h5 bi mx-2 bi-calendar3"></i> 
-            {{ 'app_dashboard_expert.calandar'|trans }} 
+            {{ 'app_dashboard_expert.calandar'|trans({
+                '%formatMonday%': formatMonday,
+                '%formatSunday%': formatSunday,
+            })|raw  }} 
+        </p>
+        <hr>
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-people-fill"></i> 
+            {{ 'app_dashboard_expert.recommanded'|trans }} 
+        </p>
+        <p class="fs-7">
+            {{ 'app_dashboard_expert.recommanded_posting'|trans }} 
+        </p>
+        {% for posting in postings %}            
+            {{ component('dashboard_posting_component', {id: posting.id})}}
+        {% endfor %}
+        <div class="col text-center">
+            <p class="mx-auto mt-4 text-center">
+                <a href="{{ path('app_home_posting') }}" class="px-3 btn btn-lg rounded-pill btn-dark">{{ 'app_dashboard_company.posting.all'|trans }}</a>
+            </p>
+        </div>
+        <hr>
+        <p class="h4 my-4">
+            <i class="h4 bi mx-2 bi-lightbulb"></i> 
+            {{ 'app_dashboard_expert.astuce'|trans }} 
+        </p>
+        <p class="m-4">
+            <i class="h5 bi mx-2 bi-check2-square"></i> 
+            {{ 'app_dashboard_expert.investigate'|trans }} <br><br>
+            <a href="{{ path('app_home_formation')}}" class="btn btn-danger btn-sm rounded-pill">
+                {{ 'app_dashboard_expert.olona_formation'|trans }} 
+            </a>
+            <hr>
+        </p>
+        <p class="m-4">
+            <i class="h5 bi mx-2 bi-check2-square"></i> 
+            {{ 'app_dashboard_expert.personnalize'|trans }} <br><br>
+                <a href="{{ path('app_guides_motivation')}}" class="px-3 btn btn-outline-secondary btn-sm rounded-pill">{{ 'app_dashboard_expert.read_more'|trans }}</a>
+            <hr>
+        </p>
+        <p class="m-4">
+            <i class="h5 bi mx-2 bi-check2-square"></i> 
+            {{ 'app_dashboard_expert.curriculum'|trans }} <br><br>
+                <a href="{{ path('app_guides_cv')}}" class="px-3 btn btn-outline-secondary btn-sm rounded-pill">{{ 'app_dashboard_expert.read_more'|trans }}</a>
+            <hr>
+        </p>
+        <p class="m-4">
+            <i class="h5 bi mx-2 bi-check2-square"></i> 
+            {{ 'app_dashboard_expert.groups'|trans }} <br><br>
+                <a href="{{ path('app_guides_reseautage')}}" class="px-3 btn btn-outline-secondary btn-sm rounded-pill">{{ 'app_dashboard_expert.read_more'|trans }}</a>
         </p>
     </div>
 </div>
 
 {% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
