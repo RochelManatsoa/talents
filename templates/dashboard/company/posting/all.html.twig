@@ -31,10 +31,10 @@
         </div>
         <div class="col-md-6 bordered themed-grid-col text-center"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></div>
         <div class="col-md-3 bordered themed-grid-col text-center">
-            <a href="{{ path('app_dashboard_company_posting_edit', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-pencil-square"></i></a>
-            <a href="{{ path('app_catalog_posting', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-eye"></i></a>
-            <a href="{{ path('app_home') }}"><i class="bi mx-1 h4 bi-geo-fill"></i></a>
-            <a href="{{ path('app_ajax_posting_delete', {'jobId': item.jobId}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"><i class="bi mx-1 h4 bi-trash"></i></a>
+            <a title="Modifier l'annonce" href="{{ path('app_dashboard_company_posting_edit', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-pencil-square"></i></a>
+            <a title="Aperçu de l'annonce" href="{{ path('app_catalog_posting', {'jobId': item.jobId}) }}"><i class="bi mx-1 h4 bi-eye"></i></a>
+            <a title="Epingler l'annonce" href="{{ path('app_home') }}"><i class="bi mx-1 h4 bi-geo-fill"></i></a>
+            <a title="Supprimer l'annonce" href="{{ path('app_ajax_posting_delete', {'jobId': item.jobId}) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"><i class="bi mx-1 h4 bi-trash"></i></a>
         </div>
     </div>
     <hr>

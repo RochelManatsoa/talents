@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Expert;
+use App\Entity\Sector;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -12,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Validator\Constraints\File;
 
 class ExpertType extends AbstractType
 {
@@ -35,13 +37,13 @@ class ExpertType extends AbstractType
                 'label' => 'app_identity_expert.year',
                 'required' => true,
                 ])
-            // ->add('mainSkills', TextareaType::class, [
-            //     'label' => 'app_identity_expert.main_skills',
-            //     'required' => true,
-            //     'attr' => [
-            //         'rows' => 8
-            //     ]
-            // ])
+            ->add('sectors', EntityType::class, [
+                'class' => Sector::class,
+                'label' => 'app_identity_expert.sector',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('aspiration', TextareaType::class, [
                 'label' => 'app_identity_expert.aspiration',
                 'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],

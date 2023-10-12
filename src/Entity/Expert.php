@@ -65,10 +65,14 @@ class Expert
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cv = null;
 
+    #[ORM\ManyToMany(targetEntity: Sector::class, inversedBy: 'experts')]
+    private Collection $sectors;
+
     public function __construct()
     {
         $this->jobTypes = new ArrayCollection();
         $this->typeJob = new ArrayCollection();
+        $this->sectors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,6 +250,30 @@ class Expert
     public function setCv(?string $cv): static
     {
         $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sector>
+     */
+    public function getSectors(): Collection
+    {
+        return $this->sectors;
+    }
+
+    public function addSector(Sector $sector): static
+    {
+        if (!$this->sectors->contains($sector)) {
+            $this->sectors->add($sector);
+        }
+
+        return $this;
+    }
+
+    public function removeSector(Sector $sector): static
+    {
+        $this->sectors->removeElement($sector);
 
         return $this;
     }
