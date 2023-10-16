@@ -38,24 +38,7 @@
                 </p>
                 {{ form_start(form)}}
                 {{ form_widget(form)}}
-                {% if app.user %}
-                    {# Utilisateur connecté, le bouton fait quelque chose d'autre (par exemple, le rediriger vers une autre page) #}
-                    <button
-                        type="submit"
-                        class="btn btn-primary text-uppercase text-white">
-                        {{ 'app_catalog_posting.button'|trans}}
-                    </button>
-                {% else %}
-                    {# Utilisateur non connecté, le bouton ouvre un modal #}
-                    <button
-                        type="button"
-                        data-te-toggle="modal" data-te-target="#loginModal"
-                        class="btn btn-primary text-uppercase text-white">
-                        {{ 'app_catalog_posting.button'|trans}}
-                    </button>
-                {% endif %}
                 {{ form_end(form)}}
-
 
 
             </div>

@@ -1,7 +1,33 @@
-<div {{ attributes }} class="form-group">
-    <input type="search" class="form-control" data-model="query" placeholder="Rechercher...">
-    {% for posting in this.postings %}
-    {{ component('table_posting_component', { 'id': posting.id }) }}
-    {% endfor %}
+<div {{ attributes }} >
+    <div class="row">
+        <div class="col-4">
+        <p class="fs-7">
+            {{ 'app_dashboard_expert_posting_all.speed_search'|trans }} 
+        </p>
+        </div>
+        <div class="col-6">
+            <input type="search" class="form-control" data-model="query" placeholder="Rechercher...">
+        </div>
+    </div>
+
+    <div id="applications-list">
+    {% if this.identity.applications is defined and this.identity.applications is not empty %}
+        {% for application in this.identity.applications %}
+            {{ component('table_application_component', {'id': application.id})}}
+        {% endfor %}
+    {% else %}
+    <div class="alert alert-info my-5" role="alert">
+    Commencez une nouvelle mission pour la voir s'afficher ici.
+    </div>
+
+    {% endif %}
+
+    </div>
+
+    <div class="row mt-3">
+        {% for posting in this.postings %}
+        {{ component('table_posting_component', { 'id': posting.id }) }}
+        {% endfor %}
+    </div>
 </div>
 
