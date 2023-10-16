@@ -1,0 +1,7 @@
+<div {{ attributes }} class="form-group">
+    <input type="search" class="form-control" data-model="query" placeholder="Rechercher...">
+    {% for posting in this.postings %}
+    {{ component('table_posting_component', { 'id': posting.id }) }}
+    {% endfor %}
+</div>
+
