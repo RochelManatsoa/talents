@@ -31,7 +31,7 @@
             <i class="h4 bi mx-2 bi-stars"></i> 
             {{ 'app_dashboard_expert.catalog_posting'|trans }} 
             <span class="h6" id="badgesContainer">
-            {% if words is defined and not empty(words) %}
+            {% if words is defined and words|length >= 0 %}
                 {% for word in words %}
                     <span class="badge bg-primary">
                         {{ word }}
@@ -39,6 +39,11 @@
                     </span>
                 {% endfor %}
             {% endif %}
+
+
+
+
+
             </span>
         </p>
         <hr>
