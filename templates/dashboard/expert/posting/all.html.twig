@@ -8,17 +8,34 @@
             <i class="h4 bi mx-2 bi-stars"></i> 
             {{ 'app_dashboard_expert.my_list'|trans }} 
             <span class="small">
-                <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_expert_posting_all.status.accepted'|trans }} 
-                <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_expert_posting_all.status.finished'|trans }} 
-                <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_expert_posting_all.status.negociate'|trans }} 
+                <span class="small status-filter" data-status="ACCEPTED">
+                    <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_expert_posting_all.status.accepted'|trans }}
+                </span>
+                <span class="small status-filter" data-status="FINISHED">
+                    <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_expert_posting_all.status.finished'|trans }}
+                </span>
+                <span class="small status-filter" data-status="PENDING">
+                    <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_expert_posting_all.status.negociate'|trans }}
+                </span>
             </span> 
         </p>
         <hr>
-        <p class="fs-7">
-            {{ 'app_dashboard_expert.recommanded_posting'|trans }} 
-        </p>
         {{ component('posting_search_component')}}
-        {{ dump(applications) }}
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.status-filter').on('click', function() {
+            const status = $(this).data('status');
+            console.log(status)
+            
+            $('.application').hide();
+    
+            $(`.application[data-application-status="${status}"]`).show();
+        });
+    });
+</script>
+
 {% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}

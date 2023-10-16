@@ -31,19 +31,16 @@
             <i class="h4 bi mx-2 bi-stars"></i> 
             {{ 'app_dashboard_expert.catalog_posting'|trans }} 
             <span class="h6" id="badgesContainer">
-            {% if words is defined and words|length >= 0 %}
+            {% if words is defined and words|length > 0 %}
                 {% for word in words %}
-                    <span class="badge bg-primary">
-                        {{ word }}
-                        <a href="#" class="remove-badge text-white" data-word="{{ word }}">×</a>
-                    </span>
+                    {% if word|trim != "" %}
+                        <span class="badge bg-primary">
+                            {{ word }}
+                            <a href="#" class="remove-badge text-white" data-word="{{ word }}">×</a>
+                        </span>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
-
-
-
-
-
             </span>
         </p>
         <hr>
@@ -55,6 +52,7 @@
         {% endfor %}
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('.remove-badge').on('click', function(e) {
@@ -66,7 +64,9 @@
             let currentSearchValue = $('#posting_search_query').val();
             let newSearchValue = currentSearchValue.replace(wordToRemove, '').trim();
             $('#posting_search_query').val(newSearchValue);
+            $(this).closest('.badge').remove();
         });
     });
 </script>
 {% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
