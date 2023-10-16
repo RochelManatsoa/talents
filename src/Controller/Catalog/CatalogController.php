@@ -65,6 +65,7 @@ class CatalogController extends AbstractController
         $application->setCreatedAt(new DateTime());
         $application->setPosting($posting);
         $application->setIdentity($identity);
+        $application->setStatus(Application::STATUS_PENDING);
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
 

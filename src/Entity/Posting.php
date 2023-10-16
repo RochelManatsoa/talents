@@ -26,6 +26,22 @@ class Posting
     const STATUS_FEATURED = 'FEATURED';
     const STATUS_RESERVED = 'RESERVED';
 
+
+    public static function getStatuses() {
+        return [
+            'Bruillon' => self::STATUS_DRAFT ,
+            'Publiée' => self::STATUS_PUBLISHED ,
+            'En attente' => self::STATUS_PENDING ,
+            'Rejetée' => self::STATUS_REJECTED ,
+            'Expirée' => self::STATUS_EXPIRED ,
+            'Archivée' => self::STATUS_ARCHIVED ,
+            'Non publiée' => self::STATUS_UNPUBLISHED ,
+            'Effacée' => self::STATUS_DELETED ,
+            'Mis en avant' => self::STATUS_FEATURED ,
+            'Réservée' => self::STATUS_RESERVED ,
+        ];
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

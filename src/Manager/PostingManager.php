@@ -136,6 +136,7 @@ class PostingManager
             $application = new Application();
             $application->setCreatedAt(new DateTime());
             $application->setPosting($posting);
+            $application->setStatus(Application::STATUS_PENDING);
             $application->setIdentity($identity);
         }
 
@@ -155,5 +156,14 @@ class PostingManager
             $postings[] = $identity->getExpert();
         }
         return $postings;
+    }
+    
+    public function allExpertPosting($expert): array
+    {
+        return array_merge(
+            $this->getPostingsByExpertSectors($expert),
+            $this->getPostingsByExpertSkills($expert),
+            $this->getPostingsByExpertLocalisation($expert)
+        );
     }
 }

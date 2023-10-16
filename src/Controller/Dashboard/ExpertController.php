@@ -57,10 +57,11 @@ class ExpertController extends AbstractController
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+        $searchTerm = "";
         
         $form = $this->createForm(PostingSearchType::class);
         $form->handleRequest($request);
-        $postings = $this->postingManager->allPosting();
+        $postings = $this->postingManager->allExpertPosting($expert);
         if ($form->isSubmitted() && $form->isValid()) {
             $searchTerm = $form->get('query')->getData();
             $postings = $this->searchPostings($searchTerm, $this->em);
@@ -69,7 +70,9 @@ class ExpertController extends AbstractController
         return $this->render('dashboard/expert/posting/index.html.twig', [
             'identity' => $identity,
             'form' => $form->createView(),
+            'recomanded_postings' => $this->postingManager->findExpertAnnouncements($expert),
             'postings' => $postings,
+            'words' => explode(' ', $searchTerm),
         ]);
     }
 
@@ -82,6 +85,7 @@ class ExpertController extends AbstractController
         
         return $this->render('dashboard/expert/posting/all.html.twig', [
             'identity' => $identity,
+            'applications' => $identity->getApplications(),
         ]);
     }
 

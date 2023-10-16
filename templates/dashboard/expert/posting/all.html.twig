@@ -2,4 +2,23 @@
 {% block sidebar %} {% include "dashboard/_sidebar_expert.html.twig" %} {% endblock %}
 
 {% block body %}
+<div class="container mt-3">
+    <div class="row text-dark">
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-stars"></i> 
+            {{ 'app_dashboard_expert.my_list'|trans }} 
+            <span class="small">
+                <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_expert_posting_all.status.accepted'|trans }} 
+                <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_expert_posting_all.status.finished'|trans }} 
+                <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_expert_posting_all.status.negociate'|trans }} 
+            </span> 
+        </p>
+        <hr>
+        <p class="fs-7">
+            {{ 'app_dashboard_expert.recommanded_posting'|trans }} 
+        </p>
+        {{ component('posting_search_component')}}
+        {{ dump(applications) }}
+    </div>
+</div>
 {% endblock %}
