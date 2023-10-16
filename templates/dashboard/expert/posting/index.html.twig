@@ -17,7 +17,51 @@
             </div>
         </div>
         {{ form_end(form) }}
-        {{ dump(postings) }}
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-stars"></i> 
+            {{ 'app_dashboard_expert.recommanded'|trans }} 
+        </p>
+        <p class="fs-7">
+            {{ 'app_dashboard_expert.recommanded_posting'|trans }} 
+        </p>
+        {% for posting in recomanded_postings %}            
+            {{ component('dashboard_posting_component', {id: posting.id})}}
+        {% endfor %}
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-stars"></i> 
+            {{ 'app_dashboard_expert.catalog_posting'|trans }} 
+            <span class="h6" id="badgesContainer">
+            {% if words is defined and not empty(words) %}
+                {% for word in words %}
+                    <span class="badge bg-primary">
+                        {{ word }}
+                        <a href="#" class="remove-badge text-white" data-word="{{ word }}">×</a>
+                    </span>
+                {% endfor %}
+            {% endif %}
+            </span>
+        </p>
+        <hr>
+
+        {% for posting in postings %}
+
+            {{ component('table_posting_component', {id: posting.id}) }}
+            
+        {% endfor %}
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('.remove-badge').on('click', function(e) {
+            e.preventDefault();
+            let wordToRemove = $(this).data('word');
+    
+            $(this).parent().remove();
+    
+            let currentSearchValue = $('#posting_search_query').val();
+            let newSearchValue = currentSearchValue.replace(wordToRemove, '').trim();
+            $('#posting_search_query').val(newSearchValue);
+        });
+    });
+</script>
 {% endblock %}

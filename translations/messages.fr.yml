@@ -354,7 +354,9 @@ app_dashboard_expert:
     find: "Trouver une mission"
     messaging: "Messagerie"
     notification: "Notification"
+    my_list: Ma liste de missions
     apply: Voir les détails et postuler
+    catalog_posting: Catalogue des annonces
     offer: Envoyer ma candidature
     offered: Vous avez postulé pour ce poste.
     astuce: Astuce du jour
@@ -388,6 +390,10 @@ app_dashboard_expert_posting_all:
     title: "Tableau de bord"
     dashboard_title: "Mes missions"
     my_posting: "Mes missions"
+    status:
+        accepted: Acceptée
+        finished: Terminée
+        negociate: En cours de négociation
 
 app_dashboard_expert_formation:
     title: "Tableau de bord"
