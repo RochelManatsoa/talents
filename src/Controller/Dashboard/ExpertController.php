@@ -175,6 +175,10 @@ class ExpertController extends AbstractController
 
     private function searchPostings(string $query, EntityManagerInterface $entityManager): array
     {
+        if(empty($query)){
+            return [];
+        }
+
         $qb = $entityManager->createQueryBuilder();
         
         $keywords = array_filter(explode(' ', $query));

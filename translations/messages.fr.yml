@@ -390,6 +390,7 @@ app_dashboard_expert_posting_all:
     title: "Tableau de bord"
     dashboard_title: "Mes missions"
     my_posting: "Mes missions"
+    speed_search: Trouver rapidement une mission
     status:
         accepted: Acceptée
         finished: Terminée

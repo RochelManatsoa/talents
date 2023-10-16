@@ -3,7 +3,9 @@
 namespace App\Twig;
 
 use DateTime;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
+use App\Entity\Application;
 use App\Repository\AccountRepository;
 use Twig\Extension\AbstractExtension;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -20,6 +22,13 @@ class AppExtension extends AbstractExtension
         )
     {
     }
+    
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('status_label', [$this, 'statusLabel']),
+        ];
+    }
 
     public function getFunctions()
     {
@@ -34,7 +43,23 @@ class AppExtension extends AbstractExtension
             new TwigFunction('show_country', [$this, 'showCountry']),
             new TwigFunction('experience_text', [$this, 'getExperienceText']),
             new TwigFunction('date_difference', [$this, 'dateDifference']),
+            new TwigFunction('status_label', [$this, 'statusLabel']),
         ];
+    }
+
+
+    public function statusLabel(string $status = NULL): string
+    {
+        switch ($status) {
+            case Application::STATUS_ACCEPTED :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-green"></i>';
+            case Application::STATUS_FINISHED :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-primary"></i>';
+            case Application::STATUS_PENDING :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
+            default:
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
+        }
     }
 
     public function metaTitle(): string

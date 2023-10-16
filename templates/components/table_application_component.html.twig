@@ -1,0 +1,69 @@
+
+<div class="container mt-3 application" data-application-status="{{ this.application.status }}">
+    <div class="row border-bottom py-3">
+        <!-- Première colonne de taille 5 avec bordure à droite -->
+        <div class="col-3 border-end">
+          <h3 class="card-title h6"><i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }} <span>{{ this.application.status|status_label|raw }}</span></h3>
+        </div>
+
+        <!-- Deuxième colonne de taille 5 avec bordure à droite -->
+        <div class="col-7 border-end">
+          <p class="card-text flex-grow-1"><small class="">{{ this.posting.description|length > 150 ? this.posting.description|slice(0, 147) ~ '...' : this.posting.description }}</small></p>
+        </div>
+
+        <!-- Troisième colonne de taille 2 contenant 3 icônes Bootstrap -->
+        <div class="col-2">
+            <div class="row">
+                <div class="col-4">
+                <button title="Envoyer un message" type="button" class="btn btn-link" data-bs-target="#exampleModalToggle{{ this.posting.id }}" data-bs-toggle="modal">
+                  <i class="bi mx-1 h4 bi-chat-square-dots"></i> <!-- Remplacez "people-fill" par le nom de l'icône que vous souhaitez utiliser -->
+                </button>  
+                </div>
+                <div class="col-4">
+                  <button title="Aperçu de l'annonce" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ this.posting.id }}">
+                    <i class="bi mx-1 h4 bi-eye"></i> <!-- Remplacez "people-fill" par le nom de l'icône que vous souhaitez utiliser -->
+                  </button>  
+                </div>
+                <div class="col-4">
+                  <button title="Epingler l'annonce" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ this.posting.id }}">
+                    <i class="bi mx-1 h4 bi-geo-fill"></i> <!-- Remplacez "people-fill" par le nom de l'icône que vous souhaitez utiliser -->
+                  </button>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="exampleModal{{ this.posting.id }}Label"><i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class=" my-3">
+            <div class="col-md-4"><span class="badge text-bg-danger">Urgent</span> | {{ this.posting.views|length }} vues | {{ this.posting.applications|length }} offres</div>
+            <div class="col-md-4"> 
+              <p class=""><i class="h5 bi mx-2 bi-building-check"></i> {{ this.posting.company.name }}</p>
+              <p class=""><i class="h5 bi mx-2 bi-geo-alt"></i> {{ show_country(this.posting.company.country) }}</p>
+              <span class="badge text-bg-primary"> {{ this.posting.sector }} </span>
+            </div>
+          </div>
+        </div>
+        {{ this.posting.description|raw }}
+      </div>
+      <div class="modal-footer">
+      {% if this.posting.isApplyByIdentity(this.identity) %}
+      <span class="btn-outline-dark">{{ 'app_dashboard_expert.offered'|trans }}</span>
+      {% else %}
+        <button type="button" class="btn btn-dark rounded-pill" data-bs-target="#exampleModalToggle{{ this.posting.id }}" data-bs-toggle="modal">{{ 'app_dashboard_expert.offer'|trans }}</button>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
