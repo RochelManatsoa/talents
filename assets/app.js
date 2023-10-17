@@ -14,23 +14,36 @@ import $ from 'jquery';
 
 $(function() {
     // Vérifiez si vous êtes sur la page d'accueil
-    if ($('#homepage-indicator').length > 0) {
-        var prevScrollpos = $(window).scrollTop();
+    // if ($('#homepage-indicator').length > 0) {
+    //     var prevScrollpos = $(window).scrollTop();
 
-        $(window).on('scroll', function() {
-            var currentScrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+    //     $(window).on('scroll', function() {
+    //         var currentScrollPos = document.documentElement.scrollTop || document.body.scrollTop;
 
-            if (currentScrollPos === 0) {
-                $('#navbar').removeClass('show');
-            } else {
-                $('#navbar').addClass('show');
-            }
+    //         if (currentScrollPos === 0) {
+    //             $('#navbar').removeClass('show');
+    //         } else {
+    //             $('#navbar').addClass('show');
+    //         }
 
-            prevScrollpos = currentScrollPos;
-        });
-    }else{
-        $('#navbar').addClass('show');
-    }
+    //         prevScrollpos = currentScrollPos;
+    //     });
+    // }else{
+    //     $('#navbar').addClass('show');
+    // }
+    $('#account_identity .custom-control-input').on('change', function() {
+        $(this).closest('form').submit();
+    });
+
+    $('.image-checkbox img').on('click', function() {
+        // Ajouter l'effet de clignotement
+        $(this).addClass('blinking');
+        
+        // Retirer l'effet de clignotement après 1.2 secondes (2 cycles d'animation)
+        setTimeout(() => {
+            $(this).removeClass('blinking');
+        }, 900);
+    });
 
 });
 

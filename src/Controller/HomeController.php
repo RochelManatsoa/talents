@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\IdentityRepository;
 use App\Repository\PostingRepository;
 use App\Repository\SectorRepository;
+use App\Service\Posting\PostingService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ class HomeController extends AbstractController
         private PostingRepository $postingRepository,
         private IdentityRepository $identityRepository,
         private SectorRepository $sectorRepository,
+        private PostingService $postingService,
     ){
     }
 
@@ -92,5 +94,18 @@ class HomeController extends AbstractController
         return $this->render('home/terms.html.twig', [
             'controller_name' => 'HomeController',
         ]);
+    }
+
+    #[Route('/formulaire', name: 'app_home_form')]
+    public function form(Request $request): Response
+    {
+        if ($request->isMethod('POST')) {
+            $postingId = $request->request->get('posting_id');
+            $this->postingService->add($postingId);
+            if (!$this->getUser()) { 
+                return $this->redirectToRoute('app_login'); 
+            }
+            return $this->redirectToRoute('app_dashboard_expert_posting_all');
+        }
     }
 }

@@ -4,30 +4,47 @@ namespace App\Controller\Dashboard;
 
 use DateTime;
 use App\Entity\Expert;
+use App\Entity\Account;
+use App\Entity\Identity;
 use App\Entity\Posting;
 use App\Manager\PostingManager;
 use App\Service\User\UserService;
 use App\Form\Search\PostingSearchType;
+use App\Service\Posting\PostingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ExpertController extends AbstractController
 {
     public function __construct(
         private UserService $userService,
         private EntityManagerInterface $em,
+        private PostingService $postingService,
         private PostingManager $postingManager
     ){
+    }
+
+    private function getExpertOrRedirect()
+    {
+        $identity = $this->userService->getCurrentIdentity();
+        if (!$identity instanceof Identity) return $this->redirectToRoute('app_identity_account');
+        $account = $identity->getAccount();
+        if (!$account instanceof Account) return $this->redirectToRoute('app_identity_account');
+        $expert = $identity->getExpert();
+        if (!$expert instanceof Expert) return null;
+
+        return $expert;
     }
 
     #[Route('/dashboard/expert', name: 'app_dashboard_expert')]
     public function index(Request $request): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
-        $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
         $now = new DateTime();
 
@@ -77,14 +94,27 @@ class ExpertController extends AbstractController
     }
 
     #[Route('/dashboard/expert/posting/all', name: 'app_dashboard_expert_posting_all')]
-    public function all(): Response
+    public function all(Request $request): Response
     {
+        if ($request->isMethod('POST')) {
+            $postingId = $request->request->get('posting_id');
+            dd($postingId);
+            if (!$this->getUser()) { 
+                $this->postingService->add($postingId);
+                return $this->redirectToRoute('app_login'); 
+            }
+            if(null != $postingId){
+                $this->postingService->add($postingId);
+            }
+        }
+        $postingSession = $this->postingService->getPostingSession();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
         
         return $this->render('dashboard/expert/posting/all.html.twig', [
             'identity' => $identity,
+            'postingSession' => $postingSession,
             'applications' => $identity->getApplications(),
         ]);
     }

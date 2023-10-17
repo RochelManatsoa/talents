@@ -23,11 +23,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class RegistrationController extends AbstractController
 {
-    private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
-        $this->emailVerifier = $emailVerifier;
+    public function __construct(
+        private EmailVerifier $emailVerifier
+    ){
     }
 
     #[Route('/register', name: 'app_register')]
