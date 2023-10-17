@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ExperienceType extends AbstractType
@@ -22,7 +23,10 @@ class ExperienceType extends AbstractType
             ->add('company', TextType::class, [
                 'label' => 'app_identity_expert_step_two.experience.company',
             ])
-            ->add('currently')
+            ->add('currently', CheckboxType::class, [
+                'label' => 'app_identity_expert_step_two.experience.currently',
+                'required' => false,
+            ])
             ->add('startDate', DateType::class,  [
                 'label' => 'app_identity_expert_step_two.experience.startDate',
                 'widget' => 'single_text',  

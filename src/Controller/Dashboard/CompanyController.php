@@ -2,15 +2,16 @@
 
 namespace App\Controller\Dashboard;
 
+use App\Entity\Account;
 use App\Entity\Company;
 use App\Entity\Posting;
 use App\Form\CompanyType;
-use App\Form\Search\ExpertSearchType;
 use App\Manager\ExpertManager;
 use App\Manager\PostingManager;
 use App\Entity\Type\PostingType;
 use App\Service\User\UserService;
 use App\Form\PostingType as Annonce;
+use App\Form\Search\ExpertSearchType;
 use App\Repository\IdentityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,8 @@ class CompanyController extends AbstractController
     private function getCompanyOrRedirect(): ?Company
     {
         $identity = $this->userService->getCurrentIdentity();
+        $account = $identity->getAccount();
+        if (!$account instanceof Account) return $this->redirectToRoute('app_identity_account');
         $company = $identity->getCompany();
         if (!$company instanceof Company) return null;
 

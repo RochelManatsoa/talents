@@ -457,5 +457,35 @@
             </div>
         </div>
     </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $('#experience').on('shown.bs.modal', function () {
+            for (let i = 0; i < 10; i++) {  // Ici, j'utilise 10 comme exemple, ajustez selon le nombre d'éléments que vous avez
+                const $currentlyCheckbox = $(`#step_two_experiences_${i}_currently`);
+                const $endDateFieldContainer = $(`#step_two_experiences_${i}_endDate`).closest('div');
+        
+                if (!$currentlyCheckbox.length) {
+                    // Si le checkbox n'existe pas, on sort de la boucle
+                    break;
+                }
+        
+                if ($currentlyCheckbox.is(':checked')) {
+                    $endDateFieldContainer.hide();
+                }
+        
+                $currentlyCheckbox.off('change').change(function() {
+                    if ($(this).is(':checked')) {
+                        $endDateFieldContainer.hide();
+                    } else {
+                        $endDateFieldContainer.show();
+                    }
+                });
+            }
+        });
+        
+
+</script>
 {% endblock %}
             

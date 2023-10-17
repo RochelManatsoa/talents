@@ -6,13 +6,14 @@ use DateTime;
 use App\Entity\Posting;
 use App\Entity\Identity;
 use App\Entity\Application;
-use App\Entity\Views\IdentityViews;
 use App\Form\ApplicationType;
 use App\Service\User\UserService;
 use App\Entity\Views\PostingViews;
+use App\Entity\Views\IdentityViews;
 use App\Repository\SectorRepository;
 use App\Repository\PostingRepository;
 use App\Repository\IdentityRepository;
+use App\Service\Posting\PostingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class CatalogController extends AbstractController
         private SectorRepository $sectorRepository,
         private UserService $userService,
         private EntityManagerInterface $em,
+        private PostingService $postingService,
     ){
     }
     
