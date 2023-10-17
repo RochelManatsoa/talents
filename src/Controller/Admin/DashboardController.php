@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Account;
 use App\Entity\Application;
 use App\Entity\Company;
 use App\Entity\Expert;
@@ -31,6 +32,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToCrud('Compte', 'fas fa-bullhorn', Account::class);
         yield MenuItem::linkToCrud('Annonces', 'fas fa-bullhorn', Posting::class);
         yield MenuItem::linkToCrud('Entreprise', 'fas fa-building', Company::class);
         yield MenuItem::linkToCrud('Expert', 'fas fa-user-tie', Expert::class);

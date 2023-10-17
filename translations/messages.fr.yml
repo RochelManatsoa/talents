@@ -464,6 +464,7 @@ app_identity_expert_step_two:
         endDate: Fin
         submit: Ajouter
         none: Veuillez ajouter vos experiences
+        currently: Actuellement en poste
     language: 
         add: Ajouter une langues
         name: Langue maîtrisées

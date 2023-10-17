@@ -1,43 +1,42 @@
 
-<section id="hero" class="desktop-vh-100" style="background-color: black;">
-    <div class="container h-100 d-flex flex-column justify-content-center">
-        <div class="row">
-            <div class="col-lg-6 text-center">
-                <img src="{{ asset('images/logo-olona-talents.jpg')}}" class="img-fluid mx-auto rounded mb-2" style="width:350px;align:center;" alt="Logo">
-                <h1 class="text-white display-1 mt-5">{{ 'app_home.section.hero.h1'|trans }}</h1>
+<section id="hero" class="my-5" style="background-color: black;">
+    <div class="container my-5 d-flex flex-column justify-content-center">
+        <div class="row my-4">
+            <div class="col-lg-6 text-center d-flex flex-column justify-content-center">
+                <h1 class="text-white display-1">{{ 'app_home.section.hero.h1'|trans }}</h1>
                 <h2 class="text-white display-5 custom-margin-h2">{{ 'app_home.section.hero.h2'|trans }}</h2>
                 <h3 class="text-white my-3 text-strong">{{ 'app_home.section.hero.h3'|trans }}</h3>
                 <div class="d-flex justify-content-center align-items-center">
                     <p class="text-white col-md-8 fs-5">{{ 'app_home.section.hero.p'|trans }}</p>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 d-flex flex-column justify-content-center ">
                 <!-- Colonne 2 : Vous pouvez ajouter une image ou un formulaire ici. -->
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-md-6">
-                        <div class="image-wrapper">
-                            <img src="{{ asset('images/home/sections/hero1.png')}}" class="img-fluid rounded mb-2" alt="Image 1">
-                            <a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a>
+                        <div class="image-wrapper m-2">
+                            <img src="{{ asset('images/home/sections/hero1.png')}}" class="img-fluid rounded" alt="Image 1">
+                            <a href="{{ path('app_dashboard_company_posting_new')}}" class="btn btn-sm btn-light py-3 text-uppercase fs-5 w-100 mx-auto rounded-pill">{{ 'app_dashboard_company_posting_new.menu'|trans }}</a>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="image-wrapper">
-                            <img src="{{ asset('images/home/sections/hero2.png')}}" class="img-fluid rounded mb-2" alt="Image 2">
-                            <a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
+                        <div class="image-wrapper m-2">
+                            <img src="{{ asset('images/home/sections/hero2.png')}}" class="img-fluid rounded" alt="Image 2">
+                            <a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-light py-3 text-uppercase fs-5 w-100 mx-auto rounded-pill">{{ 'app_home_posting.menu'|trans }}</a>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-2">
                     <div class="col-md-6">
-                        <div class="image-wrapper">
-                            <img src="{{ asset('images/home/sections/hero3.png')}}" class="img-fluid rounded mb-2" alt="Image 3">
-                            <a href="{{ path('app_home_experts')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_experts.menu'|trans }}</a>
+                        <div class="image-wrapper m-2">
+                            <img src="{{ asset('images/home/sections/hero3.png')}}" class="img-fluid rounded" alt="Image 3">
+                            <a href="{{ path('app_home_experts')}}" class="btn btn-sm btn-light py-3 text-uppercase fs-5 w-100 mx-auto rounded-pill">{{ 'app_home_experts.menu'|trans }}</a>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="image-wrapper">
-                            <img src="{{ asset('images/home/sections/hero4.png')}}" class="img-fluid rounded mb-2" alt="Image 4">
-                            <a href="{{ path('app_home_contact')}}" class="btn btn-sm btn-light py-3 text-strong text-uppercase w-100 mx-auto rounded-pill">{{ 'app_home_contact.menu'|trans }}</a>
+                        <div class="image-wrapper m-2">
+                            <img src="{{ asset('images/home/sections/hero4.png')}}" class="img-fluid rounded" alt="Image 4">
+                            <a href="{{ path('app_home_contact')}}" class="btn btn-sm btn-light py-3 text-uppercase fs-5 w-100 mx-auto rounded-pill">{{ 'app_home_contact.menu'|trans }}</a>
                         </div>
                     </div>
                 </div>

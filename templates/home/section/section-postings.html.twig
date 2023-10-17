@@ -1,20 +1,8 @@
 <section id="postings" class="" style="background-color: white;position:relative">
-    <div class="container-fluid d-flex flex-column justify-content-center">
+    <div class="container d-flex flex-column justify-content-center">
         <div class="row">
             <h2 class="text-black text-center my-5 w-100 display-2 text-strong">{{ 'app_home.section.postings.h2'|trans }}</h2>
             {{ component('carousel_posting_component')}}
-            {# {% for item in postings %}
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <div class="card h-100" style="text-align:left!important;">
-                    <div class="card-body d-flex flex-column">
-                        <h3 class="card-title h4">{{ item.title }}</h3>
-                        <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-danger">Urgent</span> | {{ item.views|length }} vues | {{ item.applications|length }} offres</h6>
-                        <p class="card-text flex-grow-1"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></p>
-                        <a href="{{ path('app_catalog_posting', {'jobId': item.jobId } ) }}" class="btn btn-dark card-link mt-auto">Postuler</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %} #}
         </div>
         <p class="d-flex flex-column flex-sm-row justify-content-center cta-group">  
             <span class="my-3"><a href="{{ path('app_home_posting')}}" class="btn btn-sm btn-outline-dark text-uppercase px-4 py-2 mx-4 rounded-pill">{{ 'app_home_posting.see_all'|trans }}</a></span>

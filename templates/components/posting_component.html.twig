@@ -5,7 +5,11 @@
           <h3 class="card-title h4">{{ this.posting.title }}</h3>
           <h6 class="card-subtitle mb-2 text-body-secondary"><span class="badge text-bg-danger">Urgent</span> | {{ this.posting.views|length }} vues | {{ this.posting.applications|length }} offres</h6>
           <p class="card-text flex-grow-1"><small class="">{{ this.posting.description|length > 200 ? this.posting.description|slice(0, 197) ~ '...' : this.posting.description }}</small></p>
-          <a href="{{ path('app_catalog_posting', {'jobId': this.posting.jobId } ) }}" class="btn btn-dark card-link mt-auto">Postuler</a>
+          {# <a href="{{ path('app_catalog_posting', {'jobId': this.posting.jobId } ) }}" class="btn btn-dark card-link mt-auto">Postuler</a> #}
+          <form action="{{ path('app_home_form') }}" method="POST">
+              <input type="hidden" name="posting_id" value="{{ this.posting.id }}">
+              <button type="submit" class="btn btn-dark card-link mt-auto">Postuler</button>
+          </form>
       </div>
   </div>
 </div>

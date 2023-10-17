@@ -21,6 +21,9 @@
         </p>
         <hr>
         {{ component('posting_search_component')}}
+        {% for posting in postingSession %}            
+            {{ component('dashboard_posting_component', {id: posting.id})}}
+        {% endfor %}
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

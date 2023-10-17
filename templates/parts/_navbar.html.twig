@@ -17,14 +17,14 @@
         <li class="nav-item">
           <a class="nav-link {{ current_route == 'app_home_experts' ? 'active' : '' }}" 
             {{ current_route == 'app_home_experts' ? 'aria-current=page' : '' }} 
-            href="{{ path('app_home_experts')}}">{{ 'app_home_experts.menu'|trans }}</a>
+            href="{{ path('app_dashboard_company_profile')}}">{{ 'app_home_experts.menu'|trans }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{ current_route == 'app_home_posting' ? 'active' : '' }}" 
             {{ current_route == 'app_home_posting' ? 'aria-current=page' : '' }} 
-            href="{{ path('app_home_posting')}}">{{ 'app_home_posting.menu'|trans }}</a>
+            href="{{ path('app_dashboard_expert_posting')}}">{{ 'app_home_posting.menu'|trans }}</a>
         </li>
-        <li class="nav-item">
+        {# <li class="nav-item">
           <a class="nav-link {{ current_route == 'app_home_formation' ? 'active' : '' }}" 
             {{ current_route == 'app_home_formation' ? 'aria-current=page' : '' }} 
             href="{{ path('app_home_formation')}}">{{ 'app_home_formation.menu'|trans }}</a>
@@ -36,7 +36,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true" href="{{ path('app_home_ia')}}">{{ 'app_home_ia.menu'|trans }}</a>
-        </li>
+        </li> #}
       </ul>
       {% if app.user %}
         <div class="dropdown">
