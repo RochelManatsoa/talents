@@ -32,13 +32,11 @@ class CompanyController extends AbstractController
     ){
     }
 
-    private function getCompanyOrRedirect(): ?Company
+    private function getCompanyOrRedirect()
     {
         $identity = $this->userService->getCurrentIdentity();
-        $account = $identity->getAccount();
-        if (!$account instanceof Account) return $this->redirectToRoute('app_identity_account');
         $company = $identity->getCompany();
-        if (!$company instanceof Company) return null;
+        if(!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
         return $company;
     }
@@ -97,7 +95,7 @@ class CompanyController extends AbstractController
     public function postingNew(Request $request): Response
     {
         $company = $this->getCompanyOrRedirect();
-        if (!$company) return $this->redirectToRoute('app_identity_create');
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
         $posting = $this->postingManager->init($company);
         $form = $this->createForm(Annonce::class, $posting, []);
@@ -120,7 +118,7 @@ class CompanyController extends AbstractController
     public function postingAll(): Response
     {
         $company = $this->getCompanyOrRedirect();
-        if (!$company) return $this->redirectToRoute('app_identity_create');
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
         return $this->render('dashboard/company/posting/all.html.twig', [
             'company' => $company,
@@ -134,6 +132,8 @@ class CompanyController extends AbstractController
     #[Route('/dashboard/company/profile', name: 'app_dashboard_company_profile')]
     public function profile(Request $request, EntityManagerInterface $entityManagerInterface): Response
     {
+        $company = $this->getCompanyOrRedirect();
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
         $form = $this->createForm(ExpertSearchType::class);
         $form->handleRequest($request);
         $company = $this->getCompanyOrRedirect();
@@ -157,7 +157,7 @@ class CompanyController extends AbstractController
     public function message(): Response
     {
         $company = $this->getCompanyOrRedirect();
-        if (!$company) return $this->redirectToRoute('app_identity_create');
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
         return $this->render('dashboard/company/message/index.html.twig', [
             'company' => $company,
@@ -168,7 +168,7 @@ class CompanyController extends AbstractController
     public function notification(): Response
     {
         $company = $this->getCompanyOrRedirect();
-        if (!$company) return $this->redirectToRoute('app_identity_create');
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
         return $this->render('dashboard/company/notification/index.html.twig', [
             'company' => $company,
@@ -179,7 +179,7 @@ class CompanyController extends AbstractController
     public function account(Request $request): Response
     {
         $company = $this->getCompanyOrRedirect();
-        if (!$company) return $this->redirectToRoute('app_identity_create');
+        if (!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
         $form = $this->createForm(CompanyType::class, $company, []);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
