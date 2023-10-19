@@ -111,8 +111,6 @@
                                         {{ formation.title }}
                                         | 
                                         {{ formation.level }}
-                                        | 
-                                        {{ date_difference(formation.endDate, formation.startDate) }}
                                     </p>
                                 {% endfor %}
                             {% else %}
@@ -359,8 +357,6 @@
                             {{ formation.title }}
                             | 
                             {{ formation.level }}
-                            | 
-                            {{ date_difference(formation.endDate, formation.startDate) }}
                             <button class="btn btn-sm btn-dark rounded-circle p-1 lh-1" type="button" data-id="js-remove" data-href="/ajax-remove-formation/{{ formation.id }}/{{ user.identity.id }}">
                                 <i class="bi bi-trash"></i>
                             </button>
@@ -483,8 +479,7 @@
                     }
                 });
             }
-        });
-        
+        });      
 
 </script>
 {% endblock %}

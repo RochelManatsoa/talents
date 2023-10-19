@@ -4,6 +4,7 @@ namespace App\Controller\Dashboard;
 
 use App\Entity\Account;
 use App\Entity\Company;
+use App\Entity\Identity;
 use App\Entity\Posting;
 use App\Form\CompanyType;
 use App\Manager\ExpertManager;
@@ -35,6 +36,7 @@ class CompanyController extends AbstractController
     private function getCompanyOrRedirect()
     {
         $identity = $this->userService->getCurrentIdentity();
+        if(!$identity instanceof Identity) return $this->redirectToRoute('app_identity_account');
         $company = $identity->getCompany();
         if(!$company instanceof Company) return $this->redirectToRoute('app_identity_create');
 
@@ -87,6 +89,7 @@ class CompanyController extends AbstractController
         return $this->render('dashboard/company/posting/edit.html.twig', [
             'referer' => $referer,
             'company' => $company,
+            'posting' => $posting,
             'form' => $form->createView(),
         ]);
     }

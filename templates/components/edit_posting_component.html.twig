@@ -1,0 +1,52 @@
+<div{{ attributes }}>
+    <div>
+        <h1>{{ posting.title }}</h1>
+
+        <hr>
+
+        <div class="mb-3">
+            <label for="posting_title" class="form-label"><h2>Title</h2></label>
+            <div class="input-group">
+                <input
+                    type="text"
+                    data-model="posting.title"
+                    data-action="blur->live#update"
+                    class="form-control"
+                    value="{{ posting.title }}"
+                    id="posting_title"
+                >
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="posting_description" class="form-label"><h2>Description</h2></label>
+            <div class="input-group">
+                <textarea
+                    data-model="posting.description"
+                    data-action="live#update"
+                    class="form-control"
+                    id="posting_description"
+                >{{ posting.description }}</textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-5 p-5 shadow bg-secondary text-light">
+        <h3>{{ posting.title }}</h3>
+        {{ posting.description }}
+    </div>
+
+    <div class="d-grid gap-2">
+        <button
+            data-action="live#action"
+            data-action-name="save"
+            class="btn btn-primary btn-sm"
+        >
+            Enregistrer les modifications
+        </button>
+    </div>
+
+    {% if isSaved %}
+        <div class="alert alert-success my-4">Enregistrer !</div>
+    {% endif %}
+</div>

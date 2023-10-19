@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
-use App\Repository\IdentityRepository;
-use App\Repository\PostingRepository;
+use App\Entity\Expert;
 use App\Repository\SectorRepository;
+use App\Repository\PostingRepository;
+use App\Repository\IdentityRepository;
+use App\Service\Expert\ExpertService;
 use App\Service\Posting\PostingService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -18,6 +20,7 @@ class HomeController extends AbstractController
         private IdentityRepository $identityRepository,
         private SectorRepository $sectorRepository,
         private PostingService $postingService,
+        private ExpertService $expertService,
     ){
     }
 
@@ -106,6 +109,18 @@ class HomeController extends AbstractController
                 return $this->redirectToRoute('app_login'); 
             }
             return $this->redirectToRoute('app_dashboard_expert_posting_all');
+        }
+    }
+
+    #[Route('/view/{username}', name: 'app_home_form_expert')]
+    public function formExpert(Request $request, Expert $expert): Response
+    {
+        if ($expert) {
+            $this->expertService->add($expert->getId());
+            if (!$this->getUser()) { 
+                return $this->redirectToRoute('app_login'); 
+            }
+            return $this->redirectToRoute('app_dashboard_company_profile');
         }
     }
 }
