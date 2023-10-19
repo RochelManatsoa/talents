@@ -43,6 +43,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert', name: 'app_dashboard_expert')]
     public function index(Request $request): Response
     {
+        dump($this->postingService->getPostingSession());
         $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');

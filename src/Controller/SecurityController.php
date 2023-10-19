@@ -7,6 +7,8 @@ use App\Entity\Account;
 use App\Entity\Company;
 use App\Entity\Identity;
 use Symfony\Component\Mime\Email;
+use App\Service\Posting\PostingService;
+use App\Service\User\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    public function __construct(
+        private PostingService $postingService,
+        private UserService $userService,
+        private RequestStack $requestStack
+    ){
+    }
+    
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        $this->userService->storeCurrentURI();
+        dump($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
+        dump($this->postingService->getPostingSession());
         if ($this->getUser()) {
             return $this->redirectToRoute('app_connect');
         }
