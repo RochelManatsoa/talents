@@ -49,4 +49,13 @@ class PostingService
 
         return $postings;
     }
+
+    public function storePreviousURL()
+    {
+        $previousRequest = $this->requestStack->getParentRequest();
+
+        if ($previousRequest) {
+            $this->requestStack->getSession()->set('original_uri_before_registration', $previousRequest->getUri());
+        }
+    }
 }

@@ -8,17 +8,19 @@ use App\Entity\Identity;
 use App\Form\ExpertType;
 use App\Form\CompanyType;
 use App\Form\IdentityType;
+use App\Form\Step\StepOneType;
+use App\Form\Step\StepTwoType;
+use App\Form\Step\StepTreeType;
 use App\Manager\IdentityManager;
 use App\Form\AccountIdentityType;
-use App\Form\Step\StepOneType;
-use App\Form\Step\StepTreeType;
-use App\Form\Step\StepTwoType;
 use App\Service\User\UserService;
+use App\Service\Posting\PostingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class IdentityController extends AbstractController
 {
@@ -26,12 +28,15 @@ class IdentityController extends AbstractController
         private UserService $userService,
         private EntityManagerInterface $em,
         private IdentityManager $identityManager,
+        private PostingService $postingService,
+        private RequestStack $requestStack,
     ){
     }
     
     #[Route('/identity/create', name: 'app_identity_create')]
     public function index(): Response
     {
+        dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
         if($identity instanceof Identity){
             $compagny = $identity->getCompany();
@@ -54,6 +59,7 @@ class IdentityController extends AbstractController
     #[Route('/identity/account', name: 'app_identity_account')]
     public function account(Request $request): Response
     {
+        dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
         if(!$identity instanceof Identity){
             $identity = $this->identityManager->init();
@@ -131,6 +137,7 @@ class IdentityController extends AbstractController
     #[Route('/identity/expert/create', name: 'app_identity_expert_create')]
     public function createExpert(Request $request): Response
     {
+        dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
 
@@ -158,6 +165,7 @@ class IdentityController extends AbstractController
     #[Route('/identity/expert/step-one', name: 'app_identity_expert_step_one')]
     public function stepOne(Request $request): Response
     {
+        dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
 
@@ -182,6 +190,7 @@ class IdentityController extends AbstractController
     #[Route('/identity/expert/step-two', name: 'app_identity_expert_step_two')]
     public function stepTwo(Request $request): Response
     {
+        dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
 
@@ -228,6 +237,7 @@ class IdentityController extends AbstractController
     #[Route('/identity/expert/step-three', name: 'app_identity_expert_step_three')]
     public function stepThree(Request $request): Response
     {
+        dump($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
 
@@ -252,6 +262,12 @@ class IdentityController extends AbstractController
     #[Route('/identity/confirmation', name: 'app_identity_confirmation')]
     public function confirmation(): Response
     {
+        dump($this->postingService->getPostingSession());
+        $redirect = $this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path');
+        if($redirect){
+            // $this->requestStack->getSession()->remove('original_uri_before_registration');
+            return $this->redirect($redirect);
+        }
         return $this->render('identity/confirmation.html.twig', [
             'controller_name' => 'IdentityController',
         ]);
