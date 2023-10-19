@@ -1,0 +1,13 @@
+<div {{ attributes }} >
+    <div class="container">
+            <input type="search" class="form-control" data-model="query" placeholder="Chercher un profil ...">
+    </div>
+
+
+    <div class="row mt-3">
+    {% for expert in this.experts %}            
+        {{ component('dashboard_expert_component', {id: expert.id})}}
+    {% endfor %}
+    </div>
+</div>
+

@@ -71,8 +71,8 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/posting', name: 'app_dashboard_expert_posting')]
     public function posting(Request $request): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
-        $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
         $searchTerm = "";
         
@@ -96,6 +96,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/posting/all', name: 'app_dashboard_expert_posting_all')]
     public function all(Request $request): Response
     {
+        $expert = $this->getExpertOrRedirect();
         if ($request->isMethod('POST')) {
             $postingId = $request->request->get('posting_id');
             dd($postingId);
@@ -122,7 +123,9 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/formation', name: 'app_dashboard_expert_formation')]
     public function formation(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
+        if(!$identity instanceof Identity) return $this->redirectToRoute('app_identity_account');
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
         
@@ -134,6 +137,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/tools', name: 'app_dashboard_expert_tools')]
     public function tools(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
@@ -146,6 +150,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/application', name: 'app_dashboard_expert_application')]
     public function application(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
@@ -158,6 +163,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/message', name: 'app_dashboard_expert_message')]
     public function message(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
@@ -170,6 +176,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/notification', name: 'app_dashboard_expert_notification')]
     public function notification(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
@@ -182,6 +189,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/account', name: 'app_dashboard_expert_account')]
     public function account(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
@@ -194,6 +202,7 @@ class ExpertController extends AbstractController
     #[Route('/dashboard/expert/profile', name: 'app_dashboard_expert_profile')]
     public function profile(): Response
     {
+        $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');

@@ -1,13 +1,5 @@
-{# <div class="card" style="">
-  <img src="{{vich_uploader_asset(this.expert.identity, 'file')}}" class="card-img-top" alt="{{ this.expert.title}}">
-  <div class="card-body">
-    <h5 class="card-title">{{ this.expert.identity.user.firstName }} {{ this.expert.identity.user.lastName|slice(0, 1)|upper }}.</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{ path('app_catalog_expert', {'username': this.expert.identity.username}) }}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> #}
 
-<a href="{{ path('app_catalog_expert', {'username': this.expert.identity.username}) }}">
+<a href="{{ path('app_home_form_expert', {'username': this.expert.identity.username}) }}">
   <div class="col">
       <div class="card">
           <img src="{{vich_uploader_asset(this.expert.identity, 'file')}}" class="card-img-top" alt="{{ this.expert.identity.user.firstName }}">

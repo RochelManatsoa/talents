@@ -14,19 +14,27 @@
         {{ 'app_dashboard_company_posting_all.list'|trans }}    
     </span> 
     <span class="small">
-        <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_company_posting_all.status.published'|trans }} 
-        <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_company_posting_all.status.finished'|trans }} 
-        <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_company_posting_all.status.moderate'|trans }} 
-        <i class="h6 bi mx-2 bi-circle-fill small text-danger"></i> {{ 'app_dashboard_company_posting_all.status.unpublished'|trans }} 
+        <span class="small status-filter" data-status="PUBLISHED">
+            <i class="h6 bi mx-2 bi-circle-fill small text-green"></i> {{ 'app_dashboard_company_posting_all.status.published'|trans }}
+        </span>
+        <span class="small status-filter" data-status="ARCHIVED">
+            <i class="h6 bi mx-2 bi-circle-fill small text-primary"></i> {{ 'app_dashboard_company_posting_all.status.finished'|trans }}
+        </span>
+        <span class="small status-filter" data-status="PENDING">
+            <i class="h6 bi mx-2 bi-circle-fill small text-warning"></i> {{ 'app_dashboard_company_posting_all.status.moderate'|trans }}
+        </span>
+        <span class="small status-filter" data-status="UNPUBLISHED">
+            <i class="h6 bi mx-2 bi-circle-fill small text-danger"></i> {{ 'app_dashboard_company_posting_all.status.unpublished'|trans }}
+        </span>
     </span> 
 </p>
 <hr>
 </div>
     {% for item in postings %}
-    <div class="row mb-3 d-flex align-items-center bg-white py-2 rounded my-1">
+    <div class="row mb-3 d-flex align-items-center bg-white py-2 rounded my-1 application" data-application-status="{{ item.status }}">
         <div class="col-md-3 bordered themed-grid-col">
             <i class="bi mx-1 h5 bi-code-slash"></i><span class="h6">{{ item.title|length > 22 ? item.title|slice(0, 19) ~ '...' : item.title }}</span><br/>
-            {% if item.isValid %}<i class="h6 bi mx-1 bi-circle-fill small text-green"></i>{% else %}<i class="h6 bi mx-1 bi-circle-fill small text-warning"></i>{% endif %}
+            {{ item.status|posting_status_Label|raw }}
             <span class="small">{{ item.views|length}} vues | {{ item.applications|length}} candidatures</span>
         </div>
         <div class="col-md-6 bordered themed-grid-col text-center"><small class="">{{ item.description|length > 100 ? item.description|slice(0, 97) ~ '...' : item.description }}</small></div>
@@ -52,5 +60,20 @@
             } %}
         {% endif %} #}
     </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.status-filter').on('click', function() {
+            const status = $(this).data('status');
+            console.log(status)
+            console.log($('.application'))
+            console.log($(`.application[data-application-status="${status}"]`))
+            
+            $('.application').hide();
+    
+            $(`.application[data-application-status="${status}"]`).show();
+        });
+    });
+</script>
 {% endblock %}
 {% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
