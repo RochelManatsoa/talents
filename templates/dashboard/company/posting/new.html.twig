@@ -2,14 +2,33 @@
 
 {% block body %}
 <h1 class="mb-3">{{ 'app_dashboard_company_posting_new.title_form'|trans }}</h1>  
-{{ form_start(form)}}
+{{ form_start(form, { 'attr': {'id': 'form_posting_ajax'}})}}
 {{ form_widget(form)}}
 <div class="col text-center my-4">
-<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="px-3 btn btn-outline-dark">{{ 'app_dashboard_company_posting_new.button.view'|trans }}</button>
+<button type="button" data-bs-toggle="modal" id="previewButton" data-bs-target="#previewModal" class="px-3 btn btn-outline-dark">{{ 'app_dashboard_company_posting_new.button.view'|trans }}</button>
 <button type="submit" class="px-3 btn btn-dark">{{ 'app_dashboard_company_posting_new.button.publish'|trans }}</button>
 <button type="reset" class="px-3 btn btn-outline-dark">{{ 'app_dashboard_company_posting_new.button.cancel'|trans }}</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-2" id="previewModalLabel">Prévisualisation de votre annonce</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="px-3 btn btn-dark">{{ 'app_dashboard_company_posting_new.button.publish'|trans }}</button>
+      </div>
+    </div>
+  </div>
 </div>
 {{ form_end(form)}}
 {% endblock %}
 {% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
-{% block footer %} {% include "components/modal/_default.html.twig" with {'title': "Prévisualisation"} %} {% endblock %}
+
+{% block footer %}
+ {% endblock %}

@@ -45,6 +45,34 @@ $(function() {
         }, 900);
     });
 
+    $('#previewButton').on('click', function(e) {
+        e.preventDefault();
+        // Récupérer les données du formulaire
+        const formData = {
+            title: $('input[name="posting[title]"]').val(),
+            description: $('textarea[name="posting[description]"]').val(),
+            tarif: $('input[name="posting[tarif]"]').val(),
+            number: $('input[name="posting[number]"]').val(),
+            plannedDate: $('input[name="posting[plannedDate]"]').val()
+        };
+        const typeText = $('select[name="posting[type]"] option:selected').text();
+        const sectorText = $('select[name="posting[sector]"] option:selected').text();
+
+        console.log(formData)
+        const content = `
+            <p><span class="text-strong">Titre :</span> <br>${formData.title}</p>
+            <p><span class="text-strong">Type :</span> <br>${typeText}</p>
+            <p><span class="text-strong">Secteur d'activité :</span> <br>${sectorText}</p>
+            <p><span class="text-strong">Description du poste:</span> <br>${formData.description}</p>
+            <p><span class="text-strong">Budget :</span> <br>${formData.tarif} €</p>
+            <p><span class="text-strong">Date du début :</span> <br>${formData.plannedDate} </p>
+            <!-- Et ainsi de suite pour les autres champs... -->
+        `;
+        $('#previewModal .modal-body').html(content);
+    
+    });
+    
+
 });
 
 const elements = $('.js-remove');
