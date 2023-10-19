@@ -35,7 +35,12 @@ class PostingType extends AbstractType
             ])
             ->add('tarif', MoneyType::class, ['label' => 'app_dashboard_company_posting_new.tarif'])
             ->add('number', NumberType::class, ['label' => 'app_dashboard_company_posting_new.number',])
-            ->add('plannedDate', DateType::class, ['label' => 'app_dashboard_company_posting_new.planned_date'])
+            ->add('plannedDate', DateType::class, [
+                'label' => 'app_dashboard_company_posting_new.planned_date',
+                'widget' => 'single_text',  
+                'format' => 'yyyy-MM-dd',   
+                'data' => new \DateTime('now'),
+                ])
         ;
     }
 

@@ -6,6 +6,7 @@ use DateTime;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use App\Entity\Application;
+use App\Entity\Posting;
 use App\Repository\AccountRepository;
 use Twig\Extension\AbstractExtension;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -27,6 +28,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('status_label', [$this, 'statusLabel']),
+            new TwigFilter('posting_status_Label', [$this, 'postingStatusLabel']),
         ];
     }
 
@@ -57,6 +59,23 @@ class AppExtension extends AbstractExtension
                 return '<i class="h6 bi mx-2 bi-circle-fill small text-primary"></i>';
             case Application::STATUS_PENDING :
                 return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
+            default:
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
+        }
+    }
+
+
+    public function postingStatusLabel(string $status = NULL): string
+    {
+        switch ($status) {
+            case Posting::STATUS_PUBLISHED :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-green"></i>';
+            case Posting::STATUS_ARCHIVED :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-primary"></i>';
+            case Posting::STATUS_DRAFT :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
+            case Posting::STATUS_UNPUBLISHED :
+                return '<i class="h6 bi mx-2 bi-circle-fill small text-danger"></i>';
             default:
                 return '<i class="h6 bi mx-2 bi-circle-fill small text-warning"></i>';
         }

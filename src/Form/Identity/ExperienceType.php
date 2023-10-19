@@ -36,6 +36,8 @@ class ExperienceType extends AbstractType
                 'label' => 'app_identity_expert_step_two.experience.endDate',
                 'widget' => 'single_text',  
                 'format' => 'yyyy-MM-dd',   
+                'data' => new \DateTime('now'),
+                'required' => false,
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'app_identity_expert_step_two.experience.description',

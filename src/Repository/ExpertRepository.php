@@ -21,20 +21,58 @@ class ExpertRepository extends ServiceEntityRepository
         parent::__construct($registry, Expert::class);
     }
 
-//    /**
-//     * @return Expert[] Returns an array of Expert objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Expert[] Returns an array of Expert objects
+    */
+   public function findValidExperts(): array
+   {
+       return $this->createQueryBuilder('e')
+            ->leftJoin('e.identity', 'i')
+            ->andWhere('i.fileName <> :defaultAvatar') 
+            ->setParameter('defaultAvatar', 'avatar-default.jpg')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+       ;
+   }
+
+
+   /**
+    * @return Experts[] Returns an array of Posting objects
+    */
+    public function findByQuery(string $query): array
+    {
+         if(empty($query)){
+             return [];
+         }
+         
+         $keywords = array_filter(explode(' ', $query));
+         $parameters = [];
+     
+         $conditions = [];
+         foreach ($keywords as $key => $keyword) {
+             $conditions[] = '(e.title LIKE :query' . $key . 
+                             ' OR e.mainSkills LIKE :query' . $key . 
+                             ' OR u.firstName LIKE :query' . $key . 
+                             ' OR u.lastName LIKE :query' . $key . 
+                             ' OR e.aspiration LIKE :query' . $key . 
+                             ' OR sec.name LIKE :query' . $key . ')';
+             $parameters['query' . $key] = '%' . $keyword . '%';
+         }
+ 
+         $qb = $this->createQueryBuilder('e');
+ 
+         $qb->select('e')
+             ->leftJoin('e.sectors', 'sec')
+             ->leftJoin('e.identity', 'ide')
+             ->leftJoin('ide.user', 'u')
+             ->andWhere(implode(' OR ', $conditions))
+             ->setParameters($parameters)
+             ->orderBy('e.id', 'ASC');
+ 
+         return $qb->getQuery()->getResult();
+ 
+    }
 
 //    public function findOneBySomeField($value): ?Expert
 //    {

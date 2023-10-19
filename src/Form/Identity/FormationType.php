@@ -22,23 +22,23 @@ class FormationType extends AbstractType
             ->add('level', TextType::class, [
                 'label' => 'app_identity_expert_step_two.formation.level',
             ])
-            // ->add('description', TextareaType::class, [
-            //     'label' => 'app_identity_expert_step_two.formation.description',
-            //     'required' => false,
-            //     'attr' => [
-            //         'rows' => 6
-            //     ]
+            ->add('description', TextareaType::class, [
+                'label' => 'app_identity_expert_step_two.formation.description',
+                'required' => false,
+                'attr' => [
+                    'rows' => 6
+                ]
+            ])
+            // ->add('startDate', DateType::class,  [
+            //     'label' => 'app_identity_expert_step_two.formation.startDate',
+            //     'widget' => 'single_text',  
+            //     'format' => 'yyyy-MM-dd',   
             // ])
-            ->add('startDate', DateType::class,  [
-                'label' => 'app_identity_expert_step_two.formation.startDate',
-                'widget' => 'single_text',  
-                'format' => 'yyyy-MM-dd',   
-            ])
-            ->add('endDate', DateType::class,  [
-                'label' => 'app_identity_expert_step_two.formation.endDate',
-                'widget' => 'single_text',  
-                'format' => 'yyyy-MM-dd',   
-            ])
+            // ->add('endDate', DateType::class,  [
+            //     'label' => 'app_identity_expert_step_two.formation.endDate',
+            //     'widget' => 'single_text',  
+            //     'format' => 'yyyy-MM-dd',   
+            // ])
             ->add('submit', SubmitType::class, [
                 'label' => 'app_identity_expert_step_two.skill.submit',
                 'attr' => [
