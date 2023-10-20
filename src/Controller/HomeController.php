@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Expert;
+use App\Repository\ExpertRepository;
 use App\Repository\SectorRepository;
 use App\Repository\PostingRepository;
 use App\Repository\IdentityRepository;
@@ -18,6 +19,7 @@ class HomeController extends AbstractController
     public function __construct(
         private PostingRepository $postingRepository,
         private IdentityRepository $identityRepository,
+        private ExpertRepository $expertRepository,
         private SectorRepository $sectorRepository,
         private PostingService $postingService,
         private ExpertService $expertService,
@@ -29,7 +31,7 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'sectors' => $this->sectorRepository->findAll(),
-            'experts' => $this->identityRepository->findSearch(),
+            'experts' => $this->expertRepository->findTopExperts(),
             'topRanked' => $this->identityRepository->findTopRanked(),
             'postings' => $this->postingRepository->findValid(),
         ]);
