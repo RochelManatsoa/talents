@@ -74,13 +74,20 @@ class ExpertRepository extends ServiceEntityRepository
  
     }
 
-//    public function findOneBySomeField($value): ?Expert
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Expert[] Returns an array of Expert objects
+     */
+    public function findTopExperts(string $value = "", int $max = 10, int $offset = 0): array
+    {
+        return $this->createQueryBuilder('e')
+             ->leftJoin('e.identity', 'i')
+             ->andWhere('i.fileName <> :defaultAvatar') 
+             ->setParameter('defaultAvatar', 'avatar-default.jpg')
+             ->orderBy('e.id', 'ASC')
+             ->setMaxResults($max)
+             ->setFirstResult($offset)
+             ->getQuery()
+             ->getResult()
+        ;
+    }
 }

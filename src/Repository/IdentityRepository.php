@@ -51,7 +51,7 @@ class IdentityRepository extends ServiceEntityRepository
             ->leftJoin('i.views', 'v')  
             ->groupBy('i')
             ->orderBy('num_views', 'DESC') 
-            ->setMaxResults(4)
+            ->setMaxResults(12)
             ->getQuery()
             ->getResult()
         ;

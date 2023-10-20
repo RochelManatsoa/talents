@@ -65,6 +65,9 @@ app_home_experts:
     keywords: "experts, professionnels, freelance, talents, Madagascar, francophone"
     see_all: "Tout voir"
 
+app_connect:
+    menu: Tableau de bord
+
 app_home_posting:
     menu: "Trouver une offre"
     title: "Publiez votre Projet - Top 1 Plateforme d'Emploi et Freelance Francophone & Malagache"
