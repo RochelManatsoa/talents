@@ -28,21 +28,9 @@ class UserService
         return $this->identityRepository->findOneBy(['user' => $this->security->getUser()]);
     }
 
-    public function storeCurrentURI()
+    public function storeCurrentURI(string $redirect)
     {
-        $currentRequest = $this->requestStack->getCurrentRequest();
-        
-        // dd($currentRequest);
-        // Si la requête actuelle est la page de connexion
-        if ($currentRequest && $currentRequest->getPathInfo() == '/login') { 
-            // Obtenez la requête parente (précédente)
-            $parentRequest = $this->requestStack->getParentRequest();
-        }
-            
-        if ($parentRequest) {
-            $uri = $parentRequest->getUri();
-            $this->requestStack->getSession()->set('redirect_uri_after_registration', $uri);
-        }
+        $this->requestStack->getSession()->set('redirect_uri_after_registration', $redirect);
     }
 
     public function getStoredURI(): ?string

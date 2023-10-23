@@ -75,15 +75,7 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, UserRepository $userRepository, TokenStorageInterface $tokenStorage): Response
     {
-        dump($this->postingService->getPostingSession());
-        dump($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
         $id = $request->query->get('id');
-        $originalURI = $this->userService->getStoredURI();
-    
-        if ($originalURI) {
-            $this->userService->removeStoredURI('original_uri_before_registration');
-            return $this->redirect($originalURI);
-        }
 
         if (null === $id) {
             return $this->redirectToRoute('app_register');
@@ -110,18 +102,7 @@ class RegistrationController extends AbstractController
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
-
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $session = $request->getSession();
-            $targetPath = $session->get('_security.main.target_path');
-        }
-        $redirectURI = $this->userService->getStoredURI();
-        if ($redirectURI) {
-            $this->userService->storeCurrentURI(null); // ou $this->session->remove('redirect_uri_after_registration');
-            return $this->redirect($redirectURI);
-        }
-        // dd($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
+        
         return $this->redirectToRoute('app_connect');
     }
 }
