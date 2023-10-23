@@ -85,6 +85,8 @@ class IdentityController extends AbstractController
     #[Route('/identity/company', name: 'app_identity_company')]
     public function company(Request $request): Response
     {
+        dump($this->userService->getStoredURI());
+        dump($this->requestStack->getCurrentRequest()->getSession());
         $identity = $this->userService->getCurrentIdentity();
         $compagny = $identity->getCompany();
 
@@ -264,9 +266,14 @@ class IdentityController extends AbstractController
     {
         dump($this->postingService->getPostingSession());
         $redirect = $this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path');
+        $originalURI = $this->userService->getStoredURI();
+    
+        if ($originalURI) {
+            $this->userService->removeStoredURI('original_uri_before_registration');
+            return $this->redirectToRoute($originalURI);
+        }
         if($redirect){
-            // $this->requestStack->getSession()->remove('original_uri_before_registration');
-            return $this->redirect($redirect);
+            return $this->redirectToRoute($redirect);
         }
         return $this->render('identity/confirmation.html.twig', [
             'controller_name' => 'IdentityController',

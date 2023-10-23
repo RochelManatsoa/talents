@@ -10,6 +10,7 @@ use App\Repository\PostingRepository;
 use App\Service\Expert\ExpertService;
 use App\Repository\IdentityRepository;
 use App\Service\Posting\PostingService;
+use App\Service\User\UserService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +25,7 @@ class HomeController extends AbstractController
         private SectorRepository $sectorRepository,
         private PostingService $postingService,
         private ExpertService $expertService,
+        private UserService $userService,
     ){
     }
 
@@ -120,6 +122,7 @@ class HomeController extends AbstractController
     {
         if ($identity->getExpert()) {
             $this->expertService->add($identity->getExpert()->getId());
+            $this->userService->storeCurrentURI('app_dashboard_company_profile');
             if (!$this->getUser()) { 
                 return $this->redirectToRoute('app_login'); 
             }

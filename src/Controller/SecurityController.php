@@ -33,8 +33,8 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $this->userService->storeCurrentURI();
         dump($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
+        dump($this->requestStack->getCurrentRequest()->getSession()->get('redirect_uri_after_registration'));
         dump($this->postingService->getPostingSession());
         dump($this->expertService->getExpertSession());
         if ($this->getUser()) {
