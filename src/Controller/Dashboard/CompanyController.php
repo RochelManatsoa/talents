@@ -14,6 +14,7 @@ use App\Service\User\UserService;
 use App\Form\PostingType as Annonce;
 use App\Form\Search\ExpertSearchType;
 use App\Repository\IdentityRepository;
+use App\Service\Expert\ExpertService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,7 @@ class CompanyController extends AbstractController
 {
     public function __construct(
         private UserService $userService,
+        private ExpertService $expertService,
         private EntityManagerInterface $em,
         private PostingManager $postingManager,
         private IdentityRepository $identityRepository,
@@ -149,7 +151,7 @@ class CompanyController extends AbstractController
 
         return $this->render('dashboard/company/profile/index.html.twig', [
             'company' => $company,
-            'expertsDefault' => $this->expertManager->allExpert(),
+            'expertsDefault' => array_merge($this->expertService->getExpertSession(), $this->expertManager->allExpert()),
             'form' => $form->createView(),
             'experts' => $experts,
             'expertsAll' => $this->identityRepository->findSearch(),

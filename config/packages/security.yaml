@@ -23,6 +23,7 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+                invalidate_session: true # Ceci va effacer la session
 
             remember_me:
                 secret: '%kernel.secret%'

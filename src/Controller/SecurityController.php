@@ -6,6 +6,7 @@ use App\Entity\Expert;
 use App\Entity\Account;
 use App\Entity\Company;
 use App\Entity\Identity;
+use App\Service\Expert\ExpertService;
 use Symfony\Component\Mime\Email;
 use App\Service\Posting\PostingService;
 use App\Service\User\UserService;
@@ -23,6 +24,7 @@ class SecurityController extends AbstractController
 {
     public function __construct(
         private PostingService $postingService,
+        private ExpertService $expertService,
         private UserService $userService,
         private RequestStack $requestStack
     ){
@@ -34,6 +36,7 @@ class SecurityController extends AbstractController
         $this->userService->storeCurrentURI();
         dump($this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path'));
         dump($this->postingService->getPostingSession());
+        dump($this->expertService->getExpertSession());
         if ($this->getUser()) {
             return $this->redirectToRoute('app_connect');
         }
