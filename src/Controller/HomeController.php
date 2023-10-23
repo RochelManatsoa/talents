@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Expert;
+use App\Entity\Identity;
 use App\Repository\ExpertRepository;
 use App\Repository\SectorRepository;
 use App\Repository\PostingRepository;
-use App\Repository\IdentityRepository;
 use App\Service\Expert\ExpertService;
+use App\Repository\IdentityRepository;
 use App\Service\Posting\PostingService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -115,10 +116,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/view/{username}', name: 'app_home_form_expert')]
-    public function formExpert(Request $request, Expert $expert): Response
+    public function formExpert(Request $request, Identity $identity): Response
     {
-        if ($expert) {
-            $this->expertService->add($expert->getId());
+        if ($identity->getExpert()) {
+            $this->expertService->add($identity->getExpert()->getId());
             if (!$this->getUser()) { 
                 return $this->redirectToRoute('app_login'); 
             }
