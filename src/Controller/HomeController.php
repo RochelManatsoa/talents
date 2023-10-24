@@ -4,17 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Expert;
 use App\Entity\Identity;
+use App\Service\User\UserService;
 use App\Repository\ExpertRepository;
 use App\Repository\SectorRepository;
 use App\Repository\PostingRepository;
 use App\Service\Expert\ExpertService;
 use App\Repository\IdentityRepository;
+use App\Service\Mailer\MailerService;
 use App\Service\Posting\PostingService;
-use App\Service\User\UserService;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 
 class HomeController extends AbstractController
 {
@@ -81,8 +84,20 @@ class HomeController extends AbstractController
     }
 
     #[Route('/legal-mentions', name: 'app_home_legal')]
-    public function legal(): Response
+    public function legal(MailerService $mailer): Response
     {
+        // $email = (new TemplatedEmail())
+        // ->from('support@olona-talents.com')
+        // ->to('test@example.com')
+        // ->subject('Test Email')
+        // ->text('This is a test email.');
+        $mailer->send(
+            "support@olona-talents.com",
+            "test",
+            "test.html.twig",
+            []
+        );
+        
         return $this->render('home/legal.html.twig', [
             'controller_name' => 'HomeController',
         ]);
@@ -129,4 +144,5 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_dashboard_company_profile');
         }
     }
+    
 }

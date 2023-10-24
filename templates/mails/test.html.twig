@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail de confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #EDEDED;
+        }
+        .container {
+            max-width: 550px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .content {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #34A7C1;
+            color: #FFFFFF;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        .info {
+            font-size: 12px;
+            color: #777;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://127.0.0.1:8000/images/logo-olona-talents-black.png" alt="Logo Olona-talents" width="100">
+        </div>
+        <div class="content">
+            <p>Bonjour [Prénom de l'utilisateur],</p>
+            <p>Merci de vous joindre à Olona-talents.com. Nous sommes ravis de vous accueillir parmi nous!</p>
+            <p>Juste une étape de plus pour commencer : </p>
+            <a href="#" class="button">Confirmer mon inscription</a>
+            <p>Après confirmation, découvrez les talents exceptionnels et explorez tout ce que nous avons à offrir.</p>
+            <p class="info">Besoin d'aide ? Contactez-nous à [adresse email de support] ou au [numéro de téléphone].</p>
+        </div>
+        <div class="footer">
+            <a href="#">Politique de confidentialité</a>
+        </div>
+    </div>
+</body>
+</html>
