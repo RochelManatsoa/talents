@@ -60,8 +60,9 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('support@olona-talents.com', 'Olona Talents'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Bienvenue sur Olona Talent, veuillez confirmer votre mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->context(['user' => $user])
             );
             // do anything else you need here, like send an email
 

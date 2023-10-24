@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmation de compte</title>
+    <title>Mail de Bienvenue</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* [La même mise en forme que le mail de bienvenue] */
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
@@ -27,7 +26,7 @@
             text-align: center; 
         }
         .header img {
-            width: 250px;
+            width: 250px;  /* Taille du logo ajustée */
         }
         .greeting {
             font-family: 'Poppins', sans-serif;
@@ -37,6 +36,13 @@
         }
         .highlight, .bold {
             font-weight: 700;
+        }
+        .tips {
+            background-color: #FFF3E0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-weight: 500;
         }
         .button {
             display: inline-block;
@@ -69,11 +75,16 @@
         </div>
         <div class="content">
             <p class="greeting">Bonjour {{ user.firstName }},</p>
-            <p>Merci de vous être inscrit sur <span class="highlight">Olona-talents.com</span> !</p>
-            <p>Avant de commencer, veuillez confirmer votre compte en cliquant sur le bouton ci-dessous :</p>
-            <a href="{{ confirmationUrl|raw }}" class="button">Confirmer mon compte</a>
-            <p>Si vous n'avez pas créé de compte sur Olona-talents.com, veuillez ignorer ce courriel.</p>
-            <p class="info">Besoin d'aide ? Écrivez-nous à <a href="mailto:contact@olona-talents.com">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456">+261340123456</a>.</p>
+            <p>Bienvenue à <span class="highlight">Olona-talents.com</span> ! 🚀</p>
+            <p>Nous sommes <span class="highlight">ravis</span> que vous ayez choisi notre plateforme pour booster votre carrière ou trouver le talent parfait pour votre entreprise.</p>
+            <a href="{{ signedUrl|raw }}" class="button">Démarrer mon aventure</a>
+            <div class="tips">
+                <strong>Tip du Jour :</strong>
+                <p><span class="bold">🔍 Côté recruteur :</span> N'oubliez pas que les <span class="highlight">premières impressions</span> comptent. Assurez-vous que votre annonce d'emploi est claire, concise et attrayante pour attirer les bons candidats.</p>
+                <p><span class="bold">🌟 Côté candidat :</span> Personnalisez toujours votre lettre de motivation pour chaque poste auquel vous postulez. Cela montre que vous avez fait vos recherches et que vous êtes vraiment intéressé.</p>
+            </div>
+            <p>Bonne chance dans vos recherches et n'hésitez pas à <span class="highlight">nous contacter</span> si vous avez des questions ou besoin d'aide.</p>
+            <p class="info">Écrivez-nous à <a href="mailto:contact@olona-talents.com">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456">+261340123456</a>.</p>
         </div>
         <div class="footer">
             <a href="https://olona-talents.com/privacy-policy">Politique de confidentialité</a> | 
