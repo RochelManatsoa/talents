@@ -143,6 +143,11 @@ app_register:
     agree_terms: "<small>En vous inscrivant, vous acceptez nos <a href=\"%terms_url%\">Conditions Générales d'Utilisation</a> et notre <a href=\"%privacy_url%\">Politique de Confidentialité</a>.</small>"
     continue: "Continuer avec "
 
+app_email_sending:
+    title: "Email de confirmation envoyé"
+    description: Nous avons envoyé un email de confirmation à l'adresse que vous avez fourni lors de l'inscription. Veillez consulter votre boîte de reception et suivre les instructions pour activer votre compte.
+    not_received: Si vous n'avez pas reçu l'email, veuillez vérifier vos dossiers spam ou cliquer <a href="%resend_confirmation%">ici</a> pour réenvoyer l'email.
+
 app_forgot_password_request:
     title: "Réinitialisez votre mot de passe"
     link: "Mot de passe oublié?"
@@ -150,6 +155,9 @@ app_forgot_password_request:
     description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
     keywords: "freelance, project, talent"
     button: "Envoyer l'email de réinitialisation du mot de passe"
+    new_password: Nouveau mot de passe
+    repeat: Répetez le nouveau mot de passe
+    not_received: Si vous ne recevez pas d'email, veuillez vérifier votre dossier de spams ou <a href="%resend_reset_password%"> réessayer </a>.
 
 app_check_email:
     title: "Email de réinitialisation du mot de passe envoyé"

@@ -14,13 +14,15 @@ use App\Form\Step\StepTreeType;
 use App\Manager\IdentityManager;
 use App\Form\AccountIdentityType;
 use App\Service\User\UserService;
+use App\Service\Mailer\MailerService;
 use App\Service\Posting\PostingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class IdentityController extends AbstractController
 {
@@ -30,6 +32,7 @@ class IdentityController extends AbstractController
         private IdentityManager $identityManager,
         private PostingService $postingService,
         private RequestStack $requestStack,
+        private UrlGeneratorInterface $urlGenerator,
     ){
     }
     
@@ -57,7 +60,7 @@ class IdentityController extends AbstractController
     }
 
     #[Route('/identity/account', name: 'app_identity_account')]
-    public function account(Request $request): Response
+    public function account(Request $request, MailerService $mailerService): Response
     {
         dump($this->postingService->getPostingSession());
         $identity = $this->userService->getCurrentIdentity();
@@ -71,6 +74,15 @@ class IdentityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $identity = $this->identityManager->saveForm($form);
+            $mailerService->send(
+                $identity->getUser()->getEmail(),
+                "Bienvenue sur Olona Talents",
+                "welcome.html.twig",
+                [
+                    'user' => $identity->getUser(),
+                    'dashboard_url' => $this->urlGenerator->generate('app_connect', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                ]
+            );
             if($identity->getAccount()->getSlug() !== "expert" ) return $this->redirectToRoute('app_identity_company', []);
             
             return $this->redirectToRoute('app_identity_expert_step_one', []);
