@@ -25,8 +25,8 @@
     </head>
     <body style="background:black;" class="container-fluid">
         {% block header %} {% include "parts/_navbar.html.twig" %} {% endblock %}
-        <div class="min-vh-100 bg-black text-white mt-5">
-            {% block fluid %}<div class="container mt-5">{% endblock %}            
+        <div class="bg-black text-white mt-auto mb-auto">
+            {% block fluid %}<div class="container">{% endblock %}            
                 {% block body %}{% endblock %}
             </div>
         </div>

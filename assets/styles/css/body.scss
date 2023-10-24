@@ -17,7 +17,7 @@ a{
     flex: 1;
     padding-top: 200px; /* Ajustez cette valeur en fonction de la hauteur de votre navbar. */
 }
-#footer a, #login a{
+#footer a, #login a, #register label a{
     color: $indigo!important;
     text-decoration: none;
 }
@@ -119,4 +119,10 @@ label.form-check-label.required{
 }
 .modal-body ul li{
     list-style: none!important;
+}
+#button-text a{
+    color: black!important;
+}
+.text-right{
+    text-align: right!important;
 }
