@@ -84,20 +84,8 @@ class HomeController extends AbstractController
     }
 
     #[Route('/legal-mentions', name: 'app_home_legal')]
-    public function legal(MailerService $mailer): Response
-    {
-        // $email = (new TemplatedEmail())
-        // ->from('support@olona-talents.com')
-        // ->to('test@example.com')
-        // ->subject('Test Email')
-        // ->text('This is a test email.');
-        $mailer->send(
-            "support@olona-talents.com",
-            "test",
-            "test.html.twig",
-            []
-        );
-        
+    public function legal(): Response
+    {        
         return $this->render('home/legal.html.twig', [
             'controller_name' => 'HomeController',
         ]);
