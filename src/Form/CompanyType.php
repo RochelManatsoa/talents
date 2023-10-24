@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Sector;
 use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,21 +25,38 @@ class CompanyType extends AbstractType
                 'label' => 'app_identity_company.size',
                 'required' => true,
                 ])
+            ->add('sectors', EntityType::class, [
+                'class' => Sector::class,
+                'label' => 'app_identity_company.sector_multiple',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => false,
+                ])
             ->add('description', TextareaType::class, [
                 'label' => 'app_identity_company.desc',
-                'required' => true,
+                'required' => false,
                 'attr' => [
-                    'rows' => 8
+                    'rows' => 8,
+                    'placeholder' => "200 à 300 caractères"
                 ]
             ])
-            ->add('website', TextType::class, ['label' => 'app_identity_company.website',])
+            ->add('website', TextType::class, [
+                'label' => 'app_identity_company.website',
+                'required' => false,
+            ])
             ->add('country', CountryType::class, [
                 'label' => 'app_identity_company.country',
-                'required' => false,
+                'required' => true,
                 'placeholder' => 'app_identity_company.select',
             ])
-            ->add('email', EmailType::class, ['label' => 'app_identity_company.email',])
-            ->add('phone', TextType::class, ['label' => 'app_identity_company.phone',])
+            ->add('email', EmailType::class, [
+                'label' => 'app_identity_company.email',
+                'required' => true,
+            ])
+            ->add('phone', TextType::class, [
+                'label' => 'app_identity_company.phone',
+                'required' => true,
+            ])
         ;
     }
 

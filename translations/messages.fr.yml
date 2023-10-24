@@ -130,10 +130,10 @@ app_logout:
     menu: "Deconnexion"
     
 app_register:
-    menu: "S'inscrire"
+    menu: Créer mon compte
     title: "Inscription à Olona-talents.com"
     description: "Créez votre compte professionnel et accédez à une plateforme dédiée aux talents francophones et malgaches."
-    already_member: Déjà membre ? <a href=\"%terms_url%\">Connectez-vous ici</a>.
+    already_member: Déjà membre ? <a href=%login_url%>Connectez-vous ici</a>
     keywords: "freelance, project, talent"
     email: "Adresse éléctronique"
     first_name: "Nom *"
@@ -185,11 +185,12 @@ app_identity_company:
     keywords: "freelance, project, talent"
     name: "Nom de l'entreprise *"
     size: "Taille de l'entreprise"
-    country: "Localisation"
-    desc: "Compétences recherchées"
-    budget: "Budget pour le poste/projet"
-    email: "Adresse mail"
-    phone: "Téléphone"
+    country: Pays *
+    sector_multiple: "Secteur d'expertise (Utilisez Ctrl pour faire un choix multiple)"
+    desc: Decrivez votre entreprise en quelques ligne
+    budget: Budget pour le poste/projet
+    email: "Adresse mail *"
+    phone: "Téléphone *"
     select: "Séléctionner"
     website: "Site Web"
     project: "Description du poste ou du projet"
