@@ -75,7 +75,8 @@ class ExpertType extends AbstractType
             ->add('birthday', DateType::class, [
                 'label' => 'Votre anniversaire',
                 'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
-                'years' => range(1970, 2010)
+                'years' => range(1970, 2010),
+                'attr' => ['class' => 'rounded-pill'] 
             ])
         ;
     }

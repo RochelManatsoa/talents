@@ -47,8 +47,10 @@
                 
                 <div class="row mb-4">
                     {{ form_label(form.expert.birthday) }}
-                    <div class="col-sm-8">
-                        {{ form_widget(form.expert.birthday, {'attr': {'class': 'rounded-pill form-control'}}) }}
+                    <div class="col-sm-8 d-flex">
+                    {{ form_widget(form.expert.birthday.day, {'attr': {'class': 'custom-rounded-start', 'style':'width:33%'}}) }}
+                    {{ form_widget(form.expert.birthday.month, {'attr': {'class': 'custom-rounded-middle', 'style':'width:33%'}}) }}
+                    {{ form_widget(form.expert.birthday.year, {'attr': {'class': 'custom-rounded-end', 'style':'width:33%'}}) }}
                     </div>
                 </div>
             </div>

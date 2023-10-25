@@ -281,13 +281,10 @@ class IdentityController extends AbstractController
         dump($this->postingService->getPostingSession());
         $redirect = $this->requestStack->getCurrentRequest()->getSession()->get('_security.main.target_path');
         $originalURI = $this->userService->getStoredURI();
-    
+        
         if ($originalURI) {
             $this->userService->removeStoredURI('original_uri_before_registration');
             return $this->redirectToRoute($originalURI);
-        }
-        if($redirect){
-            return $this->redirectToRoute($redirect);
         }
         return $this->render('identity/confirmation.html.twig', [
             'controller_name' => 'IdentityController',
