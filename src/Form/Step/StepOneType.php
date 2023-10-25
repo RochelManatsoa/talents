@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class StepOneType extends AbstractType
 {
@@ -16,12 +17,10 @@ class StepOneType extends AbstractType
     {
         $builder
             ->add('user', UserType::class, ['label' => false])
-            ->add('file', VichImageType::class, [
+            ->add('file', FileType::class, [
                 'required' => false,
                 'label' => 'app_identity_expert_step_one.avatar',
-                'download_label' => false,
-                'attr' => ['class' => 'rounded-pill'],
-                'allow_delete' => false
+                'attr' => ['class' => 'd-none'],
             ])
             ->add('expert', ExpertType::class, ['label' => false])
         ;

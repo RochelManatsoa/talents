@@ -73,11 +73,9 @@ class ExpertType extends AbstractType
                 'required' => false,
             ])
             ->add('birthday', DateType::class, [
-                'label' => 'app_identity_expert.birthday',
-                'widget' => 'single_text', 
-                'format' => 'yyyy-MM-dd', 
+                'label' => 'Votre anniversaire',
                 'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
-                'required' => false,
+                'years' => range(1970, 2010)
             ])
         ;
     }

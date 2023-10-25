@@ -18,6 +18,7 @@
 /* L'input doit apparaître après l'image */
 .vich-image input {
     order: 2;
+    display: none;
 }
 .vich-image img{
     border-radius: 50%;        /* Rend l'image complètement arrondie */
@@ -33,4 +34,10 @@
 }
 #step_one_file_file{
     margin-top: 1.5rem;
+}
+#step_one_expert_birthday_day, #step_one_expert_birthday_month, #step_one_expert_birthday_year{
+    border: 0 !important;
+}
+#step-one .rounded-circle{
+    border: 7px solid lightgray;
 }

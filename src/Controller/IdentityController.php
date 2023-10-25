@@ -6,6 +6,7 @@ use App\Entity\Expert;
 use App\Entity\Company;
 use App\Entity\Identity;
 use App\Form\ExpertType;
+use App\Entity\Candidate;
 use App\Form\CompanyType;
 use App\Form\IdentityType;
 use App\Form\Step\StepOneType;
@@ -13,6 +14,7 @@ use App\Form\Step\StepTwoType;
 use App\Form\Step\StepTreeType;
 use App\Manager\IdentityManager;
 use App\Form\AccountIdentityType;
+use App\Form\CandidateType;
 use App\Service\User\UserService;
 use App\Service\Mailer\MailerService;
 use App\Service\Posting\PostingService;
@@ -289,6 +291,23 @@ class IdentityController extends AbstractController
         }
         return $this->render('identity/confirmation.html.twig', [
             'controller_name' => 'IdentityController',
+        ]);
+    }
+
+    #[Route('/identity/candidate', name: 'app_identity_candidate')]
+    public function candidate(Request $request): Response
+    {
+        $candidate = new Candidate();
+        $form = $this->createForm(CandidateType::class, $candidate, []);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $identity = $this->identityManager->saveForm($form);
+
+            return $this->redirectToRoute('app_identity_confirmation', []);
+        }
+
+        return $this->render('identity/candidate.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
