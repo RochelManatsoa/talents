@@ -4,86 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation de compte</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* [La même mise en forme que le mail de bienvenue] */
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #EDEDED;
-        }
-        a {
-            text-decoration: none;
-            color: #0D6EFD;
-        }
-        .container {
-            max-width: 550px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 6px 10px rgba(0,0,0,0.05);
-            text-align: center; 
-        }
-        .header img {
-            width: 250px;
-        }
-        .greeting {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .highlight, .bold {
-            font-weight: 700;
-        }
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #0D6EFD;
-            color: #FFFFFF;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        a .button{
-            text-decoration: none;
-            color: #FFFFFF;
-        }
-        .info {
-            font-size: 12px;
-            color: #777;
-        }
-        .footer {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F2F2F2;
-            padding: 15px 0;
-            font-size: 12px;
-            color: #666;
-            margin-top: 25px;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="https://olona-talents.com/images/logo-light150x150.png" alt="Logo Olona-talents">
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #EDEDED;">
+    <div style="max-width: 550px; margin: 0 auto; background-color: #FFFFFF; padding: 25px; border-radius: 10px; text-align: center;">
+        <div>
+            <img src="https://olona-talents.com/images/logo-light150x150.png" alt="Logo Olona-talents" style="width: 250px;">
         </div>
-        <div class="content">
-            <p class="greeting">Bonjour {{ user.firstName }},</p>
-            <p>Merci de vous être inscrit sur <span class="highlight">Olona-talents.com</span> !</p>
+        <div>
+            <p style="font-weight: 700; font-size: 1.2em;">Bonjour {{ user.firstName }},</p>
+            <p>Merci de vous être inscrit sur Olona-talents.com !</p>
             <p>Avant de commencer, veuillez confirmer votre compte en cliquant sur le bouton ci-dessous :</p>
-            <a href="{{ signedUrl|raw }}" class="button">Confirmer mon compte</a>
+            <a href="{{ signedUrl|raw }}" style="display: inline-block; padding: 12px 24px; background-color: #0D6EFD; color: #FFFFFF; border-radius: 5px; text-decoration: none; font-weight: 500;">Confirmer mon compte</a>
             <p>Si vous n'avez pas créé de compte sur Olona-talents.com, veuillez ignorer ce courriel.</p>
-            <p class="info">Besoin d'aide ? Écrivez-nous à <a href="mailto:contact@olona-talents.com">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456">+261340123456</a>.</p>
+            <p style="font-size: 12px; color: #777;">Besoin d'aide ? Écrivez-nous à <a href="mailto:contact@olona-talents.com" style="text-decoration: none; color: #0D6EFD;">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456" style="text-decoration: none; color: #0D6EFD;">+261340123456</a>.</p>
         </div>
-        <div class="footer">
-            <a href="https://olona-talents.com/privacy-policy">Politique de confidentialité</a> | 
-            <a href="https://olona-talents.com/terms-of-service">Conditions d'utilisation</a> | 
-            <a href="https://olona-talents.com/cookie-policy">Politique de cookies</a> | 
-            <a href="https://olona-talents.com/data-request">Demande de données</a>
+        <div style="font-size: 12px; color: #666; margin-top: 25px;">
+            <a href="https://olona-talents.com/privacy-policy" style="text-decoration: none; color: #0D6EFD;">Politique de confidentialité</a> | 
+            <a href="https://olona-talents.com/terms-of-service" style="text-decoration: none; color: #0D6EFD;">Conditions d'utilisation</a> | 
+            <a href="https://olona-talents.com/cookie-policy" style="text-decoration: none; color: #0D6EFD;">Politique de cookies</a> | 
+            <a href="https://olona-talents.com/data-request" style="text-decoration: none; color: #0D6EFD;">Demande de données</a>
         </div>
     </div>
 </body>
