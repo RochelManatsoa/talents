@@ -4,97 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mail de Bienvenue</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #EDEDED;
-        }
-        a {
-            text-decoration: none;
-            color: #0D6EFD;
-        }
-        .container {
-            max-width: 550px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 6px 10px rgba(0,0,0,0.05);
-            text-align: center; 
-        }
-        .header img {
-            width: 250px;  /* Taille du logo ajustée */
-        }
-        .greeting {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .highlight, .bold {
-            font-weight: 700;
-        }
-        .tips {
-            background-color: #FFF3E0;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #0D6EFD;
-            color: #FFFFFF;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        a .button{
-            text-decoration: none;
-            color: #FFFFFF;
-        }
-        .info {
-            font-size: 12px;
-            color: #777;
-        }
-        .footer {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F2F2F2;
-            padding: 15px 0;
-            font-size: 12px;
-            color: #666;
-            margin-top: 25px;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img src="https://olona-talents.com/images/logo-light150x150.png" alt="Logo Olona-talents">
+<body style="font-family: 'Open Sans', Arial, sans-serif; margin: 0; padding: 20px; background-color: #EDEDED;">
+    <div style="max-width: 550px; margin: 0 auto; background-color: #FFFFFF; padding: 25px; border-radius: 10px; box-shadow: 0 6px 10px rgba(0,0,0,0.05); text-align: center;">
+        <div style="text-align: center;">
+            <img src="https://olona-talents.com/images/logo-light150x150.png" alt="Logo Olona-talents" style="width: 250px;">
         </div>
-        <div class="content">
-            <p class="greeting">Bonjour {{ user.firstName }},</p>
-            <p>Bienvenue à <span class="highlight">Olona-talents.com</span> ! 🚀</p>
-            <p>Nous sommes <span class="highlight">ravis</span> que vous ayez choisi notre plateforme pour booster votre carrière ou trouver le talent parfait pour votre entreprise.</p>
-            <a href="{{ dashboard_url|raw }}" class="button">Démarrer mon aventure</a>
-            <div class="tips">
+        <div>
+            <p style="font-family: 'Poppins', Arial, sans-serif; font-weight: 700; font-size: 1.2em; margin-bottom: 20px;">Bonjour {{ user.firstName }},</p>
+            <p>Bienvenue à <span style="font-weight: 700;">Olona-talents.com</span> ! 🚀</p>
+            <p>Nous sommes <span style="font-weight: 700;">ravis</span> que vous ayez choisi notre plateforme pour booster votre carrière ou trouver le talent parfait pour votre entreprise.</p>
+            <a href="{{ dashboard_url|raw }}" style="display: inline-block; padding: 12px 24px; background-color: #0D6EFD; color: #FFFFFF; border-radius: 5px; text-decoration: none; font-weight: 500; margin-bottom: 20px;">Démarrer mon aventure</a>
+            <div style="background-color: #FFF3E0; padding: 15px; margin: 20px 0; border-radius: 5px; font-weight: 500;">
                 <strong>Tip du Jour :</strong>
-                <p><span class="bold">🔍 Côté recruteur :</span> N'oubliez pas que les <span class="highlight">premières impressions</span> comptent. Assurez-vous que votre annonce d'emploi est claire, concise et attrayante pour attirer les bons candidats.</p>
-                <p><span class="bold">🌟 Côté candidat :</span> Personnalisez toujours votre lettre de motivation pour chaque poste auquel vous postulez. Cela montre que vous avez fait vos recherches et que vous êtes vraiment intéressé.</p>
+                <p><span style="font-weight: 700;">🔍 Côté recruteur :</span> N'oubliez pas que les <span style="font-weight: 700;">premières impressions</span> comptent. Assurez-vous que votre annonce d'emploi est claire, concise et attrayante pour attirer les bons candidats.</p>
+                <p><span style="font-weight: 700;">🌟 Côté candidat :</span> Personnalisez toujours votre lettre de motivation pour chaque poste auquel vous postulez. Cela montre que vous avez fait vos recherches et que vous êtes vraiment intéressé.</p>
             </div>
-            <p>Bonne chance dans vos recherches et n'hésitez pas à <span class="highlight">nous contacter</span> si vous avez des questions ou besoin d'aide.</p>
-            <p class="info">Écrivez-nous à <a href="mailto:contact@olona-talents.com">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456">+261340123456</a>.</p>
+            <p>Bonne chance dans vos recherches et n'hésitez pas à <span style="font-weight: 700;">nous contacter</span> si vous avez des questions ou besoin d'aide.</p>
+            <p style="font-size: 12px; color: #777;">Écrivez-nous à <a href="mailto:contact@olona-talents.com" style="text-decoration: none; color: #0D6EFD;">contact@olona-talents.com</a> ou appelez-nous au <a href="tel:+261340123456" style="text-decoration: none; color: #0D6EFD;">+261340123456</a>.</p>
         </div>
-        <div class="footer">
-            <a href="https://olona-talents.com/privacy-policy">Politique de confidentialité</a> | 
-            <a href="https://olona-talents.com/terms-of-service">Conditions d'utilisation</a> | 
-            <a href="https://olona-talents.com/cookie-policy">Politique de cookies</a> | 
-            <a href="https://olona-talents.com/data-request">Demande de données</a>
+        <div style="font-family: 'Poppins', Arial, sans-serif; background-color: #F2F2F2; padding: 15px 0; font-size: 12px; color: #666; margin-top: 25px;">
+            <a href="https://olona-talents.com/privacy-policy" style="text-decoration: none; color: #0D6EFD;">Politique de confidentialité</a> | 
+            <a href="https://olona-talents.com/terms-of-service" style="text-decoration: none; color: #0D6EFD;">Conditions d'utilisation</a> | 
+            <a href="https://olona-talents.com/cookie-policy" style="text-decoration: none; color: #0D6EFD;">Politique de cookies</a> | 
+            <a href="https://olona-talents.com/data-request" style="text-decoration: none; color: #0D6EFD;">Demande de données</a>
         </div>
     </div>
 </body>
