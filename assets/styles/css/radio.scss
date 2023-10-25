@@ -40,3 +40,23 @@
     width: auto;
     margin-top: 1rem;
 }
+/* Arrondir le début (le côté gauche pour les langues LTR) */
+.custom-rounded-start {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+/* Arrondir la fin (le côté droit pour les langues LTR) */
+.custom-rounded-end {
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+/* Arrondir la fin (le côté droit pour les langues LTR) */
+.custom-rounded-middle {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
