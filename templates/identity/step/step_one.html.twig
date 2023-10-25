@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<section id="hero" class="" style="background-color: black;">
+<section id="step-one" class="" style="background-color: black;">
     <div class="container">
         <h1 class="h1 text-center pt-4 text-white font-bold">
             {{ 'app_identity_expert_step_one.title'|trans }}
@@ -30,8 +30,10 @@
                         {{ form_label(form.file) }}
                         {{ 'app_identity_expert_step_one.avatar_desc'|trans }}
                     </div>
-                    <div class="col-sm-8">
-                        {{ form_widget(form.file) }}
+                    <div class="col-sm-8 text-center">
+
+                    <img src="{{ form.vars.data.fileName ? asset('uploads/experts/' ~ form.vars.data.fileName) : defaultAvatar }}" class="rounded-circle profile-img" width="150" height="150" alt="Avatar">
+                    {{ form_widget(form.file) }}
                     </div>
                 </div>
                 <hr class="my-2 mb-4">
@@ -46,7 +48,7 @@
                 <div class="row mb-4">
                     {{ form_label(form.expert.birthday) }}
                     <div class="col-sm-8">
-                        {{ form_widget(form.expert.birthday, {'attr': {'class': 'rounded-pill'}}) }}
+                        {{ form_widget(form.expert.birthday, {'attr': {'class': 'rounded-pill form-control'}}) }}
                     </div>
                 </div>
             </div>
@@ -73,4 +75,20 @@
     </div>
 </section>
 
+
+<script>
+    document.querySelector('.profile-img').addEventListener('click', function() {
+        document.getElementById('{{ form.file.vars.id }}').click();
+    });
+
+    document.getElementById('{{ form.file.vars.id }}').addEventListener('change', function(event) {
+        if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector('.profile-img').src = e.target.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    });
+</script>
 {% endblock %}
