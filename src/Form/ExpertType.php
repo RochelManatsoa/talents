@@ -24,7 +24,7 @@ class ExpertType extends AbstractType
             ->add('country', CountryType::class, [
                 'label' => 'app_identity_expert.localisation',
                 'required' => false,
-                'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
+                'label_attr' => ['class' => 'col-form-label'],
                 'placeholder' => 'app_identity_expert.select',
             ])
             ->add('title', TextType::class, [
