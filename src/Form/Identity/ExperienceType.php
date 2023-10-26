@@ -2,6 +2,7 @@
 
 namespace App\Form\Identity;
 
+use DateTime;
 use App\Entity\Identity\Experience;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,13 +30,13 @@ class ExperienceType extends AbstractType
             ])
             ->add('startDate', DateType::class,  [
                 'label' => 'app_identity_expert_step_two.experience.startDate',
-                'widget' => 'single_text',  
-                'format' => 'yyyy-MM-dd',   
+                'years' => range(1950, (new \DateTime('now'))->format("Y")),
+                'attr' => ['class' => 'rounded-pill'] 
             ])
             ->add('endDate', DateType::class,  [
                 'label' => 'app_identity_expert_step_two.experience.endDate',
-                'widget' => 'single_text',  
-                'format' => 'yyyy-MM-dd',   
+                'years' => range(1950, 2100),
+                'attr' => ['class' => 'rounded-pill'] ,
                 'data' => new \DateTime('now'),
                 'required' => false,
             ])

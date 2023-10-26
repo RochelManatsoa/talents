@@ -35,6 +35,9 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $level = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $currently = null;
+
     public function __construct()
     {
         $this->identity = new ArrayCollection();
@@ -130,6 +133,18 @@ class Formation
     public function setLevel(?string $level): static
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function isCurrently(): ?bool
+    {
+        return $this->currently;
+    }
+
+    public function setCurrently(?bool $currently): static
+    {
+        $this->currently = $currently;
 
         return $this;
     }

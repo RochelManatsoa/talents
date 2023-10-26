@@ -45,6 +45,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('show_country', [$this, 'showCountry']),
             new TwigFunction('experience_text', [$this, 'getExperienceText']),
             new TwigFunction('date_difference', [$this, 'dateDifference']),
+            new TwigFunction('years_difference', [$this, 'yearsDifference']),
             new TwigFunction('status_label', [$this, 'statusLabel']),
         ];
     }
@@ -177,6 +178,19 @@ class AppExtension extends AbstractExtension
         }
         if ($interval->d > 0) {
             $result .= $interval->d . ' jours';
+        }
+
+        return trim($result);
+    }
+
+    public function yearsDifference(DateTime $date1, DateTime $date2): string
+    {
+        $interval = $date1->diff($date2);
+
+        $result = '';
+
+        if ($interval->y > 0) {
+            $result .= $interval->y . ' années ';
         }
 
         return trim($result);

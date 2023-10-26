@@ -213,7 +213,7 @@ app_identity_expert:
     button: "Enregistrer et continuer"
     name: "Votre titre"
     professionnal: "Titre professionnel *"
-    sector: "Secteur d'expertise"
+    sector: "Secteur d'activité"
     year: "Années d'expérience"
     localisation: "Localisation"
     select: "Séléctionner"
@@ -470,6 +470,7 @@ app_identity_expert_step_two:
         endDate: Fin
         submit: Ajouter
         none: Veuillez ajouter vos formations
+        currently: En cours
     experience: 
         add: Ajouter une experience
         name: Experiences
@@ -491,8 +492,7 @@ app_identity_expert_step_two:
         title: Poste occupé
         company: Entreprise
         description: Description
-        startDate: Début
-        endDate: Fin
+        label: Langues
         submit: Ajouter
         none: Veuillez ajouter les langues que vous maîtrisez
     title: Détails professionnels
