@@ -2,4 +2,42 @@
 {% block sidebar %} {% include "dashboard/_sidebar_expert.html.twig" %} {% endblock %}
 
 {% block body %}
+<div class="row text-dark">
+    <p class="h4">
+        <i class="bi mx-2 bi-person-vcard"></i> 
+        {{ 'app_dashboard_expert_account.personnal_info'|trans }} 
+    </p>
+    <hr>
+    {{ form_start(formInfo)}}
+    <p class="h5">
+        {{ 'app_dashboard_expert_account.general'|trans }} 
+    </p>
+    <div class="row">
+        <div class="col-6">
+            {{ form_widget(formInfo.country)}} 
+        </div>
+        <div class="col-6">
+            {{ form_widget(formInfo.birthday)}} 
+        </div>
+    </div>
+    <p class="h5">
+        {{ 'app_dashboard_expert_account.experiences'|trans }} 
+    </p>
+    <div class="my-3">
+        {{ form_label(formInfo.title)}}         
+        {{ form_widget(formInfo.title)}} 
+    </div>
+    <div class="my-3">
+        {{ form_label(formInfo.years)}}         
+        {{ form_widget(formInfo.years)}} 
+    </div>
+    <p class="h5">
+        {{ 'app_dashboard_expert_account.cv_option'|trans }} 
+    </p>
+    <div style="display:none;">
+        {{ form_widget(formInfo)}} 
+    </div>
+    {{ form_end(formInfo)}}
+
+</div>
 {% endblock %}

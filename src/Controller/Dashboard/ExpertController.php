@@ -7,6 +7,7 @@ use App\Entity\Expert;
 use App\Entity\Account;
 use App\Entity\Identity;
 use App\Entity\Posting;
+use App\Form\ExpertType;
 use App\Manager\PostingManager;
 use App\Service\User\UserService;
 use App\Form\Search\PostingSearchType;
@@ -188,15 +189,22 @@ class ExpertController extends AbstractController
     }
 
     #[Route('/dashboard/expert/account', name: 'app_dashboard_expert_account')]
-    public function account(): Response
+    public function account(Request $request): Response
     {
         $expert = $this->getExpertOrRedirect();
         $identity = $this->userService->getCurrentIdentity();
         $expert = $identity->getExpert();
         if(!$expert instanceof Expert) return $this->redirectToRoute('app_identity_create');
+
+        $formInfo = $this->createForm(ExpertType::class, $expert);
+        $formInfo->handleRequest($request);
+        if ($formInfo->isSubmitted() && $formInfo->isValid()) {
+            $searchTerm = $formInfo->get('query')->getData();
+        }
         
         return $this->render('dashboard/expert/account/index.html.twig', [
             'identity' => $identity,
+            'formInfo' => $formInfo->createView(),
         ]);
     }
 

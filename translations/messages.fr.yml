@@ -419,9 +419,15 @@ app_dashboard_expert_tools:
     menu: "Mes outils de travail"
 
 app_dashboard_expert_account:
-    title: "Tableau de bord"
-    dashboard_title: "Mon compte"
-    menu: "Mon compte"
+    title: Tableau de bord
+    dashboard_title: Mon compte
+    menu: Mon compte
+    personnal_info: Informations personnelles
+    general: Informations générales
+    experiences: Informations relatives à mon CV
+    cv_option: Options de diffusion de votre CV
+    professional_info: Informations professionnelles
+    search_for: Recherche de poste
 
 
 app_identity_expert_step_one:
