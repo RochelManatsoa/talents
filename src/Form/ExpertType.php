@@ -37,12 +37,20 @@ class ExpertType extends AbstractType
                 'label' => 'app_identity_expert.year',
                 'required' => true,
                 ])
+            // ->add('sectors', EntityType::class, [
+            //     'class' => Sector::class,
+            //     'label' => 'app_identity_company.sector_multiple',
+            //     'choice_label' => 'name',
+            //     'multiple' => true,
+            //     'expanded' => false,
+            //     ])
             ->add('sectors', EntityType::class, [
                 'class' => Sector::class,
-                'label' => 'app_identity_expert.sector',
+                'label' => 'app_identity_company.sector_multiple',
                 'choice_label' => 'name',
                 'multiple' => true,
-                'expanded' => true,
+                'expanded' => false,
+                'required' => false,
             ])
             ->add('aspiration', TextareaType::class, [
                 'label' => 'app_identity_expert.aspiration',
@@ -59,7 +67,7 @@ class ExpertType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '4096k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',

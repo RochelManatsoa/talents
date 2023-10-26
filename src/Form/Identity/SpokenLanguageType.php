@@ -5,6 +5,8 @@ namespace App\Form\Identity;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use App\Entity\Identity\SpokenLanguage;
+use App\Entity\Language;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +18,10 @@ class SpokenLanguageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('language')
+            ->add('language', EntityType::class, [
+                'class' => Language::class,
+                'label' => 'app_identity_expert_step_two.language.label',
+            ])
             ->add('level', ChoiceType::class, [
                 'label' => 'app_identity_expert_step_two.skill.level',
                 'choices'  => [
