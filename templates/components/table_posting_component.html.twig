@@ -1,4 +1,4 @@
-<div class="container">
+{# <div class="container">
     <div class="row border-bottom py-3">
         <!-- Première colonne de taille 5 avec bordure à droite -->
         <div class="col-4 border-end">
@@ -80,4 +80,92 @@
       </div>
     </div>
   </div>
+</div> #}
+<div class="container">
+    <div class="row border-bottom py-3">
+        <div class="col-4 border-end">
+            <h3 class="card-title h6">
+                <i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }}
+            </h3>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                <span class="badge text-bg-danger">Urgent</span> | {{ this.posting.views|length }} vues | {{ this.posting.applications|length }} offres
+            </h6>
+        </div>
+
+        <div class="col-6 border-end">
+            <p class="card-text flex-grow-1">
+                <small>
+                    {{ this.posting.description|length > 200 ? this.posting.description|slice(0, 197) ~ '...' : this.posting.description }}
+                </small>
+            </p>
+        </div>
+
+        <div class="col-2">
+            {% for action in ['folder-plus', 'eye', 'geo-fill'] %}
+            <div class="col-4">
+                <button title="Action" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal{{ this.posting.id }}">
+                    <i class="bi mx-1 h4 bi-{{ action }}"></i>
+                </button>  
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+
+{% for modalId in ['exampleModal', 'exampleModalToggle'] %}
+<div class="modal fade" id="{{ modalId }}{{ this.posting.id }}" tabindex="-1" aria-labelledby="{{ modalId }}{{ this.posting.id }}Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            {% if modalId == 'exampleModal' %}
+                <!-- Modal -->
+<div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="exampleModal{{ this.posting.id }}Label"><i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row my-3">
+            <div class="col-md-4"><span class="badge text-bg-danger">Urgent</span> | {{ this.posting.views|length }} vues | {{ this.posting.applications|length }} offres</div>
+            <div class="col-md-4 ms-auto"> 
+              <p class=""><i class="h5 bi mx-2 bi-building-check"></i> {{ this.posting.company.name }}</p>
+              <p class=""><i class="h5 bi mx-2 bi-geo-alt"></i> {{ show_country(this.posting.company.country) }}</p>
+              <span class="badge text-bg-primary"> {{ this.posting.sector }} </span>
+            </div>
+          </div>
+        </div>
+        {{ this.posting.description|raw }}
+      </div>
+      <div class="modal-footer">
+      {% if this.posting.isApplyByIdentity(this.identity) %}
+      <span class="btn-outline-dark">{{ 'app_dashboard_expert.offered'|trans }}</span>
+      {% else %}
+        <button type="button" class="btn btn-dark rounded-pill" data-bs-target="#exampleModalToggle{{ this.posting.id }}" data-bs-toggle="modal">{{ 'app_dashboard_expert.offer'|trans }}</button>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+            {% else %}
+                <!-- Modal -->
+<div class="modal fade" id="exampleModalToggle{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModalToggle{{ this.posting.id }}Label" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-content">
+    {{ form_start(this.form, { 'attr' : { 'action': path('app_ajax_posting_apply', {'jobId': this.posting.jobId}), 'id': this.posting.jobId }}) }}
+    <div class="modal-header">
+      <h2 class="modal-title fs-5" id="exampleModalToggle{{ this.posting.id }}Label"> {{ this.posting.title }}</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    {{ form_end(this.form) }} 
+    </div>
+  </div>
+</div>
+</div> 
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}

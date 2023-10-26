@@ -505,7 +505,7 @@ app_identity_expert_step_three:
     identity_title: Dernière étape, comment souhaitez vous être contacté(e) par vos prochains clients?
     user: 
         firstName: Nom(s)
-    title: Informations de contact professionnels (*)
+    title: Vos réseaux professionnels*
     message: (*) Chez OLONA TALENTS, nous accordons une grande importance à la protection de vos données personnelles. Soyez assuré(e) que les informations fournies dans cette section ne seront utilisées que dans le cadre strict de nos services et ne seront ni rendues public, ni partagées avec des tiers sans votre consentement explicite au début de la mise en relation avec vos futurs clients. <br>Pour plus de details sur la manière dont nous partageons et utilisons vos données, veuillez consulter notre <a href=\"%privacy_url%\">Politique de confidentialité.</a>
     keywords: "freelance, project, talent"
     button: Valider mon profil
