@@ -1,4 +1,4 @@
-{% extends 'dashboard/layout.html.twig' %}
+{# {% extends 'dashboard/layout.html.twig' %}
 {% block sidebar %} {% include "dashboard/_sidebar_expert.html.twig" %} {% endblock %}
 
 {% block body %}
@@ -41,4 +41,105 @@
 </script>
 
 {% endblock %}
-{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %}
+{% block inner_footer %}{% include "dashboard/_inner_footer.html.twig" %}{% endblock %} #}
+
+{% extends 'dashboard/layout.html.twig' %}
+
+{% block sidebar %}
+    {% include "dashboard/_sidebar_expert.html.twig" %}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-3">
+    <div class="row text-dark">
+        <!-- Heading -->
+        <p class="h4 mt-3">
+            <i class="h4 bi mx-2 bi-stars"></i> 
+            {{ 'app_dashboard_expert.my_list'|trans }} 
+        </p>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons mt-2">
+            <button class="status-filter" data-status="ACCEPTED">
+                <i class="h6 bi mx-2 bi-circle-fill text-green"></i> Accepté
+            </button>
+            <button class="status-filter" data-status="FINISHED">
+                <i class="h6 bi mx-2 bi-circle-fill text-primary"></i> Terminé
+            </button>
+            <button class="status-filter" data-status="PENDING">
+                <i class="h6 bi mx-2 bi-circle-fill text-warning"></i> En cours de négociation
+            </button>
+            <button class="reset-filter">Réinitialiser</button>
+        </div>
+        
+        <hr>
+        
+        <!-- Search Component -->
+        {{ component('posting_search_component') }}
+        
+        <!-- Posting List -->
+        {# {% for posting in postingSession %}
+            {{ component('dashboard_posting_component', {id: posting.id}) }}
+        {% endfor %} #}
+    </div>
+</div>
+{% endblock %}
+
+{% block inner_footer %}
+    {% include "dashboard/_inner_footer.html.twig" %}
+
+    <!-- External Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Status Filter Script -->
+    <script>
+        $(document).ready(function() {
+            $('.status-filter').on('click', function() {
+                const status = $(this).data('status');
+                console.log(status)
+                
+                $('.application').hide();
+                $(`.application[data-application-status="${status}"]`).show();
+            });
+            
+            $('.reset-filter').on('click', function() {
+                $('.application').show();
+            });
+        });
+    </script>
+    {# <script>
+        $(document).ready(function() {
+            let currentStatusFilter = ''; // Stocke le filtre de statut actuel
+            
+            $('.status-filter').on('click', function() {
+                currentStatusFilter = $(this).data('status');
+                filterResults();
+            });
+            
+            $('.reset-filter').on('click', function() {
+                currentStatusFilter = '';
+                filterResults();
+            });
+            
+            $('input[type="search"]').on('keyup', function() {
+                filterResults();
+            });
+    
+            function filterResults() {
+                const searchTerm = $('input[type="search"]').val().toLowerCase();
+    
+                $('.application').each(function() {
+                    const title = $(this).find('h3, p').text().toLowerCase(); // Adaptez ceci pour cibler le bon élément
+                    const status = $(this).data('application-status');
+    
+                    if (title.includes(searchTerm) && (!currentStatusFilter || status === currentStatusFilter)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        });
+    </script> #}
+    
+{% endblock %}

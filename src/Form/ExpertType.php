@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -36,14 +37,7 @@ class ExpertType extends AbstractType
                 'choices' => Expert::CHOICE_YEAR,
                 'label' => 'app_identity_expert.year',
                 'required' => true,
-                ])
-            // ->add('sectors', EntityType::class, [
-            //     'class' => Sector::class,
-            //     'label' => 'app_identity_company.sector_multiple',
-            //     'choice_label' => 'name',
-            //     'multiple' => true,
-            //     'expanded' => false,
-            //     ])
+            ])
             ->add('sectors', EntityType::class, [
                 'class' => Sector::class,
                 'label' => 'app_identity_company.sector_multiple',
@@ -65,6 +59,7 @@ class ExpertType extends AbstractType
                 'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
                 'mapped' => false,
                 'required' => false,
+                'attr' => ['class' => 'custom-file-input'],
                 'constraints' => [
                     new File([
                         'maxSize' => '4096k',
@@ -75,7 +70,7 @@ class ExpertType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
                     ])
                 ],
-            ])
+            ])            
             ->add('website', TextType::class, [
                 'label' => 'app_identity_expert.website',
                 'required' => false,
@@ -85,6 +80,14 @@ class ExpertType extends AbstractType
                 'label_attr' => ['class' => 'col-sm-4 text-center col-form-label'],
                 'years' => range(1970, 2010),
                 'attr' => ['class' => 'rounded-pill'] 
+            ])
+            ->add('phone', TextType::class, [
+                'label' => 'app_identity_company.phone',
+                'required' => true,
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'app_identity_company.email',
+                'required' => true,
             ])
         ;
     }
