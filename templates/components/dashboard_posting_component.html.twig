@@ -12,7 +12,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
+{# <div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
@@ -41,7 +41,73 @@
       </div>
     </div>
   </div>
+</div> #}
+
+{# <div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="exampleModal{{ this.posting.id }}Label"><i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row my-3">
+            <div class="col-md-6">
+              <span class="badge bg-danger">Urgent</span> 
+              <span class="mx-3">{{ this.posting.views|length }} vues</span> 
+              <span>{{ this.posting.applications|length }} offres</span>
+            </div>
+            <div class="col-md-6 text-end"> 
+              <span class="badge bg-primary"> {{ this.posting.sector }} </span>
+            </div>
+          </div>
+        </div>
+        <div class="my-3">
+          {{ this.posting.description|raw }}
+        </div>
+      </div>
+      <div class="modal-footer">
+      {% if this.posting.isApplyByIdentity(this.identity) %}
+        <span class="btn btn-outline-dark">{{ 'app_dashboard_expert.offered'|trans }}</span>
+      {% else %}
+        <button type="button" class="btn btn-dark rounded-pill" data-bs-target="#exampleModalToggle{{ this.posting.id }}" data-bs-toggle="modal">{{ 'app_dashboard_expert.offer'|trans }}</button>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div> #}
+
+<div class="modal fade" id="exampleModal{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModal{{ this.posting.id }}Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <div class="d-flex align-items-center">
+          <h2 class="modal-title fs-4 me-3"><i class="mx-2 h3 bi bi-code-slash"></i> {{ this.posting.title }}</h2>
+          <span class="badge bg-danger me-2">Urgent</span>
+          <span class="me-3"><i class="bi bi-eye"></i> {{ this.posting.views|length }} vues</span>
+          <span class="me-3"><i class="bi bi-file-earmark-person"></i> {{ this.posting.applications|length }} offres</span>
+          <span class="badge bg-primary">{{ this.posting.sector }}</span>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="my-3">
+          {{ this.posting.description|raw }}
+        </div>
+      </div>
+      <div class="modal-footer">
+      {% if this.posting.isApplyByIdentity(this.identity) %}
+        <span class="btn btn-outline-dark">{{ 'app_dashboard_expert.offered'|trans }}</span>
+      {% else %}
+        <button type="button" class="btn btn-dark rounded-pill" data-bs-target="#exampleModalToggle{{ this.posting.id }}" data-bs-toggle="modal">{{ 'app_dashboard_expert.offer'|trans }}</button>
+      {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalToggle{{ this.posting.id }}" tabindex="-1" aria-labelledby="exampleModalToggle{{ this.posting.id }}Label" aria-hidden="true">

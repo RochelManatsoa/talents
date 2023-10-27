@@ -1,3 +1,5 @@
+
+{% if this.allPostings is not empty %}
 {% set numSlides = this.allPostings|length // 6 %}
 {% if this.allPostings|length % 6 > 0 %}
 {% set numSlides = numSlides + 1 %}
@@ -29,3 +31,4 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}

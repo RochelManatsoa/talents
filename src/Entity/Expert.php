@@ -71,6 +71,12 @@ class Expert
     #[ORM\ManyToMany(targetEntity: Sector::class, inversedBy: 'experts')]
     private Collection $sectors;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
     public function __construct()
     {
         $this->jobTypes = new ArrayCollection();
@@ -277,6 +283,30 @@ class Expert
     public function removeSector(Sector $sector): static
     {
         $this->sectors->removeElement($sector);
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): static
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }

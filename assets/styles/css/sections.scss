@@ -41,3 +41,108 @@
 #step-one .rounded-circle{
     border: 7px solid lightgray;
 }
+// .filter-buttons {
+//     display: flex;
+//     gap: 10px;
+//     margin-bottom: 20px;
+// }
+
+// .filter-buttons button {
+//     padding: 8px 15px;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.3s;
+// }
+
+// .filter-buttons button:hover {
+//     opacity: 0.9;
+// }
+
+// .filter-buttons .status-filter[data-status="ACCEPTED"] {
+//     background-color: #4CAF50; /* Vert */
+//     color: white;
+// }
+
+// .filter-buttons .status-filter[data-status="FINISHED"] {
+//     background-color: #007BFF; /* Bleu */
+//     color: white;
+// }
+
+// .filter-buttons .status-filter[data-status="PENDING"] {
+//     background-color: #FFC107; /* Jaune */
+//     color: white;
+// }
+
+// .filter-buttons .reset-filter {
+//     background-color: #6c757d; /* Gris */
+//     color: white;
+// }
+
+// .application {
+//     display: none;
+// }
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-buttons button {
+    padding: 8px 15px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.filter-buttons button:hover {
+    opacity: 0.9;
+}
+
+.filter-buttons .status-filter[data-status="ACCEPTED"] {
+    color: #4CAF50; /* Vert */
+}
+
+.filter-buttons .status-filter[data-status="FINISHED"] {
+    color: #007BFF; /* Bleu */
+}
+
+.filter-buttons .status-filter[data-status="PENDING"] {
+    color: #FFC107; /* Jaune */
+}
+
+.filter-buttons .reset-filter {
+    color: #6c757d; /* Gris */
+    position: relative;
+}
+
+.filter-buttons .reset-filter::before {
+    content: "×";
+    position: absolute;
+    top: 0;
+    right: -10px;
+    font-size: 20px;
+    line-height: 1;
+    color: red;
+}
+
+.application {
+    display: none;
+}
+.filter-buttons input,
+.filter-buttons button {
+    margin-right: 10px;
+}
+
+.filter-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+    opacity: 0.9;
+}

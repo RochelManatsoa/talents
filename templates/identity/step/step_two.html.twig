@@ -16,7 +16,7 @@
                         <div class="row mb-4">
                             {{ form_label(form.expert.title) }}
                             <div class="col-sm-8">
-                                {{ form_widget(form.expert.title, {'attr': {'class': 'rounded-pill' }}
+                                {{ form_widget(form.expert.title, {'attr': {'class': 'rounded-pill', 'required': 'required'  }}
                                 ) }}
                                                     
                             </div>
@@ -205,7 +205,17 @@
                             <div class="col-sm-8">
                                 {{ form_widget(form.expert.cv, {'attr': {'class': 'rounded-pill' }}
                                 ) }}
-                                                    
+                            {# <div class="custom-file">
+                                {{ form_widget(form.expert.cv) }}
+                                <label for="{{ form.expert.cv.vars.id }}" class="custom-file-label">Importer un fichier</label>
+                            </div> #}
+                            {# <div class="custom-file">
+                                {{ form_errors(form.expert.cv) }}
+                                {{ form_widget(form.expert.cv) }}
+                                <label for="{{ form.expert.cv.vars.id }}" class="custom-file-label">Importer un fichier</label>
+                            </div> #}
+                        
+                            {{ form_errors(form.expert.cv) }}
                             </div>
                         </div>
                     </div>
@@ -457,7 +467,22 @@
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInputElement = document.querySelector('.custom-file-input');
+    
+        if (fileInputElement) {
+            fileInputElement.addEventListener('change', function() {
+                var fileName = this.value.split('\\').pop();
+                this.nextElementSibling.textContent = fileName ? fileName : 'Importer un fichier';
+            });
+        }
+    });
 
+
+    {# document.querySelector('.custom-file-input').addEventListener('change', function() {
+        var fileName = this.value.split('\\').pop();
+        this.nextElementSibling.textContent = fileName;
+    }); #}
 </script>
 {% endblock %}
             
